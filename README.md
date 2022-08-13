@@ -6,6 +6,8 @@
 server:
   # 服务器的HTTP端口，默认为8080
   port: 8090
+# Spring配置
+spring:
   # redis 配置
   redis:
     # 地址
