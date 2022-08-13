@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.deal.mapper.DealLeft4Mapper">
+    
+    <resultMap type="DealLeft4" id="DealLeft4Result">
+        <result property="id"    column="id"    />
+        <result property="monthandtype"    column="monthAndType"    />
+        <result property="newadd"    column="newAdd"    />
+        <result property="death"    column="death"    />
+    </resultMap>
+
+    <sql id="selectDealLeft4Vo">
+        select id, monthAndType, newAdd, death from deal_left_4
+    </sql>
+
+    <select id="selectDealLeft4List" parameterType="DealLeft4" resultMap="DealLeft4Result">
+        <include refid="selectDealLeft4Vo"/>
+        <where>  
+            <if test="monthandtype != null  and monthandtype != ''"> and monthAndType = #{monthandtype}</if>
+            <if test="newadd != null "> and newAdd = #{newadd}</if>
+            <if test="death != null "> and death = #{death}</if>
+        </where>
+    </select>
+    
+    <select id="selectDealLeft4ById" parameterType="Long" resultMap="DealLeft4Result">
+        <include refid="selectDealLeft4Vo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDealLeft4" parameterType="DealLeft4" useGeneratedKeys="true" keyProperty="id">
+        insert into deal_left_4
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="monthandtype != null">monthAndType,</if>
+            <if test="newadd != null">newAdd,</if>
+            <if test="death != null">death,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="monthandtype != null">#{monthandtype},</if>
+            <if test="newadd != null">#{newadd},</if>
+            <if test="death != null">#{death},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDealLeft4" parameterType="DealLeft4">
+        update deal_left_4
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="monthandtype != null">monthAndType = #{monthandtype},</if>
+            <if test="newadd != null">newAdd = #{newadd},</if>
+            <if test="death != null">death = #{death},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDealLeft4ById" parameterType="Long">
+        delete from deal_left_4 where id = #{id}
+    </delete>
+
+    <delete id="deleteDealLeft4ByIds" parameterType="String">
+        delete from deal_left_4 where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

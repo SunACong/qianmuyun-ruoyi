@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.SheepSheepbirthMapper">
+    
+    <resultMap type="SheepSheepbirth" id="SheepSheepbirthResult">
+        <result property="id"    column="id"    />
+        <result property="matingid"    column="matingid"    />
+        <result property="eartagid"    column="eartagid"    />
+        <result property="motherid"    column="motherid"    />
+        <result property="fatherid"    column="fatherid"    />
+        <result property="sex"    column="sex"    />
+        <result property="colour"    column="colour"    />
+        <result property="birthweight"    column="birthweight"    />
+        <result property="status"    column="status"    />
+        <result property="region"    column="region"    />
+        <result property="buildingnum"    column="buildingnum"    />
+        <result property="columnnum"    column="columnnum"    />
+        <result property="weaningdate"    column="weaningdate"    />
+        <result property="weaningweight"    column="weaningweight"    />
+        <result property="type"    column="type"    />
+        <result property="newregion"    column="newregion"    />
+        <result property="newbuilding"    column="newbuilding"    />
+        <result property="newcolumn"    column="newcolumn"    />
+        <result property="video"    column="video"    />
+        <result property="bak1"    column="bak1"    />
+        <result property="bak2"    column="bak2"    />
+        <result property="bak3"    column="bak3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectSheepSheepbirthVo">
+        select id, matingid, eartagid, motherid, fatherid, sex, colour, birthweight, status, region, buildingnum, columnnum, weaningdate, weaningweight, type, newregion, newbuilding, newcolumn, video, bak1, bak2, bak3, create_by, create_date, update_by, update_date, remarks, del_flag from sheep_sheepbirth
+    </sql>
+
+    <select id="selectSheepSheepbirthList" parameterType="SheepSheepbirth" resultMap="SheepSheepbirthResult">
+        <include refid="selectSheepSheepbirthVo"/>
+        <where>  
+            <if test="matingid != null  and matingid != ''"> and matingid = #{matingid}</if>
+            <if test="eartagid != null  and eartagid != ''"> and eartagid = #{eartagid}</if>
+            <if test="motherid != null  and motherid != ''"> and motherid = #{motherid}</if>
+            <if test="fatherid != null  and fatherid != ''"> and fatherid = #{fatherid}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="colour != null  and colour != ''"> and colour like concat('%', #{colour}, '%')</if>
+            <if test="birthweight != null  and birthweight != ''"> and birthweight = #{birthweight}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="buildingnum != null  and buildingnum != ''"> and buildingnum = #{buildingnum}</if>
+            <if test="columnnum != null  and columnnum != ''"> and columnnum = #{columnnum}</if>
+            <if test="params.beginWeaningdate != null and params.beginWeaningdate != '' and params.endWeaningdate != null and params.endWeaningdate != ''"> and weaningdate between #{params.beginWeaningdate} and #{params.endWeaningdate}</if>
+            <if test="weaningweight != null  and weaningweight != ''"> and weaningweight like concat('%', #{weaningweight}, '%')</if>
+            <if test="type != null  and type != ''"> and type like concat('%', #{type}, '%')</if>
+            <if test="newregion != null  and newregion != ''"> and newregion like concat('%', #{newregion}, '%')</if>
+            <if test="newbuilding != null  and newbuilding != ''"> and newbuilding like concat('%', #{newbuilding}, '%')</if>
+            <if test="newcolumn != null  and newcolumn != ''"> and newcolumn like concat('%', #{newcolumn}, '%')</if>
+            <if test="video != null  and video != ''"> and video = #{video}</if>
+            <if test="bak1 != null  and bak1 != ''"> and bak1 = #{bak1}</if>
+            <if test="bak2 != null  and bak2 != ''"> and bak2 = #{bak2}</if>
+            <if test="bak3 != null  and bak3 != ''"> and bak3 = #{bak3}</if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="createDate != null "> and create_date = #{createDate}</if>
+            <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+            <if test="updateDate != null "> and update_date = #{updateDate}</if>
+            <if test="remarks != null  and remarks != ''"> and remarks = #{remarks}</if>
+            <if test="delFlag != null  and delFlag != ''"> and del_flag = #{delFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectSheepSheepbirthById" parameterType="Long" resultMap="SheepSheepbirthResult">
+        <include refid="selectSheepSheepbirthVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSheepSheepbirth" parameterType="SheepSheepbirth" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep_sheepbirth
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="matingid != null">matingid,</if>
+            <if test="eartagid != null">eartagid,</if>
+            <if test="motherid != null">motherid,</if>
+            <if test="fatherid != null">fatherid,</if>
+            <if test="sex != null">sex,</if>
+            <if test="colour != null">colour,</if>
+            <if test="birthweight != null">birthweight,</if>
+            <if test="status != null">status,</if>
+            <if test="region != null">region,</if>
+            <if test="buildingnum != null">buildingnum,</if>
+            <if test="columnnum != null">columnnum,</if>
+            <if test="weaningdate != null">weaningdate,</if>
+            <if test="weaningweight != null">weaningweight,</if>
+            <if test="type != null">type,</if>
+            <if test="newregion != null">newregion,</if>
+            <if test="newbuilding != null">newbuilding,</if>
+            <if test="newcolumn != null">newcolumn,</if>
+            <if test="video != null">video,</if>
+            <if test="bak1 != null">bak1,</if>
+            <if test="bak2 != null">bak2,</if>
+            <if test="bak3 != null">bak3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="matingid != null">#{matingid},</if>
+            <if test="eartagid != null">#{eartagid},</if>
+            <if test="motherid != null">#{motherid},</if>
+            <if test="fatherid != null">#{fatherid},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="colour != null">#{colour},</if>
+            <if test="birthweight != null">#{birthweight},</if>
+            <if test="status != null">#{status},</if>
+            <if test="region != null">#{region},</if>
+            <if test="buildingnum != null">#{buildingnum},</if>
+            <if test="columnnum != null">#{columnnum},</if>
+            <if test="weaningdate != null">#{weaningdate},</if>
+            <if test="weaningweight != null">#{weaningweight},</if>
+            <if test="type != null">#{type},</if>
+            <if test="newregion != null">#{newregion},</if>
+            <if test="newbuilding != null">#{newbuilding},</if>
+            <if test="newcolumn != null">#{newcolumn},</if>
+            <if test="video != null">#{video},</if>
+            <if test="bak1 != null">#{bak1},</if>
+            <if test="bak2 != null">#{bak2},</if>
+            <if test="bak3 != null">#{bak3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheepSheepbirth" parameterType="SheepSheepbirth">
+        update sheep_sheepbirth
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="matingid != null">matingid = #{matingid},</if>
+            <if test="eartagid != null">eartagid = #{eartagid},</if>
+            <if test="motherid != null">motherid = #{motherid},</if>
+            <if test="fatherid != null">fatherid = #{fatherid},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="colour != null">colour = #{colour},</if>
+            <if test="birthweight != null">birthweight = #{birthweight},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="region != null">region = #{region},</if>
+            <if test="buildingnum != null">buildingnum = #{buildingnum},</if>
+            <if test="columnnum != null">columnnum = #{columnnum},</if>
+            <if test="weaningdate != null">weaningdate = #{weaningdate},</if>
+            <if test="weaningweight != null">weaningweight = #{weaningweight},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="newregion != null">newregion = #{newregion},</if>
+            <if test="newbuilding != null">newbuilding = #{newbuilding},</if>
+            <if test="newcolumn != null">newcolumn = #{newcolumn},</if>
+            <if test="video != null">video = #{video},</if>
+            <if test="bak1 != null">bak1 = #{bak1},</if>
+            <if test="bak2 != null">bak2 = #{bak2},</if>
+            <if test="bak3 != null">bak3 = #{bak3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheepSheepbirthById" parameterType="Long">
+        delete from sheep_sheepbirth where id = #{id}
+    </delete>
+
+    <delete id="deleteSheepSheepbirthByIds" parameterType="String">
+        delete from sheep_sheepbirth where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

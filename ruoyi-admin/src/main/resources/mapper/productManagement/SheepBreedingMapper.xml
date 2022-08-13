@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.SheepBreedingMapper">
+    
+    <resultMap type="SheepBreeding" id="SheepBreedingResult">
+        <result property="id"    column="id"    />
+        <result property="eartagid"    column="eartagid"    />
+        <result property="motherid"    column="motherid"    />
+        <result property="fatherid"    column="fatherid"    />
+        <result property="breedingstage"    column="breedingstage"    />
+        <result property="colour"    column="colour"    />
+        <result property="gweight"    column="gweight"    />
+        <result property="bodylength"    column="bodylength"    />
+        <result property="bodyheight"    column="bodyheight"    />
+        <result property="bodybust"    column="bodybust"    />
+        <result property="wristheight"    column="wristheight"    />
+        <result property="video"    column="video"    />
+        <result property="breedingdate"    column="breedingdate"    />
+        <result property="startdate"    column="startdate"    />
+        <result property="enddate"    column="enddate"    />
+        <result property="bak1"    column="bak1"    />
+        <result property="bak2"    column="bak2"    />
+        <result property="bak3"    column="bak3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectSheepBreedingVo">
+        select id, eartagid, motherid, fatherid, breedingstage, colour, gweight, bodylength, bodyheight, bodybust, wristheight, video, breedingdate, startdate, enddate, bak1, bak2, bak3, create_by, create_date, update_by, update_date, remarks, del_flag from sheep_breeding
+    </sql>
+
+    <select id="selectSheepBreedingList" parameterType="SheepBreeding" resultMap="SheepBreedingResult">
+        <include refid="selectSheepBreedingVo"/>
+        <where>  
+            <if test="eartagid != null  and eartagid != ''"> and eartagid = #{eartagid}</if>
+            <if test="params.beginBreedingdate != null and params.beginBreedingdate != '' and params.endBreedingdate != null and params.endBreedingdate != ''"> and breedingdate between #{params.beginBreedingdate} and #{params.endBreedingdate}</if>
+            <if test="params.beginStartdate != null and params.beginStartdate != '' and params.endStartdate != null and params.endStartdate != ''"> and startdate between #{params.beginStartdate} and #{params.endStartdate}</if>
+            <if test="params.beginEnddate != null and params.beginEnddate != '' and params.endEnddate != null and params.endEnddate != ''"> and enddate between #{params.beginEnddate} and #{params.endEnddate}</if>
+            <if test="bak3 != null  and bak3 != ''"> and bak3 = #{bak3}</if>
+        </where>
+    </select>
+    
+    <select id="selectSheepBreedingById" parameterType="Long" resultMap="SheepBreedingResult">
+        <include refid="selectSheepBreedingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSheepBreeding" parameterType="SheepBreeding" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep_breeding
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eartagid != null">eartagid,</if>
+            <if test="motherid != null">motherid,</if>
+            <if test="fatherid != null">fatherid,</if>
+            <if test="breedingstage != null">breedingstage,</if>
+            <if test="colour != null">colour,</if>
+            <if test="gweight != null">gweight,</if>
+            <if test="bodylength != null">bodylength,</if>
+            <if test="bodyheight != null">bodyheight,</if>
+            <if test="bodybust != null">bodybust,</if>
+            <if test="wristheight != null">wristheight,</if>
+            <if test="video != null">video,</if>
+            <if test="breedingdate != null">breedingdate,</if>
+            <if test="startdate != null">startdate,</if>
+            <if test="enddate != null">enddate,</if>
+            <if test="bak1 != null">bak1,</if>
+            <if test="bak2 != null">bak2,</if>
+            <if test="bak3 != null">bak3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="eartagid != null">#{eartagid},</if>
+            <if test="motherid != null">#{motherid},</if>
+            <if test="fatherid != null">#{fatherid},</if>
+            <if test="breedingstage != null">#{breedingstage},</if>
+            <if test="colour != null">#{colour},</if>
+            <if test="gweight != null">#{gweight},</if>
+            <if test="bodylength != null">#{bodylength},</if>
+            <if test="bodyheight != null">#{bodyheight},</if>
+            <if test="bodybust != null">#{bodybust},</if>
+            <if test="wristheight != null">#{wristheight},</if>
+            <if test="video != null">#{video},</if>
+            <if test="breedingdate != null">#{breedingdate},</if>
+            <if test="startdate != null">#{startdate},</if>
+            <if test="enddate != null">#{enddate},</if>
+            <if test="bak1 != null">#{bak1},</if>
+            <if test="bak2 != null">#{bak2},</if>
+            <if test="bak3 != null">#{bak3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheepBreeding" parameterType="SheepBreeding">
+        update sheep_breeding
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="eartagid != null">eartagid = #{eartagid},</if>
+            <if test="motherid != null">motherid = #{motherid},</if>
+            <if test="fatherid != null">fatherid = #{fatherid},</if>
+            <if test="breedingstage != null">breedingstage = #{breedingstage},</if>
+            <if test="colour != null">colour = #{colour},</if>
+            <if test="gweight != null">gweight = #{gweight},</if>
+            <if test="bodylength != null">bodylength = #{bodylength},</if>
+            <if test="bodyheight != null">bodyheight = #{bodyheight},</if>
+            <if test="bodybust != null">bodybust = #{bodybust},</if>
+            <if test="wristheight != null">wristheight = #{wristheight},</if>
+            <if test="video != null">video = #{video},</if>
+            <if test="breedingdate != null">breedingdate = #{breedingdate},</if>
+            <if test="startdate != null">startdate = #{startdate},</if>
+            <if test="enddate != null">enddate = #{enddate},</if>
+            <if test="bak1 != null">bak1 = #{bak1},</if>
+            <if test="bak2 != null">bak2 = #{bak2},</if>
+            <if test="bak3 != null">bak3 = #{bak3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheepBreedingById" parameterType="Long">
+        delete from sheep_breeding where id = #{id}
+    </delete>
+
+    <delete id="deleteSheepBreedingByIds" parameterType="String">
+        delete from sheep_breeding where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

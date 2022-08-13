@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.deal.mapper.DealLeft3Mapper">
+    
+    <resultMap type="DealLeft3" id="DealLeft3Result">
+        <result property="id"    column="id"    />
+        <result property="man"    column="man"    />
+        <result property="mantotal"    column="manTotal"    />
+        <result property="mansale"    column="manSale"    />
+        <result property="women"    column="women"    />
+        <result property="womentotal"    column="womenTotal"    />
+        <result property="womensale"    column="womenSale"    />
+        <result property="salesheep"    column="saleSheep"    />
+        <result property="salesheeptotal"    column="saleSheepTotal"    />
+        <result property="salesheepsale"    column="saleSheepSale"    />
+        <result property="ablesale"    column="ableSale"    />
+    </resultMap>
+
+    <sql id="selectDealLeft3Vo">
+        select id, man, manTotal, manSale, women, womenTotal, womenSale, saleSheep, saleSheepTotal, saleSheepSale, ableSale from deal_left_3
+    </sql>
+
+    <select id="selectDealLeft3List" parameterType="DealLeft3" resultMap="DealLeft3Result">
+        <include refid="selectDealLeft3Vo"/>
+        <where>  
+            <if test="man != null "> and man = #{man}</if>
+            <if test="mantotal != null "> and manTotal = #{mantotal}</if>
+            <if test="mansale != null "> and manSale = #{mansale}</if>
+            <if test="women != null "> and women = #{women}</if>
+            <if test="womentotal != null "> and womenTotal = #{womentotal}</if>
+            <if test="womensale != null "> and womenSale = #{womensale}</if>
+            <if test="salesheep != null "> and saleSheep = #{salesheep}</if>
+            <if test="salesheeptotal != null "> and saleSheepTotal = #{salesheeptotal}</if>
+            <if test="salesheepsale != null "> and saleSheepSale = #{salesheepsale}</if>
+            <if test="ablesale != null "> and ableSale = #{ablesale}</if>
+        </where>
+    </select>
+    
+    <select id="selectDealLeft3ById" parameterType="Long" resultMap="DealLeft3Result">
+        <include refid="selectDealLeft3Vo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDealLeft3" parameterType="DealLeft3" useGeneratedKeys="true" keyProperty="id">
+        insert into deal_left_3
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="man != null">man,</if>
+            <if test="mantotal != null">manTotal,</if>
+            <if test="mansale != null">manSale,</if>
+            <if test="women != null">women,</if>
+            <if test="womentotal != null">womenTotal,</if>
+            <if test="womensale != null">womenSale,</if>
+            <if test="salesheep != null">saleSheep,</if>
+            <if test="salesheeptotal != null">saleSheepTotal,</if>
+            <if test="salesheepsale != null">saleSheepSale,</if>
+            <if test="ablesale != null">ableSale,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="man != null">#{man},</if>
+            <if test="mantotal != null">#{mantotal},</if>
+            <if test="mansale != null">#{mansale},</if>
+            <if test="women != null">#{women},</if>
+            <if test="womentotal != null">#{womentotal},</if>
+            <if test="womensale != null">#{womensale},</if>
+            <if test="salesheep != null">#{salesheep},</if>
+            <if test="salesheeptotal != null">#{salesheeptotal},</if>
+            <if test="salesheepsale != null">#{salesheepsale},</if>
+            <if test="ablesale != null">#{ablesale},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDealLeft3" parameterType="DealLeft3">
+        update deal_left_3
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="man != null">man = #{man},</if>
+            <if test="mantotal != null">manTotal = #{mantotal},</if>
+            <if test="mansale != null">manSale = #{mansale},</if>
+            <if test="women != null">women = #{women},</if>
+            <if test="womentotal != null">womenTotal = #{womentotal},</if>
+            <if test="womensale != null">womenSale = #{womensale},</if>
+            <if test="salesheep != null">saleSheep = #{salesheep},</if>
+            <if test="salesheeptotal != null">saleSheepTotal = #{salesheeptotal},</if>
+            <if test="salesheepsale != null">saleSheepSale = #{salesheepsale},</if>
+            <if test="ablesale != null">ableSale = #{ablesale},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDealLeft3ById" parameterType="Long">
+        delete from deal_left_3 where id = #{id}
+    </delete>
+
+    <delete id="deleteDealLeft3ByIds" parameterType="String">
+        delete from deal_left_3 where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

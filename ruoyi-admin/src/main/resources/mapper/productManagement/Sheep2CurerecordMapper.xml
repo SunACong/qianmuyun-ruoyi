@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.Sheep2CurerecordMapper">
+    
+    <resultMap type="Sheep2Curerecord" id="Sheep2CurerecordResult">
+        <result property="id"    column="id"    />
+        <result property="cureTime"    column="cure_time"    />
+        <result property="curePosition"    column="cure_position"    />
+        <result property="dayAge"    column="day_age"    />
+        <result property="illTime"    column="ill_time"    />
+        <result property="illCause"    column="ill_cause"    />
+        <result property="signCure"    column="sign_cure"    />
+        <result property="drugName"    column="drug_name"    />
+        <result property="drugMethod"    column="drug_method"    />
+        <result property="sheepNumber"    column="sheep_number"    />
+        <result property="result"    column="result"    />
+        <result property="remark"    column="remark"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="creatTime"    column="creat_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSheep2CurerecordVo">
+        select id, cure_time, cure_position, day_age, ill_time, ill_cause, sign_cure, drug_name, drug_method, sheep_number, result, remark, user_id, dept_id, creat_time, update_time from sheep2_curerecord
+    </sql>
+
+    <select id="selectSheep2CurerecordList" parameterType="Sheep2Curerecord" resultMap="Sheep2CurerecordResult">
+        <include refid="selectSheep2CurerecordVo"/>
+        <where>  
+            <if test="params.beginCureTime != null and params.beginCureTime != '' and params.endCureTime != null and params.endCureTime != ''"> and cure_time between #{params.beginCureTime} and #{params.endCureTime}</if>
+            <if test="curePosition != null  and curePosition != ''"> and cure_position like concat('%', #{curePosition}, '%')</if>
+            <if test="dayAge != null  and dayAge != ''"> and day_age = #{dayAge}</if>
+            <if test="params.beginIllTime != null and params.beginIllTime != '' and params.endIllTime != null and params.endIllTime != ''"> and ill_time between #{params.beginIllTime} and #{params.endIllTime}</if>
+            <if test="illCause != null  and illCause != ''"> and ill_cause = #{illCause}</if>
+            <if test="signCure != null  and signCure != ''"> and sign_cure = #{signCure}</if>
+            <if test="drugName != null  and drugName != ''"> and drug_name like concat('%', #{drugName}, '%')</if>
+            <if test="drugMethod != null  and drugMethod != ''"> and drug_method = #{drugMethod}</if>
+            <if test="sheepNumber != null  and sheepNumber != ''"> and sheep_number = #{sheepNumber}</if>
+            <if test="result != null  and result != ''"> and result = #{result}</if>
+            <if test="remark != null  and remark != ''"> and remark like concat('%', #{remark}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and creat_time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
+            <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and update_time between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectSheep2CurerecordById" parameterType="Long" resultMap="Sheep2CurerecordResult">
+        <include refid="selectSheep2CurerecordVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSheep2Curerecord" parameterType="Sheep2Curerecord" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep2_curerecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cureTime != null">cure_time,</if>
+            <if test="curePosition != null">cure_position,</if>
+            <if test="dayAge != null">day_age,</if>
+            <if test="illTime != null">ill_time,</if>
+            <if test="illCause != null">ill_cause,</if>
+            <if test="signCure != null">sign_cure,</if>
+            <if test="drugName != null">drug_name,</if>
+            <if test="drugMethod != null">drug_method,</if>
+            <if test="sheepNumber != null">sheep_number,</if>
+            <if test="result != null">result,</if>
+            <if test="remark != null">remark,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="creatTime != null">creat_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cureTime != null">#{cureTime},</if>
+            <if test="curePosition != null">#{curePosition},</if>
+            <if test="dayAge != null">#{dayAge},</if>
+            <if test="illTime != null">#{illTime},</if>
+            <if test="illCause != null">#{illCause},</if>
+            <if test="signCure != null">#{signCure},</if>
+            <if test="drugName != null">#{drugName},</if>
+            <if test="drugMethod != null">#{drugMethod},</if>
+            <if test="sheepNumber != null">#{sheepNumber},</if>
+            <if test="result != null">#{result},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="creatTime != null">#{creatTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheep2Curerecord" parameterType="Sheep2Curerecord">
+        update sheep2_curerecord
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="cureTime != null">cure_time = #{cureTime},</if>
+            <if test="curePosition != null">cure_position = #{curePosition},</if>
+            <if test="dayAge != null">day_age = #{dayAge},</if>
+            <if test="illTime != null">ill_time = #{illTime},</if>
+            <if test="illCause != null">ill_cause = #{illCause},</if>
+            <if test="signCure != null">sign_cure = #{signCure},</if>
+            <if test="drugName != null">drug_name = #{drugName},</if>
+            <if test="drugMethod != null">drug_method = #{drugMethod},</if>
+            <if test="sheepNumber != null">sheep_number = #{sheepNumber},</if>
+            <if test="result != null">result = #{result},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="creatTime != null">creat_time = #{creatTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheep2CurerecordById" parameterType="Long">
+        delete from sheep2_curerecord where id = #{id}
+    </delete>
+
+    <delete id="deleteSheep2CurerecordByIds" parameterType="String">
+        delete from sheep2_curerecord where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

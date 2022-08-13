@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.videoManager.mapper.TVideoMapper">
+    
+    <resultMap type="TVideo" id="TVideoResult">
+        <result property="id"    column="id"    />
+        <result property="area"    column="area"    />
+        <result property="house"    column="house"    />
+        <result property="deviceserial"    column="deviceSerial"    />
+        <result property="channelno"    column="channelNo"    />
+        <result property="equipmentname"    column="equipmentName"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectTVideoVo">
+        select id, area, house, deviceSerial, channelNo, equipmentName, status from t_video
+    </sql>
+
+    <select id="selectTVideoList" parameterType="TVideo" resultMap="TVideoResult">
+        <include refid="selectTVideoVo"/>
+        <where>  
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="house != null  and house != ''"> and house = #{house}</if>
+            <if test="deviceserial != null  and deviceserial != ''"> and deviceSerial = #{deviceserial}</if>
+            <if test="channelno != null  and channelno != ''"> and channelNo = #{channelno}</if>
+            <if test="equipmentname != null  and equipmentname != ''"> and equipmentName = #{equipmentname}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectTVideoById" parameterType="Long" resultMap="TVideoResult">
+        <include refid="selectTVideoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTVideo" parameterType="TVideo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_video
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="area != null">area,</if>
+            <if test="house != null">house,</if>
+            <if test="deviceserial != null">deviceSerial,</if>
+            <if test="channelno != null">channelNo,</if>
+            <if test="equipmentname != null">equipmentName,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="area != null">#{area},</if>
+            <if test="house != null">#{house},</if>
+            <if test="deviceserial != null">#{deviceserial},</if>
+            <if test="channelno != null">#{channelno},</if>
+            <if test="equipmentname != null">#{equipmentname},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTVideo" parameterType="TVideo">
+        update t_video
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="area != null">area = #{area},</if>
+            <if test="house != null">house = #{house},</if>
+            <if test="deviceserial != null">deviceSerial = #{deviceserial},</if>
+            <if test="channelno != null">channelNo = #{channelno},</if>
+            <if test="equipmentname != null">equipmentName = #{equipmentname},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTVideoById" parameterType="Long">
+        delete from t_video where id = #{id}
+    </delete>
+
+    <delete id="deleteTVideoByIds" parameterType="String">
+        delete from t_video where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

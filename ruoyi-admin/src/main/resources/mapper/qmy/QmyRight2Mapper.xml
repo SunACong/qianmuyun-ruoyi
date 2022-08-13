@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.qmy.mapper.QmyRight2Mapper">
+    
+    <resultMap type="QmyRight2" id="QmyRight2Result">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="cure"    column="cure"    />
+        <result property="nocure"    column="noCure"    />
+    </resultMap>
+
+    <sql id="selectQmyRight2Vo">
+        select id, type, cure, noCure from qmy_right_2
+    </sql>
+
+    <select id="selectQmyRight2List" parameterType="QmyRight2" resultMap="QmyRight2Result">
+        <include refid="selectQmyRight2Vo"/>
+        <where>  
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="cure != null "> and cure = #{cure}</if>
+            <if test="nocure != null "> and noCure = #{nocure}</if>
+        </where>
+    </select>
+    
+    <select id="selectQmyRight2ById" parameterType="Long" resultMap="QmyRight2Result">
+        <include refid="selectQmyRight2Vo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertQmyRight2" parameterType="QmyRight2" useGeneratedKeys="true" keyProperty="id">
+        insert into qmy_right_2
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null">type,</if>
+            <if test="cure != null">cure,</if>
+            <if test="nocure != null">noCure,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null">#{type},</if>
+            <if test="cure != null">#{cure},</if>
+            <if test="nocure != null">#{nocure},</if>
+         </trim>
+    </insert>
+
+    <update id="updateQmyRight2" parameterType="QmyRight2">
+        update qmy_right_2
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null">type = #{type},</if>
+            <if test="cure != null">cure = #{cure},</if>
+            <if test="nocure != null">noCure = #{nocure},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteQmyRight2ById" parameterType="Long">
+        delete from qmy_right_2 where id = #{id}
+    </delete>
+
+    <delete id="deleteQmyRight2ByIds" parameterType="String">
+        delete from qmy_right_2 where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

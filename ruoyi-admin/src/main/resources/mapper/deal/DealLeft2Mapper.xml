@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.deal.mapper.DealLeft2Mapper">
+    
+    <resultMap type="DealLeft2" id="DealLeft2Result">
+        <result property="id"    column="id"    />
+        <result property="whitegoat"    column="whiteGoat"    />
+        <result property="dubaisheep"    column="dubaiSheep"    />
+        <result property="blackgoat"    column="blackGoat"    />
+        <result property="boersheep"    column="boerSheep"    />
+        <result property="nubiansheep"    column="nubianSheep"    />
+    </resultMap>
+
+    <sql id="selectDealLeft2Vo">
+        select id, whiteGoat, dubaiSheep, blackGoat, boerSheep, nubianSheep from deal_left_2
+    </sql>
+
+    <select id="selectDealLeft2List" parameterType="DealLeft2" resultMap="DealLeft2Result">
+        <include refid="selectDealLeft2Vo"/>
+        <where>  
+            <if test="whitegoat != null "> and whiteGoat = #{whitegoat}</if>
+            <if test="dubaisheep != null "> and dubaiSheep = #{dubaisheep}</if>
+            <if test="blackgoat != null "> and blackGoat = #{blackgoat}</if>
+            <if test="boersheep != null "> and boerSheep = #{boersheep}</if>
+            <if test="nubiansheep != null "> and nubianSheep = #{nubiansheep}</if>
+        </where>
+    </select>
+    
+    <select id="selectDealLeft2ById" parameterType="Long" resultMap="DealLeft2Result">
+        <include refid="selectDealLeft2Vo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDealLeft2" parameterType="DealLeft2" useGeneratedKeys="true" keyProperty="id">
+        insert into deal_left_2
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="whitegoat != null">whiteGoat,</if>
+            <if test="dubaisheep != null">dubaiSheep,</if>
+            <if test="blackgoat != null">blackGoat,</if>
+            <if test="boersheep != null">boerSheep,</if>
+            <if test="nubiansheep != null">nubianSheep,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="whitegoat != null">#{whitegoat},</if>
+            <if test="dubaisheep != null">#{dubaisheep},</if>
+            <if test="blackgoat != null">#{blackgoat},</if>
+            <if test="boersheep != null">#{boersheep},</if>
+            <if test="nubiansheep != null">#{nubiansheep},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDealLeft2" parameterType="DealLeft2">
+        update deal_left_2
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="whitegoat != null">whiteGoat = #{whitegoat},</if>
+            <if test="dubaisheep != null">dubaiSheep = #{dubaisheep},</if>
+            <if test="blackgoat != null">blackGoat = #{blackgoat},</if>
+            <if test="boersheep != null">boerSheep = #{boersheep},</if>
+            <if test="nubiansheep != null">nubianSheep = #{nubiansheep},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDealLeft2ById" parameterType="Long">
+        delete from deal_left_2 where id = #{id}
+    </delete>
+
+    <delete id="deleteDealLeft2ByIds" parameterType="String">
+        delete from deal_left_2 where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

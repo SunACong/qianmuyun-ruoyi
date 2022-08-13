@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.Sheep2SamplingMapper">
+    
+    <resultMap type="Sheep2Sampling" id="Sheep2SamplingResult">
+        <result property="id"    column="id"    />
+        <result property="samplingTime"    column="sampling_time"    />
+        <result property="enclosureNumber"    column="enclosure_number"    />
+        <result property="sheepNumber"    column="sheep_number"    />
+        <result property="samplingName"    column="sampling_name"    />
+        <result property="samplingNumber"    column="sampling_number"    />
+        <result property="monitoringItem"    column="monitoring_item"    />
+        <result property="monitoringResult"    column="monitoring_result"    />
+        <result property="deal"    column="deal"    />
+        <result property="remark"    column="remark"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="creatTime"    column="creat_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSheep2SamplingVo">
+        select id, sampling_time, enclosure_number, sheep_number, sampling_name, sampling_number, monitoring_item, monitoring_result, deal, remark, user_id, dept_id, creat_time, update_time from sheep2_sampling
+    </sql>
+
+    <select id="selectSheep2SamplingList" parameterType="Sheep2Sampling" resultMap="Sheep2SamplingResult">
+        <include refid="selectSheep2SamplingVo"/>
+        <where>  
+            <if test="params.beginSamplingTime != null and params.beginSamplingTime != '' and params.endSamplingTime != null and params.endSamplingTime != ''"> and sampling_time between #{params.beginSamplingTime} and #{params.endSamplingTime}</if>
+            <if test="enclosureNumber != null  and enclosureNumber != ''"> and enclosure_number = #{enclosureNumber}</if>
+            <if test="sheepNumber != null  and sheepNumber != ''"> and sheep_number = #{sheepNumber}</if>
+            <if test="samplingName != null  and samplingName != ''"> and sampling_name like concat('%', #{samplingName}, '%')</if>
+            <if test="samplingNumber != null "> and sampling_number = #{samplingNumber}</if>
+            <if test="monitoringItem != null  and monitoringItem != ''"> and monitoring_item like concat('%', #{monitoringItem}, '%')</if>
+            <if test="monitoringResult != null  and monitoringResult != ''"> and monitoring_result = #{monitoringResult}</if>
+            <if test="deal != null  and deal != ''"> and deal like concat('%', #{deal}, '%')</if>
+            <if test="remark != null  and remark != ''"> and remark like concat('%', #{remark}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and creat_time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
+            <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and update_time between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectSheep2SamplingById" parameterType="Long" resultMap="Sheep2SamplingResult">
+        <include refid="selectSheep2SamplingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSheep2Sampling" parameterType="Sheep2Sampling" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep2_sampling
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="samplingTime != null">sampling_time,</if>
+            <if test="enclosureNumber != null">enclosure_number,</if>
+            <if test="sheepNumber != null">sheep_number,</if>
+            <if test="samplingName != null">sampling_name,</if>
+            <if test="samplingNumber != null">sampling_number,</if>
+            <if test="monitoringItem != null">monitoring_item,</if>
+            <if test="monitoringResult != null">monitoring_result,</if>
+            <if test="deal != null">deal,</if>
+            <if test="remark != null">remark,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="creatTime != null">creat_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="samplingTime != null">#{samplingTime},</if>
+            <if test="enclosureNumber != null">#{enclosureNumber},</if>
+            <if test="sheepNumber != null">#{sheepNumber},</if>
+            <if test="samplingName != null">#{samplingName},</if>
+            <if test="samplingNumber != null">#{samplingNumber},</if>
+            <if test="monitoringItem != null">#{monitoringItem},</if>
+            <if test="monitoringResult != null">#{monitoringResult},</if>
+            <if test="deal != null">#{deal},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="creatTime != null">#{creatTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheep2Sampling" parameterType="Sheep2Sampling">
+        update sheep2_sampling
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="samplingTime != null">sampling_time = #{samplingTime},</if>
+            <if test="enclosureNumber != null">enclosure_number = #{enclosureNumber},</if>
+            <if test="sheepNumber != null">sheep_number = #{sheepNumber},</if>
+            <if test="samplingName != null">sampling_name = #{samplingName},</if>
+            <if test="samplingNumber != null">sampling_number = #{samplingNumber},</if>
+            <if test="monitoringItem != null">monitoring_item = #{monitoringItem},</if>
+            <if test="monitoringResult != null">monitoring_result = #{monitoringResult},</if>
+            <if test="deal != null">deal = #{deal},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="creatTime != null">creat_time = #{creatTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheep2SamplingById" parameterType="Long">
+        delete from sheep2_sampling where id = #{id}
+    </delete>
+
+    <delete id="deleteSheep2SamplingByIds" parameterType="String">
+        delete from sheep2_sampling where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

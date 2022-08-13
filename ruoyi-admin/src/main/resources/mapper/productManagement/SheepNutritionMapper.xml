@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.SheepNutritionMapper">
+    
+    <resultMap type="SheepNutrition" id="SheepNutritionResult">
+        <result property="id"    column="id"    />
+        <result property="nutritiondate"    column="nutritiondate"    />
+        <result property="region"    column="region"    />
+        <result property="buildingnum"    column="buildingnum"    />
+        <result property="columnnum"    column="columnnum"    />
+        <result property="eartagid"    column="eartagid"    />
+        <result property="amount"    column="amount"    />
+        <result property="weight"    column="weight"    />
+        <result property="stage"    column="stage"    />
+        <result property="concentrate"    column="concentrate"    />
+        <result property="roughage"    column="roughage"    />
+        <result property="feedingnum"    column="feedingnum"    />
+        <result property="totalnum"    column="totalnum"    />
+        <result property="fullpriceper"    column="fullpriceper"    />
+        <result property="startdate"    column="startdate"    />
+        <result property="enddate"    column="enddate"    />
+        <result property="video"    column="video"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="bak1"    column="bak1"    />
+        <result property="bak2"    column="bak2"    />
+        <result property="bak3"    column="bak3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectSheepNutritionVo">
+        select id, nutritiondate, region, buildingnum, columnnum, eartagid, amount, weight, stage, concentrate, roughage, feedingnum, totalnum, fullpriceper, startdate, enddate, video, remarks, bak1, bak2, bak3, create_by, create_date, update_by, update_date, del_flag from sheep_nutrition
+    </sql>
+
+    <select id="selectSheepNutritionList" parameterType="SheepNutrition" resultMap="SheepNutritionResult">
+        <include refid="selectSheepNutritionVo"/>
+        <where>  
+            <if test="params.beginNutritiondate != null and params.beginNutritiondate != '' and params.endNutritiondate != null and params.endNutritiondate != ''"> and nutritiondate between #{params.beginNutritiondate} and #{params.endNutritiondate}</if>
+            <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="buildingnum != null  and buildingnum != ''"> and buildingnum = #{buildingnum}</if>
+            <if test="columnnum != null  and columnnum != ''"> and columnnum = #{columnnum}</if>
+            <if test="eartagid != null  and eartagid != ''"> and eartagid = #{eartagid}</if>
+            <if test="params.beginStartdate != null and params.beginStartdate != '' and params.endStartdate != null and params.endStartdate != ''"> and startdate between #{params.beginStartdate} and #{params.endStartdate}</if>
+            <if test="params.beginEnddate != null and params.beginEnddate != '' and params.endEnddate != null and params.endEnddate != ''"> and enddate between #{params.beginEnddate} and #{params.endEnddate}</if>
+        </where>
+    </select>
+    
+    <select id="selectSheepNutritionById" parameterType="Long" resultMap="SheepNutritionResult">
+        <include refid="selectSheepNutritionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSheepNutrition" parameterType="SheepNutrition" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep_nutrition
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nutritiondate != null">nutritiondate,</if>
+            <if test="region != null">region,</if>
+            <if test="buildingnum != null">buildingnum,</if>
+            <if test="columnnum != null">columnnum,</if>
+            <if test="eartagid != null">eartagid,</if>
+            <if test="amount != null">amount,</if>
+            <if test="weight != null">weight,</if>
+            <if test="stage != null">stage,</if>
+            <if test="concentrate != null">concentrate,</if>
+            <if test="roughage != null">roughage,</if>
+            <if test="feedingnum != null">feedingnum,</if>
+            <if test="totalnum != null">totalnum,</if>
+            <if test="fullpriceper != null">fullpriceper,</if>
+            <if test="startdate != null">startdate,</if>
+            <if test="enddate != null">enddate,</if>
+            <if test="video != null">video,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="bak1 != null">bak1,</if>
+            <if test="bak2 != null">bak2,</if>
+            <if test="bak3 != null">bak3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nutritiondate != null">#{nutritiondate},</if>
+            <if test="region != null">#{region},</if>
+            <if test="buildingnum != null">#{buildingnum},</if>
+            <if test="columnnum != null">#{columnnum},</if>
+            <if test="eartagid != null">#{eartagid},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="stage != null">#{stage},</if>
+            <if test="concentrate != null">#{concentrate},</if>
+            <if test="roughage != null">#{roughage},</if>
+            <if test="feedingnum != null">#{feedingnum},</if>
+            <if test="totalnum != null">#{totalnum},</if>
+            <if test="fullpriceper != null">#{fullpriceper},</if>
+            <if test="startdate != null">#{startdate},</if>
+            <if test="enddate != null">#{enddate},</if>
+            <if test="video != null">#{video},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="bak1 != null">#{bak1},</if>
+            <if test="bak2 != null">#{bak2},</if>
+            <if test="bak3 != null">#{bak3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheepNutrition" parameterType="SheepNutrition">
+        update sheep_nutrition
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="nutritiondate != null">nutritiondate = #{nutritiondate},</if>
+            <if test="region != null">region = #{region},</if>
+            <if test="buildingnum != null">buildingnum = #{buildingnum},</if>
+            <if test="columnnum != null">columnnum = #{columnnum},</if>
+            <if test="eartagid != null">eartagid = #{eartagid},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="stage != null">stage = #{stage},</if>
+            <if test="concentrate != null">concentrate = #{concentrate},</if>
+            <if test="roughage != null">roughage = #{roughage},</if>
+            <if test="feedingnum != null">feedingnum = #{feedingnum},</if>
+            <if test="totalnum != null">totalnum = #{totalnum},</if>
+            <if test="fullpriceper != null">fullpriceper = #{fullpriceper},</if>
+            <if test="startdate != null">startdate = #{startdate},</if>
+            <if test="enddate != null">enddate = #{enddate},</if>
+            <if test="video != null">video = #{video},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="bak1 != null">bak1 = #{bak1},</if>
+            <if test="bak2 != null">bak2 = #{bak2},</if>
+            <if test="bak3 != null">bak3 = #{bak3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheepNutritionById" parameterType="Long">
+        delete from sheep_nutrition where id = #{id}
+    </delete>
+
+    <delete id="deleteSheepNutritionByIds" parameterType="String">
+        delete from sheep_nutrition where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

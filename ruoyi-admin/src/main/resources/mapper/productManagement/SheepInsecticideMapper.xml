@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.SheepInsecticideMapper">
+    
+    <resultMap type="SheepInsecticide" id="SheepInsecticideResult">
+        <result property="id"    column="id"    />
+        <result property="insecttime"    column="insecttime"    />
+        <result property="region"    column="region"    />
+        <result property="buildingnum"    column="buildingnum"    />
+        <result property="columnnum"    column="columnnum"    />
+        <result property="eartagid"    column="eartagid"    />
+        <result property="pesticide"    column="pesticide"    />
+        <result property="method"    column="method"    />
+        <result property="dose"    column="dose"    />
+        <result property="nonpesticideid"    column="nonpesticideid"    />
+        <result property="reason"    column="reason"    />
+        <result property="video"    column="video"    />
+        <result property="startdate"    column="startdate"    />
+        <result property="enddate"    column="enddate"    />
+        <result property="bak1"    column="bak1"    />
+        <result property="bak2"    column="bak2"    />
+        <result property="bak3"    column="bak3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createDate"    column="create_date"    />
+    </resultMap>
+
+    <sql id="selectSheepInsecticideVo">
+        select id, insecttime, region, buildingnum, columnnum, eartagid, pesticide, method, dose, nonpesticideid, reason, video, startdate, enddate, bak1, bak2, bak3, create_by, update_by, update_date, remarks, del_flag, create_date from sheep_insecticide
+    </sql>
+
+    <select id="selectSheepInsecticideList" parameterType="SheepInsecticide" resultMap="SheepInsecticideResult">
+        <include refid="selectSheepInsecticideVo"/>
+        <where>  
+            <if test="params.beginInsecttime != null and params.beginInsecttime != '' and params.endInsecttime != null and params.endInsecttime != ''"> and insecttime between #{params.beginInsecttime} and #{params.endInsecttime}</if>
+            <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="buildingnum != null  and buildingnum != ''"> and buildingnum = #{buildingnum}</if>
+            <if test="columnnum != null  and columnnum != ''"> and columnnum = #{columnnum}</if>
+            <if test="params.beginStartdate != null and params.beginStartdate != '' and params.endStartdate != null and params.endStartdate != ''"> and startdate between #{params.beginStartdate} and #{params.endStartdate}</if>
+            <if test="params.beginEnddate != null and params.beginEnddate != '' and params.endEnddate != null and params.endEnddate != ''"> and enddate between #{params.beginEnddate} and #{params.endEnddate}</if>
+        </where>
+    </select>
+    
+    <select id="selectSheepInsecticideById" parameterType="Long" resultMap="SheepInsecticideResult">
+        <include refid="selectSheepInsecticideVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSheepInsecticide" parameterType="SheepInsecticide" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep_insecticide
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="insecttime != null">insecttime,</if>
+            <if test="region != null">region,</if>
+            <if test="buildingnum != null">buildingnum,</if>
+            <if test="columnnum != null">columnnum,</if>
+            <if test="eartagid != null">eartagid,</if>
+            <if test="pesticide != null">pesticide,</if>
+            <if test="method != null">method,</if>
+            <if test="dose != null">dose,</if>
+            <if test="nonpesticideid != null">nonpesticideid,</if>
+            <if test="reason != null">reason,</if>
+            <if test="video != null">video,</if>
+            <if test="startdate != null">startdate,</if>
+            <if test="enddate != null">enddate,</if>
+            <if test="bak1 != null">bak1,</if>
+            <if test="bak2 != null">bak2,</if>
+            <if test="bak3 != null">bak3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createDate != null">create_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="insecttime != null">#{insecttime},</if>
+            <if test="region != null">#{region},</if>
+            <if test="buildingnum != null">#{buildingnum},</if>
+            <if test="columnnum != null">#{columnnum},</if>
+            <if test="eartagid != null">#{eartagid},</if>
+            <if test="pesticide != null">#{pesticide},</if>
+            <if test="method != null">#{method},</if>
+            <if test="dose != null">#{dose},</if>
+            <if test="nonpesticideid != null">#{nonpesticideid},</if>
+            <if test="reason != null">#{reason},</if>
+            <if test="video != null">#{video},</if>
+            <if test="startdate != null">#{startdate},</if>
+            <if test="enddate != null">#{enddate},</if>
+            <if test="bak1 != null">#{bak1},</if>
+            <if test="bak2 != null">#{bak2},</if>
+            <if test="bak3 != null">#{bak3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createDate != null">#{createDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheepInsecticide" parameterType="SheepInsecticide">
+        update sheep_insecticide
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="insecttime != null">insecttime = #{insecttime},</if>
+            <if test="region != null">region = #{region},</if>
+            <if test="buildingnum != null">buildingnum = #{buildingnum},</if>
+            <if test="columnnum != null">columnnum = #{columnnum},</if>
+            <if test="eartagid != null">eartagid = #{eartagid},</if>
+            <if test="pesticide != null">pesticide = #{pesticide},</if>
+            <if test="method != null">method = #{method},</if>
+            <if test="dose != null">dose = #{dose},</if>
+            <if test="nonpesticideid != null">nonpesticideid = #{nonpesticideid},</if>
+            <if test="reason != null">reason = #{reason},</if>
+            <if test="video != null">video = #{video},</if>
+            <if test="startdate != null">startdate = #{startdate},</if>
+            <if test="enddate != null">enddate = #{enddate},</if>
+            <if test="bak1 != null">bak1 = #{bak1},</if>
+            <if test="bak2 != null">bak2 = #{bak2},</if>
+            <if test="bak3 != null">bak3 = #{bak3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheepInsecticideById" parameterType="Long">
+        delete from sheep_insecticide where id = #{id}
+    </delete>
+
+    <delete id="deleteSheepInsecticideByIds" parameterType="String">
+        delete from sheep_insecticide where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

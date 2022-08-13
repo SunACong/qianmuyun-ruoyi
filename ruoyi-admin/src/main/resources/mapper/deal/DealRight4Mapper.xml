@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.deal.mapper.DealRight4Mapper">
+    
+    <resultMap type="DealRight4" id="DealRight4Result">
+        <result property="id"    column="id"    />
+        <result property="datatype"    column="dataType"    />
+        <result property="number"    column="number"    />
+    </resultMap>
+
+    <sql id="selectDealRight4Vo">
+        select id, dataType, number from deal_right_4
+    </sql>
+
+    <select id="selectDealRight4List" parameterType="DealRight4" resultMap="DealRight4Result">
+        <include refid="selectDealRight4Vo"/>
+        <where>  
+            <if test="datatype != null  and datatype != ''"> and dataType = #{datatype}</if>
+            <if test="number != null "> and number = #{number}</if>
+        </where>
+    </select>
+    
+    <select id="selectDealRight4ById" parameterType="Long" resultMap="DealRight4Result">
+        <include refid="selectDealRight4Vo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDealRight4" parameterType="DealRight4" useGeneratedKeys="true" keyProperty="id">
+        insert into deal_right_4
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="datatype != null">dataType,</if>
+            <if test="number != null">number,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="datatype != null">#{datatype},</if>
+            <if test="number != null">#{number},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDealRight4" parameterType="DealRight4">
+        update deal_right_4
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="datatype != null">dataType = #{datatype},</if>
+            <if test="number != null">number = #{number},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDealRight4ById" parameterType="Long">
+        delete from deal_right_4 where id = #{id}
+    </delete>
+
+    <delete id="deleteDealRight4ByIds" parameterType="String">
+        delete from deal_right_4 where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

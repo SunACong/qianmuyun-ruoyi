@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.Sheep2ImmuneMapper">
+    
+    <resultMap type="Sheep2Immune" id="Sheep2ImmuneResult">
+        <result property="id"    column="id"    />
+        <result property="sheepNumber"    column="sheep_number"    />
+        <result property="immuneTime"    column="immune_time"    />
+        <result property="immunePosition"    column="immune_position"    />
+        <result property="immuneName"    column="immune_name"    />
+        <result property="immuneFrom"    column="immune_from"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="immuneMethod"    column="immune_method"    />
+        <result property="immuneDose"    column="immune_dose"    />
+        <result property="signOperation"    column="sign_operation"    />
+        <result property="remark"    column="remark"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="creatTime"    column="creat_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSheep2ImmuneVo">
+        select id, sheep_number, immune_time, immune_position, immune_name, immune_from, batch_number, immune_method, immune_dose, sign_operation, remark, user_id, dept_id, creat_time, update_time from sheep2_immune
+    </sql>
+
+    <select id="selectSheep2ImmuneList" parameterType="Sheep2Immune" resultMap="Sheep2ImmuneResult">
+        <include refid="selectSheep2ImmuneVo"/>
+        <where>  
+            <if test="sheepNumber != null  and sheepNumber != ''"> and sheep_number = #{sheepNumber}</if>
+            <if test="params.beginImmuneTime != null and params.beginImmuneTime != '' and params.endImmuneTime != null and params.endImmuneTime != ''"> and immune_time between #{params.beginImmuneTime} and #{params.endImmuneTime}</if>
+            <if test="immunePosition != null  and immunePosition != ''"> and immune_position = #{immunePosition}</if>
+            <if test="immuneName != null  and immuneName != ''"> and immune_name like concat('%', #{immuneName}, '%')</if>
+            <if test="immuneFrom != null  and immuneFrom != ''"> and immune_from like concat('%', #{immuneFrom}, '%')</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="immuneMethod != null  and immuneMethod != ''"> and immune_method = #{immuneMethod}</if>
+            <if test="immuneDose != null  and immuneDose != ''"> and immune_dose = #{immuneDose}</if>
+            <if test="signOperation != null  and signOperation != ''"> and sign_operation like concat('%', #{signOperation}, '%')</if>
+            <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and creat_time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
+            <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and update_time between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectSheep2ImmuneById" parameterType="Long" resultMap="Sheep2ImmuneResult">
+        <include refid="selectSheep2ImmuneVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSheep2Immune" parameterType="Sheep2Immune" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep2_immune
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sheepNumber != null">sheep_number,</if>
+            <if test="immuneTime != null">immune_time,</if>
+            <if test="immunePosition != null">immune_position,</if>
+            <if test="immuneName != null">immune_name,</if>
+            <if test="immuneFrom != null">immune_from,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="immuneMethod != null">immune_method,</if>
+            <if test="immuneDose != null">immune_dose,</if>
+            <if test="signOperation != null">sign_operation,</if>
+            <if test="remark != null">remark,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="creatTime != null">creat_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sheepNumber != null">#{sheepNumber},</if>
+            <if test="immuneTime != null">#{immuneTime},</if>
+            <if test="immunePosition != null">#{immunePosition},</if>
+            <if test="immuneName != null">#{immuneName},</if>
+            <if test="immuneFrom != null">#{immuneFrom},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="immuneMethod != null">#{immuneMethod},</if>
+            <if test="immuneDose != null">#{immuneDose},</if>
+            <if test="signOperation != null">#{signOperation},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="creatTime != null">#{creatTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheep2Immune" parameterType="Sheep2Immune">
+        update sheep2_immune
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sheepNumber != null">sheep_number = #{sheepNumber},</if>
+            <if test="immuneTime != null">immune_time = #{immuneTime},</if>
+            <if test="immunePosition != null">immune_position = #{immunePosition},</if>
+            <if test="immuneName != null">immune_name = #{immuneName},</if>
+            <if test="immuneFrom != null">immune_from = #{immuneFrom},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="immuneMethod != null">immune_method = #{immuneMethod},</if>
+            <if test="immuneDose != null">immune_dose = #{immuneDose},</if>
+            <if test="signOperation != null">sign_operation = #{signOperation},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="creatTime != null">creat_time = #{creatTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheep2ImmuneById" parameterType="Long">
+        delete from sheep2_immune where id = #{id}
+    </delete>
+
+    <delete id="deleteSheep2ImmuneByIds" parameterType="String">
+        delete from sheep2_immune where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

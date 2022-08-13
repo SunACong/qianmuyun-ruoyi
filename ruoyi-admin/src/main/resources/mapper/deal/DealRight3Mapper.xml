@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.deal.mapper.DealRight3Mapper">
+    
+    <resultMap type="DealRight3" id="DealRight3Result">
+        <result property="id"    column="id"    />
+        <result property="sheeptype"    column="sheepType"    />
+        <result property="pass"    column="pass"    />
+        <result property="nopass"    column="nopass"    />
+    </resultMap>
+
+    <sql id="selectDealRight3Vo">
+        select id, sheepType, pass, nopass from deal_right_3
+    </sql>
+
+    <select id="selectDealRight3List" parameterType="DealRight3" resultMap="DealRight3Result">
+        <include refid="selectDealRight3Vo"/>
+        <where>  
+            <if test="sheeptype != null  and sheeptype != ''"> and sheepType = #{sheeptype}</if>
+            <if test="pass != null "> and pass = #{pass}</if>
+            <if test="nopass != null "> and nopass = #{nopass}</if>
+        </where>
+    </select>
+    
+    <select id="selectDealRight3ById" parameterType="Long" resultMap="DealRight3Result">
+        <include refid="selectDealRight3Vo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDealRight3" parameterType="DealRight3" useGeneratedKeys="true" keyProperty="id">
+        insert into deal_right_3
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sheeptype != null">sheepType,</if>
+            <if test="pass != null">pass,</if>
+            <if test="nopass != null">nopass,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sheeptype != null">#{sheeptype},</if>
+            <if test="pass != null">#{pass},</if>
+            <if test="nopass != null">#{nopass},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDealRight3" parameterType="DealRight3">
+        update deal_right_3
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sheeptype != null">sheepType = #{sheeptype},</if>
+            <if test="pass != null">pass = #{pass},</if>
+            <if test="nopass != null">nopass = #{nopass},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDealRight3ById" parameterType="Long">
+        delete from deal_right_3 where id = #{id}
+    </delete>
+
+    <delete id="deleteDealRight3ByIds" parameterType="String">
+        delete from deal_right_3 where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

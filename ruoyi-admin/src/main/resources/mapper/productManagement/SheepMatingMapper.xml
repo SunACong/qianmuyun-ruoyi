@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.SheepMatingMapper">
+    
+    <resultMap type="SheepMating" id="SheepMatingResult">
+        <result property="id"    column="id"    />
+        <result property="matingdate"    column="matingdate"    />
+        <result property="femaleid"    column="femaleid"    />
+        <result property="maleid"    column="maleid"    />
+        <result property="nrelation"    column="nrelation"    />
+        <result property="region"    column="region"    />
+        <result property="buildingnum"    column="buildingnum"    />
+        <result property="columnnum"    column="columnnum"    />
+        <result property="matingmode"    column="matingmode"    />
+        <result property="birthmode"    column="birthmode"    />
+        <result property="abortionreason"    column="abortionreason"    />
+        <result property="newregion"    column="newregion"    />
+        <result property="newbuilding"    column="newbuilding"    />
+        <result property="newcolumn"    column="newcolumn"    />
+        <result property="method"    column="method"    />
+        <result property="birthdate"    column="birthdate"    />
+        <result property="birthnum"    column="birthnum"    />
+        <result property="birthmale"    column="birthmale"    />
+        <result property="birthfemale"    column="birthfemale"    />
+        <result property="parity"    column="parity"    />
+        <result property="bak1"    column="bak1"    />
+        <result property="bak2"    column="bak2"    />
+        <result property="bak3"    column="bak3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectSheepMatingVo">
+        select id, matingdate, femaleid, maleid, nrelation, region, buildingnum, columnnum, matingmode, birthmode, abortionreason, newregion, newbuilding, newcolumn, method, birthdate, birthnum, birthmale, birthfemale, parity, bak1, bak2, bak3, create_by, create_date, remarks, update_by, update_date, del_flag from sheep_mating
+    </sql>
+
+    <select id="selectSheepMatingList" parameterType="SheepMating" resultMap="SheepMatingResult">
+        <include refid="selectSheepMatingVo"/>
+        <where>  
+            <if test="matingdate != null "> and matingdate = #{matingdate}</if>
+            <if test="femaleid != null  and femaleid != ''"> and femaleid = #{femaleid}</if>
+            <if test="maleid != null  and maleid != ''"> and maleid = #{maleid}</if>
+            <if test="params.beginBirthdate != null and params.beginBirthdate != '' and params.endBirthdate != null and params.endBirthdate != ''"> and birthdate between #{params.beginBirthdate} and #{params.endBirthdate}</if>
+        </where>
+    </select>
+    
+    <select id="selectSheepMatingById" parameterType="Long" resultMap="SheepMatingResult">
+        <include refid="selectSheepMatingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSheepMating" parameterType="SheepMating" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep_mating
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="matingdate != null">matingdate,</if>
+            <if test="femaleid != null">femaleid,</if>
+            <if test="maleid != null">maleid,</if>
+            <if test="nrelation != null">nrelation,</if>
+            <if test="region != null">region,</if>
+            <if test="buildingnum != null">buildingnum,</if>
+            <if test="columnnum != null">columnnum,</if>
+            <if test="matingmode != null">matingmode,</if>
+            <if test="birthmode != null">birthmode,</if>
+            <if test="abortionreason != null">abortionreason,</if>
+            <if test="newregion != null">newregion,</if>
+            <if test="newbuilding != null">newbuilding,</if>
+            <if test="newcolumn != null">newcolumn,</if>
+            <if test="method != null">method,</if>
+            <if test="birthdate != null">birthdate,</if>
+            <if test="birthnum != null">birthnum,</if>
+            <if test="birthmale != null">birthmale,</if>
+            <if test="birthfemale != null">birthfemale,</if>
+            <if test="parity != null">parity,</if>
+            <if test="bak1 != null">bak1,</if>
+            <if test="bak2 != null">bak2,</if>
+            <if test="bak3 != null">bak3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="matingdate != null">#{matingdate},</if>
+            <if test="femaleid != null">#{femaleid},</if>
+            <if test="maleid != null">#{maleid},</if>
+            <if test="nrelation != null">#{nrelation},</if>
+            <if test="region != null">#{region},</if>
+            <if test="buildingnum != null">#{buildingnum},</if>
+            <if test="columnnum != null">#{columnnum},</if>
+            <if test="matingmode != null">#{matingmode},</if>
+            <if test="birthmode != null">#{birthmode},</if>
+            <if test="abortionreason != null">#{abortionreason},</if>
+            <if test="newregion != null">#{newregion},</if>
+            <if test="newbuilding != null">#{newbuilding},</if>
+            <if test="newcolumn != null">#{newcolumn},</if>
+            <if test="method != null">#{method},</if>
+            <if test="birthdate != null">#{birthdate},</if>
+            <if test="birthnum != null">#{birthnum},</if>
+            <if test="birthmale != null">#{birthmale},</if>
+            <if test="birthfemale != null">#{birthfemale},</if>
+            <if test="parity != null">#{parity},</if>
+            <if test="bak1 != null">#{bak1},</if>
+            <if test="bak2 != null">#{bak2},</if>
+            <if test="bak3 != null">#{bak3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheepMating" parameterType="SheepMating">
+        update sheep_mating
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="matingdate != null">matingdate = #{matingdate},</if>
+            <if test="femaleid != null">femaleid = #{femaleid},</if>
+            <if test="maleid != null">maleid = #{maleid},</if>
+            <if test="nrelation != null">nrelation = #{nrelation},</if>
+            <if test="region != null">region = #{region},</if>
+            <if test="buildingnum != null">buildingnum = #{buildingnum},</if>
+            <if test="columnnum != null">columnnum = #{columnnum},</if>
+            <if test="matingmode != null">matingmode = #{matingmode},</if>
+            <if test="birthmode != null">birthmode = #{birthmode},</if>
+            <if test="abortionreason != null">abortionreason = #{abortionreason},</if>
+            <if test="newregion != null">newregion = #{newregion},</if>
+            <if test="newbuilding != null">newbuilding = #{newbuilding},</if>
+            <if test="newcolumn != null">newcolumn = #{newcolumn},</if>
+            <if test="method != null">method = #{method},</if>
+            <if test="birthdate != null">birthdate = #{birthdate},</if>
+            <if test="birthnum != null">birthnum = #{birthnum},</if>
+            <if test="birthmale != null">birthmale = #{birthmale},</if>
+            <if test="birthfemale != null">birthfemale = #{birthfemale},</if>
+            <if test="parity != null">parity = #{parity},</if>
+            <if test="bak1 != null">bak1 = #{bak1},</if>
+            <if test="bak2 != null">bak2 = #{bak2},</if>
+            <if test="bak3 != null">bak3 = #{bak3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheepMatingById" parameterType="Long">
+        delete from sheep_mating where id = #{id}
+    </delete>
+
+    <delete id="deleteSheepMatingByIds" parameterType="String">
+        delete from sheep_mating where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

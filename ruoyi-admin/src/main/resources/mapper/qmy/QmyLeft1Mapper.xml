@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.qmy.mapper.QmyLeft1Mapper">
+    
+    <resultMap type="QmyLeft1" id="QmyLeft1Result">
+        <result property="id"    column="id"    />
+        <result property="sheeptype"    column="sheepType"    />
+        <result property="formatterdata"    column="formatterData"    />
+        <result property="value11"    column="value1_1"    />
+        <result property="value12"    column="value1_2"    />
+    </resultMap>
+
+    <sql id="selectQmyLeft1Vo">
+        select id, sheepType, formatterData, value1_1, value1_2 from qmy_left_1
+    </sql>
+
+    <select id="selectQmyLeft1List" parameterType="QmyLeft1" resultMap="QmyLeft1Result">
+        <include refid="selectQmyLeft1Vo"/>
+        <where>  
+            <if test="sheeptype != null  and sheeptype != ''"> and sheepType = #{sheeptype}</if>
+            <if test="formatterdata != null "> and formatterData = #{formatterdata}</if>
+            <if test="value11 != null "> and value1_1 = #{value11}</if>
+            <if test="value12 != null "> and value1_2 = #{value12}</if>
+        </where>
+    </select>
+    
+    <select id="selectQmyLeft1ById" parameterType="Long" resultMap="QmyLeft1Result">
+        <include refid="selectQmyLeft1Vo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertQmyLeft1" parameterType="QmyLeft1" useGeneratedKeys="true" keyProperty="id">
+        insert into qmy_left_1
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sheeptype != null">sheepType,</if>
+            <if test="formatterdata != null">formatterData,</if>
+            <if test="value11 != null">value1_1,</if>
+            <if test="value12 != null">value1_2,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sheeptype != null">#{sheeptype},</if>
+            <if test="formatterdata != null">#{formatterdata},</if>
+            <if test="value11 != null">#{value11},</if>
+            <if test="value12 != null">#{value12},</if>
+         </trim>
+    </insert>
+
+    <update id="updateQmyLeft1" parameterType="QmyLeft1">
+        update qmy_left_1
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sheeptype != null">sheepType = #{sheeptype},</if>
+            <if test="formatterdata != null">formatterData = #{formatterdata},</if>
+            <if test="value11 != null">value1_1 = #{value11},</if>
+            <if test="value12 != null">value1_2 = #{value12},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteQmyLeft1ById" parameterType="Long">
+        delete from qmy_left_1 where id = #{id}
+    </delete>
+
+    <delete id="deleteQmyLeft1ByIds" parameterType="String">
+        delete from qmy_left_1 where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

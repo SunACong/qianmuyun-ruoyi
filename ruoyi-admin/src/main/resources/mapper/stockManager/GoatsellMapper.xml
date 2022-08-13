@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.stockManager.mapper.GoatsellMapper">
+
+    <resultMap type="Goatsell" id="GoatsellResult">
+        <result property="id"    column="id"    />
+        <result property="selldate"    column="selldate"    />
+        <result property="eartagid"    column="eartagid"    />
+        <result property="region"    column="region"    />
+        <result property="buildingnum"    column="buildingnum"    />
+        <result property="columnnum"    column="columnnum"    />
+        <result property="birthdate"    column="birthdate"    />
+        <result property="goattype"    column="goattype"    />
+        <result property="age"    column="age"    />
+        <result property="nweight"    column="nweight"    />
+        <result property="colour"    column="colour"    />
+        <result property="rankm"    column="rankm"    />
+        <result property="unit"    column="unit"    />
+        <result property="ordernum"    column="ordernum"    />
+        <result property="purchasenum"    column="purchasenum"    />
+        <result property="bak1"    column="bak1"    />
+        <result property="bak2"    column="bak2"    />
+        <result property="bak3"    column="bak3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectGoatsellVo">
+        select id, selldate, eartagid, region, buildingnum, columnnum, birthdate, goattype, age, nweight, colour, rankm, unit, ordernum, purchasenum, bak1, bak2, bak3, create_by, create_date, update_by, update_date, remarks, del_flag from sheep_goatsell
+    </sql>
+
+    <select id="selectGoatsellList" parameterType="Goatsell" resultMap="GoatsellResult">
+        <include refid="selectGoatsellVo"/>
+        <where>
+            <if test="params.beginSelldate != null and params.beginSelldate != '' and params.endSelldate != null and params.endSelldate != ''"> and selldate between #{params.beginSelldate} and #{params.endSelldate}</if>
+            <if test="eartagid != null  and eartagid != ''"> and eartagid = #{eartagid}</if>
+            <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="buildingnum != null  and buildingnum != ''"> and buildingnum = #{buildingnum}</if>
+            <if test="columnnum != null  and columnnum != ''"> and columnnum = #{columnnum}</if>
+            <if test="params.beginBirthdate != null and params.beginBirthdate != '' and params.endBirthdate != null and params.endBirthdate != ''"> and birthdate between #{params.beginBirthdate} and #{params.endBirthdate}</if>
+            <if test="goattype != null  and goattype != ''"> and goattype = #{goattype}</if>
+            <if test="age != null  and age != ''"> and age = #{age}</if>
+            <if test="nweight != null  and nweight != ''"> and nweight = #{nweight}</if>
+            <if test="colour != null  and colour != ''"> and colour = #{colour}</if>
+            <if test="rankm != null  and rankm != ''"> and rankm = #{rankm}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="ordernum != null  and ordernum != ''"> and ordernum = #{ordernum}</if>
+            <if test="purchasenum != null  and purchasenum != ''"> and purchasenum = #{purchasenum}</if>
+            <if test="bak1 != null  and bak1 != ''"> and bak1 = #{bak1}</if>
+            <if test="bak2 != null  and bak2 != ''"> and bak2 = #{bak2}</if>
+            <if test="bak3 != null  and bak3 != ''"> and bak3 = #{bak3}</if>
+            <if test="params.beginCreateDate != null and params.beginCreateDate != '' and params.endCreateDate != null and params.endCreateDate != ''"> and create_date between #{params.beginCreateDate} and #{params.endCreateDate}</if>
+            <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+            <if test="params.beginUpdateDate != null and params.beginUpdateDate != '' and params.endUpdateDate != null and params.endUpdateDate != ''"> and update_date between #{params.beginUpdateDate} and #{params.endUpdateDate}</if>
+            <if test="remarks != null  and remarks != ''"> and remarks = #{remarks}</if>
+        </where>
+    </select>
+
+    <select id="selectGoatsellById" parameterType="Long" resultMap="GoatsellResult">
+        <include refid="selectGoatsellVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertGoatsell" parameterType="Goatsell" useGeneratedKeys="true" keyProperty="id">
+        insert into goatsell
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="selldate != null">selldate,</if>
+            <if test="eartagid != null">eartagid,</if>
+            <if test="region != null">region,</if>
+            <if test="buildingnum != null">buildingnum,</if>
+            <if test="columnnum != null">columnnum,</if>
+            <if test="birthdate != null">birthdate,</if>
+            <if test="goattype != null">goattype,</if>
+            <if test="age != null">age,</if>
+            <if test="nweight != null">nweight,</if>
+            <if test="colour != null">colour,</if>
+            <if test="rankm != null">rankm,</if>
+            <if test="unit != null">unit,</if>
+            <if test="ordernum != null">ordernum,</if>
+            <if test="purchasenum != null">purchasenum,</if>
+            <if test="bak1 != null">bak1,</if>
+            <if test="bak2 != null">bak2,</if>
+            <if test="bak3 != null">bak3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="selldate != null">#{selldate},</if>
+            <if test="eartagid != null">#{eartagid},</if>
+            <if test="region != null">#{region},</if>
+            <if test="buildingnum != null">#{buildingnum},</if>
+            <if test="columnnum != null">#{columnnum},</if>
+            <if test="birthdate != null">#{birthdate},</if>
+            <if test="goattype != null">#{goattype},</if>
+            <if test="age != null">#{age},</if>
+            <if test="nweight != null">#{nweight},</if>
+            <if test="colour != null">#{colour},</if>
+            <if test="rankm != null">#{rankm},</if>
+            <if test="unit != null">#{unit},</if>
+            <if test="ordernum != null">#{ordernum},</if>
+            <if test="purchasenum != null">#{purchasenum},</if>
+            <if test="bak1 != null">#{bak1},</if>
+            <if test="bak2 != null">#{bak2},</if>
+            <if test="bak3 != null">#{bak3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGoatsell" parameterType="Goatsell">
+        update goatsell
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="selldate != null">selldate = #{selldate},</if>
+            <if test="eartagid != null">eartagid = #{eartagid},</if>
+            <if test="region != null">region = #{region},</if>
+            <if test="buildingnum != null">buildingnum = #{buildingnum},</if>
+            <if test="columnnum != null">columnnum = #{columnnum},</if>
+            <if test="birthdate != null">birthdate = #{birthdate},</if>
+            <if test="goattype != null">goattype = #{goattype},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="nweight != null">nweight = #{nweight},</if>
+            <if test="colour != null">colour = #{colour},</if>
+            <if test="rankm != null">rankm = #{rankm},</if>
+            <if test="unit != null">unit = #{unit},</if>
+            <if test="ordernum != null">ordernum = #{ordernum},</if>
+            <if test="purchasenum != null">purchasenum = #{purchasenum},</if>
+            <if test="bak1 != null">bak1 = #{bak1},</if>
+            <if test="bak2 != null">bak2 = #{bak2},</if>
+            <if test="bak3 != null">bak3 = #{bak3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGoatsellById" parameterType="Long">
+        delete from goatsell where id = #{id}
+    </delete>
+
+    <delete id="deleteGoatsellByIds" parameterType="String">
+        delete from goatsell where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

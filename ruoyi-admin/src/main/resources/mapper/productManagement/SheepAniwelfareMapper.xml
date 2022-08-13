@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.SheepAniwelfareMapper">
+
+    <resultMap type="SheepAniwelfare" id="SheepAniwelfareResult">
+        <result property="id"    column="id"    />
+        <result property="checkdate"    column="checkdate"    />
+        <result property="operation"    column="operation"    />
+        <result property="feedhouse"    column="feedhouse"    />
+        <result property="killrat"    column="killrat"    />
+        <result property="ventilation"    column="ventilation"    />
+        <result property="goathouse"    column="goathouse"    />
+        <result property="environment"    column="environment"    />
+        <result property="forgegrass"    column="forgegrass"    />
+        <result property="coldproof"    column="coldproof"    />
+        <result property="mosquitocontrol"    column="mosquitocontrol"    />
+        <result property="video"    column="video"    />
+        <result property="startdate"    column="startdate"    />
+        <result property="enddate"    column="enddate"    />
+        <result property="bak1"    column="bak1"    />
+        <result property="bak2"    column="bak2"    />
+        <result property="bak3"    column="bak3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectSheepAniwelfareVo">
+#         select id, checkdate, operation, feedhouse, killrat, ventilation, goathouse, environment, forgegrass, coldproof, mosquitocontrol, video, startdate, enddate, bak1, bak2, bak3, create_by, create_date, update_by, update_date, remarks, del_flag from sheep_aniwelfare
+        select * from sheep_aniwelfare
+    </sql>
+
+    <select id="selectSheepAniwelfareList" parameterType="SheepAniwelfare" resultMap="SheepAniwelfareResult">
+        <include refid="selectSheepAniwelfareVo"/>
+        <where>
+            <if test="params.beginCheckdate != null and params.beginCheckdate != '' and params.endCheckdate != null and params.endCheckdate != ''"> and checkdate between #{params.beginCheckdate} and #{params.endCheckdate}</if>
+            <if test="params.beginStartdate != null and params.beginStartdate != '' and params.endStartdate != null and params.endStartdate != ''"> and startdate between #{params.beginStartdate} and #{params.endStartdate}</if>
+            <if test="params.beginEnddate != null and params.beginEnddate != '' and params.endEnddate != null and params.endEnddate != ''"> and enddate between #{params.beginEnddate} and #{params.endEnddate}</if>
+            <if test="bak3 != null  and bak3 != ''"> and bak3 = #{bak3}</if>
+        </where>
+    </select>
+
+    <select id="selectSheepAniwelfareById" parameterType="Long" resultMap="SheepAniwelfareResult">
+        <include refid="selectSheepAniwelfareVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertSheepAniwelfare" parameterType="SheepAniwelfare" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep_aniwelfare
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="checkdate != null">checkdate,</if>
+            <if test="operation != null">operation,</if>
+            <if test="feedhouse != null">feedhouse,</if>
+            <if test="killrat != null">killrat,</if>
+            <if test="ventilation != null">ventilation,</if>
+            <if test="goathouse != null">goathouse,</if>
+            <if test="environment != null">environment,</if>
+            <if test="forgegrass != null">forgegrass,</if>
+            <if test="coldproof != null">coldproof,</if>
+            <if test="mosquitocontrol != null">mosquitocontrol,</if>
+            <if test="video != null">video,</if>
+            <if test="startdate != null">startdate,</if>
+            <if test="enddate != null">enddate,</if>
+            <if test="bak1 != null">bak1,</if>
+            <if test="bak2 != null">bak2,</if>
+            <if test="bak3 != null">bak3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="checkdate != null">#{checkdate},</if>
+            <if test="operation != null">#{operation},</if>
+            <if test="feedhouse != null">#{feedhouse},</if>
+            <if test="killrat != null">#{killrat},</if>
+            <if test="ventilation != null">#{ventilation},</if>
+            <if test="goathouse != null">#{goathouse},</if>
+            <if test="environment != null">#{environment},</if>
+            <if test="forgegrass != null">#{forgegrass},</if>
+            <if test="coldproof != null">#{coldproof},</if>
+            <if test="mosquitocontrol != null">#{mosquitocontrol},</if>
+            <if test="video != null">#{video},</if>
+            <if test="startdate != null">#{startdate},</if>
+            <if test="enddate != null">#{enddate},</if>
+            <if test="bak1 != null">#{bak1},</if>
+            <if test="bak2 != null">#{bak2},</if>
+            <if test="bak3 != null">#{bak3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheepAniwelfare" parameterType="SheepAniwelfare">
+        update sheep_aniwelfare
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="checkdate != null">checkdate = #{checkdate},</if>
+            <if test="operation != null">operation = #{operation},</if>
+            <if test="feedhouse != null">feedhouse = #{feedhouse},</if>
+            <if test="killrat != null">killrat = #{killrat},</if>
+            <if test="ventilation != null">ventilation = #{ventilation},</if>
+            <if test="goathouse != null">goathouse = #{goathouse},</if>
+            <if test="environment != null">environment = #{environment},</if>
+            <if test="forgegrass != null">forgegrass = #{forgegrass},</if>
+            <if test="coldproof != null">coldproof = #{coldproof},</if>
+            <if test="mosquitocontrol != null">mosquitocontrol = #{mosquitocontrol},</if>
+            <if test="video != null">video = #{video},</if>
+            <if test="startdate != null">startdate = #{startdate},</if>
+            <if test="enddate != null">enddate = #{enddate},</if>
+            <if test="bak1 != null">bak1 = #{bak1},</if>
+            <if test="bak2 != null">bak2 = #{bak2},</if>
+            <if test="bak3 != null">bak3 = #{bak3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheepAniwelfareById" parameterType="Long">
+        delete from sheep_aniwelfare where id = #{id}
+    </delete>
+
+    <delete id="deleteSheepAniwelfareByIds" parameterType="String">
+        delete from sheep_aniwelfare where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

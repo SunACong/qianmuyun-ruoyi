@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.qmy.mapper.QmyLeft42Mapper">
+    
+    <resultMap type="QmyLeft42" id="QmyLeft42Result">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="number"    column="number"    />
+    </resultMap>
+
+    <sql id="selectQmyLeft42Vo">
+        select id, type, number from qmy_left_4_2
+    </sql>
+
+    <select id="selectQmyLeft42List" parameterType="QmyLeft42" resultMap="QmyLeft42Result">
+        <include refid="selectQmyLeft42Vo"/>
+        <where>  
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="number != null "> and number = #{number}</if>
+        </where>
+    </select>
+    
+    <select id="selectQmyLeft42ById" parameterType="Long" resultMap="QmyLeft42Result">
+        <include refid="selectQmyLeft42Vo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertQmyLeft42" parameterType="QmyLeft42" useGeneratedKeys="true" keyProperty="id">
+        insert into qmy_left_4_2
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null">type,</if>
+            <if test="number != null">number,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null">#{type},</if>
+            <if test="number != null">#{number},</if>
+         </trim>
+    </insert>
+
+    <update id="updateQmyLeft42" parameterType="QmyLeft42">
+        update qmy_left_4_2
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null">type = #{type},</if>
+            <if test="number != null">number = #{number},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteQmyLeft42ById" parameterType="Long">
+        delete from qmy_left_4_2 where id = #{id}
+    </delete>
+
+    <delete id="deleteQmyLeft42ByIds" parameterType="String">
+        delete from qmy_left_4_2 where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

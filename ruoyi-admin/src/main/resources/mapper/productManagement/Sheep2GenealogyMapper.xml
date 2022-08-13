@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.Sheep2GenealogyMapper">
+    
+    <resultMap type="Sheep2Genealogy" id="Sheep2GenealogyResult">
+        <result property="id"    column="id"    />
+        <result property="sheepType"    column="sheep_type"    />
+        <result property="sheepNumber"    column="sheep_number"    />
+        <result property="sex"    column="sex"    />
+        <result property="bornTime"    column="born_time"    />
+        <result property="number"    column="number"    />
+        <result property="bornNumber"    column="born_number"    />
+        <result property="rankm"    column="rankm"    />
+        <result property="outTime"    column="out_time"    />
+        <result property="outKg"    column="out_kg"    />
+        <result property="fatherNumber"    column="father_number"    />
+        <result property="ffatherNumber"    column="ffather_number"    />
+        <result property="fmotherNumber"    column="fmother_number"    />
+        <result property="motherNumber"    column="mother_number"    />
+        <result property="mfatherNumber"    column="mfather_number"    />
+        <result property="mmotherNumber"    column="mmother_number"    />
+        <result property="age"    column="age"    />
+        <result property="kHeavy"    column="k_heavy"    />
+        <result property="kHeight"    column="k_height"    />
+        <result property="kLong"    column="k_long"    />
+        <result property="kChest"    column="k_chest"    />
+        <result property="picture"    column="picture"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="creatTime"    column="creat_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSheep2GenealogyVo">
+        select id, sheep_type, sheep_number, sex, born_time, number, born_number, rankm, out_time, out_kg, father_number, ffather_number, fmother_number, mother_number, mfather_number, mmother_number, age, k_heavy, k_height, k_long, k_chest, picture, user_id, dept_id, creat_time, update_time from sheep2_genealogy
+    </sql>
+
+    <select id="selectSheep2GenealogyList" parameterType="Sheep2Genealogy" resultMap="Sheep2GenealogyResult">
+        <include refid="selectSheep2GenealogyVo"/>
+        <where>  
+            <if test="sheepType != null  and sheepType != ''"> and sheep_type = #{sheepType}</if>
+            <if test="sheepNumber != null  and sheepNumber != ''"> and sheep_number = #{sheepNumber}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="params.beginBornTime != null and params.beginBornTime != '' and params.endBornTime != null and params.endBornTime != ''"> and born_time between #{params.beginBornTime} and #{params.endBornTime}</if>
+            <if test="number != null "> and number = #{number}</if>
+            <if test="bornNumber != null "> and born_number = #{bornNumber}</if>
+            <if test="rankm != null  and rankm != ''"> and rankm = #{rankm}</if>
+            <if test="params.beginOutTime != null and params.beginOutTime != '' and params.endOutTime != null and params.endOutTime != ''"> and out_time between #{params.beginOutTime} and #{params.endOutTime}</if>
+            <if test="outKg != null "> and out_kg = #{outKg}</if>
+            <if test="fatherNumber != null  and fatherNumber != ''"> and father_number = #{fatherNumber}</if>
+            <if test="ffatherNumber != null  and ffatherNumber != ''"> and ffather_number = #{ffatherNumber}</if>
+            <if test="fmotherNumber != null  and fmotherNumber != ''"> and fmother_number = #{fmotherNumber}</if>
+            <if test="motherNumber != null  and motherNumber != ''"> and mother_number = #{motherNumber}</if>
+            <if test="mfatherNumber != null  and mfatherNumber != ''"> and mfather_number = #{mfatherNumber}</if>
+            <if test="mmotherNumber != null  and mmotherNumber != ''"> and mmother_number = #{mmotherNumber}</if>
+            <if test="age != null  and age != ''"> and age = #{age}</if>
+            <if test="kHeavy != null "> and k_heavy = #{kHeavy}</if>
+            <if test="kHeight != null "> and k_height = #{kHeight}</if>
+            <if test="kLong != null "> and k_long = #{kLong}</if>
+            <if test="kChest != null "> and k_chest = #{kChest}</if>
+            <if test="picture != null  and picture != ''"> and picture = #{picture}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and creat_time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
+            <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and update_time between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectSheep2GenealogyById" parameterType="Long" resultMap="Sheep2GenealogyResult">
+        <include refid="selectSheep2GenealogyVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSheep2Genealogy" parameterType="Sheep2Genealogy" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep2_genealogy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sheepType != null">sheep_type,</if>
+            <if test="sheepNumber != null">sheep_number,</if>
+            <if test="sex != null">sex,</if>
+            <if test="bornTime != null">born_time,</if>
+            <if test="number != null">number,</if>
+            <if test="bornNumber != null">born_number,</if>
+            <if test="rankm != null">rankm,</if>
+            <if test="outTime != null">out_time,</if>
+            <if test="outKg != null">out_kg,</if>
+            <if test="fatherNumber != null">father_number,</if>
+            <if test="ffatherNumber != null">ffather_number,</if>
+            <if test="fmotherNumber != null">fmother_number,</if>
+            <if test="motherNumber != null">mother_number,</if>
+            <if test="mfatherNumber != null">mfather_number,</if>
+            <if test="mmotherNumber != null">mmother_number,</if>
+            <if test="age != null">age,</if>
+            <if test="kHeavy != null">k_heavy,</if>
+            <if test="kHeight != null">k_height,</if>
+            <if test="kLong != null">k_long,</if>
+            <if test="kChest != null">k_chest,</if>
+            <if test="picture != null">picture,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="creatTime != null">creat_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sheepType != null">#{sheepType},</if>
+            <if test="sheepNumber != null">#{sheepNumber},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="bornTime != null">#{bornTime},</if>
+            <if test="number != null">#{number},</if>
+            <if test="bornNumber != null">#{bornNumber},</if>
+            <if test="rankm != null">#{rankm},</if>
+            <if test="outTime != null">#{outTime},</if>
+            <if test="outKg != null">#{outKg},</if>
+            <if test="fatherNumber != null">#{fatherNumber},</if>
+            <if test="ffatherNumber != null">#{ffatherNumber},</if>
+            <if test="fmotherNumber != null">#{fmotherNumber},</if>
+            <if test="motherNumber != null">#{motherNumber},</if>
+            <if test="mfatherNumber != null">#{mfatherNumber},</if>
+            <if test="mmotherNumber != null">#{mmotherNumber},</if>
+            <if test="age != null">#{age},</if>
+            <if test="kHeavy != null">#{kHeavy},</if>
+            <if test="kHeight != null">#{kHeight},</if>
+            <if test="kLong != null">#{kLong},</if>
+            <if test="kChest != null">#{kChest},</if>
+            <if test="picture != null">#{picture},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="creatTime != null">#{creatTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheep2Genealogy" parameterType="Sheep2Genealogy">
+        update sheep2_genealogy
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sheepType != null">sheep_type = #{sheepType},</if>
+            <if test="sheepNumber != null">sheep_number = #{sheepNumber},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="bornTime != null">born_time = #{bornTime},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="bornNumber != null">born_number = #{bornNumber},</if>
+            <if test="rankm != null">rankm = #{rankm},</if>
+            <if test="outTime != null">out_time = #{outTime},</if>
+            <if test="outKg != null">out_kg = #{outKg},</if>
+            <if test="fatherNumber != null">father_number = #{fatherNumber},</if>
+            <if test="ffatherNumber != null">ffather_number = #{ffatherNumber},</if>
+            <if test="fmotherNumber != null">fmother_number = #{fmotherNumber},</if>
+            <if test="motherNumber != null">mother_number = #{motherNumber},</if>
+            <if test="mfatherNumber != null">mfather_number = #{mfatherNumber},</if>
+            <if test="mmotherNumber != null">mmother_number = #{mmotherNumber},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="kHeavy != null">k_heavy = #{kHeavy},</if>
+            <if test="kHeight != null">k_height = #{kHeight},</if>
+            <if test="kLong != null">k_long = #{kLong},</if>
+            <if test="kChest != null">k_chest = #{kChest},</if>
+            <if test="picture != null">picture = #{picture},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="creatTime != null">creat_time = #{creatTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheep2GenealogyById" parameterType="Long">
+        delete from sheep2_genealogy where id = #{id}
+    </delete>
+
+    <delete id="deleteSheep2GenealogyByIds" parameterType="String">
+        delete from sheep2_genealogy where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

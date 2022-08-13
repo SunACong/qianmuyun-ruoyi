@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.deal.mapper.DealRight1Mapper">
+    
+    <resultMap type="DealRight1" id="DealRight1Result">
+        <result property="id"    column="id"    />
+        <result property="diseasetype"    column="diseaseType"    />
+        <result property="grade"    column="grade"    />
+        <result property="address"    column="address"    />
+    </resultMap>
+
+    <sql id="selectDealRight1Vo">
+        select id, diseaseType, grade, address from deal_right_1
+    </sql>
+
+    <select id="selectDealRight1List" parameterType="DealRight1" resultMap="DealRight1Result">
+        <include refid="selectDealRight1Vo"/>
+        <where>  
+            <if test="diseasetype != null  and diseasetype != ''"> and diseaseType = #{diseasetype}</if>
+            <if test="grade != null  and grade != ''"> and grade = #{grade}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+        </where>
+    </select>
+    
+    <select id="selectDealRight1ById" parameterType="Long" resultMap="DealRight1Result">
+        <include refid="selectDealRight1Vo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDealRight1" parameterType="DealRight1" useGeneratedKeys="true" keyProperty="id">
+        insert into deal_right_1
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="diseasetype != null">diseaseType,</if>
+            <if test="grade != null">grade,</if>
+            <if test="address != null">address,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="diseasetype != null">#{diseasetype},</if>
+            <if test="grade != null">#{grade},</if>
+            <if test="address != null">#{address},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDealRight1" parameterType="DealRight1">
+        update deal_right_1
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="diseasetype != null">diseaseType = #{diseasetype},</if>
+            <if test="grade != null">grade = #{grade},</if>
+            <if test="address != null">address = #{address},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDealRight1ById" parameterType="Long">
+        delete from deal_right_1 where id = #{id}
+    </delete>
+
+    <delete id="deleteDealRight1ByIds" parameterType="String">
+        delete from deal_right_1 where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

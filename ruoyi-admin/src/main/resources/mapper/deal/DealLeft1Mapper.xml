@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.deal.mapper.DealLeft1Mapper">
+
+    <resultMap type="DealLeft1" id="DealLeft1Result">
+        <result property="id"    column="id"    />
+        <result property="week"    column="week"    />
+        <result property="total"    column="total"    />
+        <result property="sale"    column="sale"    />
+    </resultMap>
+
+    <sql id="selectDealLeft1Vo">
+        select id, week, total, sale from deal_left_1
+    </sql>
+
+    <select id="selectDealLeft1List" parameterType="DealLeft1" resultMap="DealLeft1Result">
+        <include refid="selectDealLeft1Vo"/>
+        <where>
+            <if test="week != null  and week != ''"> and week = #{week}</if>
+            <if test="total != null "> and total = #{total}</if>
+            <if test="sale != null "> and sale = #{sale}</if>
+        </where>
+    </select>
+
+    <select id="selectDealLeft1ById" parameterType="Long" resultMap="DealLeft1Result">
+        <include refid="selectDealLeft1Vo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDealLeft1" parameterType="DealLeft1" useGeneratedKeys="true" keyProperty="id">
+        insert into deal_left_1
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="week != null">week,</if>
+            <if test="total != null">total,</if>
+            <if test="sale != null">sale,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="week != null">#{week},</if>
+            <if test="total != null">#{total},</if>
+            <if test="sale != null">#{sale},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDealLeft1" parameterType="DealLeft1">
+        update deal_left_1
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="week != null">week = #{week},</if>
+            <if test="total != null">total = #{total},</if>
+            <if test="sale != null">sale = #{sale},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDealLeft1ById" parameterType="Long">
+        delete from deal_left_1 where id = #{id}
+    </delete>
+
+    <delete id="deleteDealLeft1ByIds" parameterType="String">
+        delete from deal_left_1 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.Sheep2ProductrecordMapper">
+    
+    <resultMap type="Sheep2Productrecord" id="Sheep2ProductrecordResult">
+        <result property="id"    column="id"    />
+        <result property="enclosure"    column="enclosure"    />
+        <result property="productTime"    column="product_time"    />
+        <result property="born"    column="born"    />
+        <result property="transferIn"    column="transfer_in"    />
+        <result property="transferOut"    column="transfer_out"    />
+        <result property="death"    column="death"    />
+        <result property="number"    column="number"    />
+        <result property="remark"    column="remark"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="creatTime"    column="creat_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSheep2ProductrecordVo">
+        select id, enclosure, product_time, born, transfer_in, transfer_out, death, number, remark, user_id, dept_id, creat_time, update_time from sheep2_productrecord
+    </sql>
+
+    <select id="selectSheep2ProductrecordList" parameterType="Sheep2Productrecord" resultMap="Sheep2ProductrecordResult">
+        <include refid="selectSheep2ProductrecordVo"/>
+        <where>  
+            <if test="enclosure != null  and enclosure != ''"> and enclosure = #{enclosure}</if>
+            <if test="params.beginProductTime != null and params.beginProductTime != '' and params.endProductTime != null and params.endProductTime != ''"> and product_time between #{params.beginProductTime} and #{params.endProductTime}</if>
+            <if test="born != null "> and born = #{born}</if>
+            <if test="transferIn != null "> and transfer_in = #{transferIn}</if>
+            <if test="transferOut != null "> and transfer_out = #{transferOut}</if>
+            <if test="death != null "> and death = #{death}</if>
+            <if test="number != null "> and number = #{number}</if>
+            <if test="remark != null  and remark != ''"> and remark like concat('%', #{remark}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and creat_time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
+            <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and update_time between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectSheep2ProductrecordById" parameterType="Long" resultMap="Sheep2ProductrecordResult">
+        <include refid="selectSheep2ProductrecordVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSheep2Productrecord" parameterType="Sheep2Productrecord" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep2_productrecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="enclosure != null">enclosure,</if>
+            <if test="productTime != null">product_time,</if>
+            <if test="born != null">born,</if>
+            <if test="transferIn != null">transfer_in,</if>
+            <if test="transferOut != null">transfer_out,</if>
+            <if test="death != null">death,</if>
+            <if test="number != null">number,</if>
+            <if test="remark != null">remark,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="creatTime != null">creat_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="enclosure != null">#{enclosure},</if>
+            <if test="productTime != null">#{productTime},</if>
+            <if test="born != null">#{born},</if>
+            <if test="transferIn != null">#{transferIn},</if>
+            <if test="transferOut != null">#{transferOut},</if>
+            <if test="death != null">#{death},</if>
+            <if test="number != null">#{number},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="creatTime != null">#{creatTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheep2Productrecord" parameterType="Sheep2Productrecord">
+        update sheep2_productrecord
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="enclosure != null">enclosure = #{enclosure},</if>
+            <if test="productTime != null">product_time = #{productTime},</if>
+            <if test="born != null">born = #{born},</if>
+            <if test="transferIn != null">transfer_in = #{transferIn},</if>
+            <if test="transferOut != null">transfer_out = #{transferOut},</if>
+            <if test="death != null">death = #{death},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="creatTime != null">creat_time = #{creatTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheep2ProductrecordById" parameterType="Long">
+        delete from sheep2_productrecord where id = #{id}
+    </delete>
+
+    <delete id="deleteSheep2ProductrecordByIds" parameterType="String">
+        delete from sheep2_productrecord where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

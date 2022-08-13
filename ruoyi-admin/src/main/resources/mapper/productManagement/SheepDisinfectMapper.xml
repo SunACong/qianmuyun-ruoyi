@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.SheepDisinfectMapper">
+    
+    <resultMap type="SheepDisinfect" id="SheepDisinfectResult">
+        <result property="id"    column="id"    />
+        <result property="disinfectdate"    column="disinfectdate"    />
+        <result property="disinfectloc"    column="disinfectloc"    />
+        <result property="disinfectregion"    column="disinfectregion"    />
+        <result property="disinfectbuilding"    column="disinfectbuilding"    />
+        <result property="disinfectmedicine"    column="disinfectmedicine"    />
+        <result property="disinfectmethod"    column="disinfectmethod"    />
+        <result property="dose"    column="dose"    />
+        <result property="video"    column="video"    />
+        <result property="startdate"    column="startdate"    />
+        <result property="enddate"    column="enddate"    />
+        <result property="bak1"    column="bak1"    />
+        <result property="bak2"    column="bak2"    />
+        <result property="bak3"    column="bak3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectSheepDisinfectVo">
+        select id, disinfectdate, disinfectloc, disinfectregion, disinfectbuilding, disinfectmedicine, disinfectmethod, dose, video, startdate, enddate, bak1, bak2, bak3, create_by, create_date, update_by, update_date, remarks, del_flag from sheep_disinfect
+    </sql>
+
+    <select id="selectSheepDisinfectList" parameterType="SheepDisinfect" resultMap="SheepDisinfectResult">
+        <include refid="selectSheepDisinfectVo"/>
+        <where>  
+            <if test="params.beginDisinfectdate != null and params.beginDisinfectdate != '' and params.endDisinfectdate != null and params.endDisinfectdate != ''"> and disinfectdate between #{params.beginDisinfectdate} and #{params.endDisinfectdate}</if>
+            <if test="startdate != null "> and startdate = #{startdate}</if>
+            <if test="enddate != null "> and enddate = #{enddate}</if>
+            <if test="bak3 != null  and bak3 != ''"> and bak3 = #{bak3}</if>
+        </where>
+    </select>
+    
+    <select id="selectSheepDisinfectById" parameterType="Long" resultMap="SheepDisinfectResult">
+        <include refid="selectSheepDisinfectVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSheepDisinfect" parameterType="SheepDisinfect" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep_disinfect
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="disinfectdate != null">disinfectdate,</if>
+            <if test="disinfectloc != null">disinfectloc,</if>
+            <if test="disinfectregion != null">disinfectregion,</if>
+            <if test="disinfectbuilding != null">disinfectbuilding,</if>
+            <if test="disinfectmedicine != null">disinfectmedicine,</if>
+            <if test="disinfectmethod != null">disinfectmethod,</if>
+            <if test="dose != null">dose,</if>
+            <if test="video != null">video,</if>
+            <if test="startdate != null">startdate,</if>
+            <if test="enddate != null">enddate,</if>
+            <if test="bak1 != null">bak1,</if>
+            <if test="bak2 != null">bak2,</if>
+            <if test="bak3 != null">bak3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="disinfectdate != null">#{disinfectdate},</if>
+            <if test="disinfectloc != null">#{disinfectloc},</if>
+            <if test="disinfectregion != null">#{disinfectregion},</if>
+            <if test="disinfectbuilding != null">#{disinfectbuilding},</if>
+            <if test="disinfectmedicine != null">#{disinfectmedicine},</if>
+            <if test="disinfectmethod != null">#{disinfectmethod},</if>
+            <if test="dose != null">#{dose},</if>
+            <if test="video != null">#{video},</if>
+            <if test="startdate != null">#{startdate},</if>
+            <if test="enddate != null">#{enddate},</if>
+            <if test="bak1 != null">#{bak1},</if>
+            <if test="bak2 != null">#{bak2},</if>
+            <if test="bak3 != null">#{bak3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheepDisinfect" parameterType="SheepDisinfect">
+        update sheep_disinfect
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="disinfectdate != null">disinfectdate = #{disinfectdate},</if>
+            <if test="disinfectloc != null">disinfectloc = #{disinfectloc},</if>
+            <if test="disinfectregion != null">disinfectregion = #{disinfectregion},</if>
+            <if test="disinfectbuilding != null">disinfectbuilding = #{disinfectbuilding},</if>
+            <if test="disinfectmedicine != null">disinfectmedicine = #{disinfectmedicine},</if>
+            <if test="disinfectmethod != null">disinfectmethod = #{disinfectmethod},</if>
+            <if test="dose != null">dose = #{dose},</if>
+            <if test="video != null">video = #{video},</if>
+            <if test="startdate != null">startdate = #{startdate},</if>
+            <if test="enddate != null">enddate = #{enddate},</if>
+            <if test="bak1 != null">bak1 = #{bak1},</if>
+            <if test="bak2 != null">bak2 = #{bak2},</if>
+            <if test="bak3 != null">bak3 = #{bak3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheepDisinfectById" parameterType="Long">
+        delete from sheep_disinfect where id = #{id}
+    </delete>
+
+    <delete id="deleteSheepDisinfectByIds" parameterType="String">
+        delete from sheep_disinfect where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

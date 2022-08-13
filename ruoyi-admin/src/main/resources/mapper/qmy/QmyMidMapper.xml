@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.qmy.mapper.QmyMidMapper">
+    
+    <resultMap type="QmyMid" id="QmyMidResult">
+        <result property="id"    column="id"    />
+        <result property="number"    column="number"    />
+        <result property="excellent"    column="excellent"    />
+        <result property="good"    column="good"    />
+        <result property="poor"    column="poor"    />
+    </resultMap>
+
+    <sql id="selectQmyMidVo">
+        select id, number, excellent, good, poor from qmy_mid
+    </sql>
+
+    <select id="selectQmyMidList" parameterType="QmyMid" resultMap="QmyMidResult">
+        <include refid="selectQmyMidVo"/>
+        <where>  
+            <if test="number != null "> and number = #{number}</if>
+            <if test="excellent != null "> and excellent = #{excellent}</if>
+            <if test="good != null "> and good = #{good}</if>
+            <if test="poor != null "> and poor = #{poor}</if>
+        </where>
+    </select>
+    
+    <select id="selectQmyMidById" parameterType="Long" resultMap="QmyMidResult">
+        <include refid="selectQmyMidVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertQmyMid" parameterType="QmyMid" useGeneratedKeys="true" keyProperty="id">
+        insert into qmy_mid
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="number != null">number,</if>
+            <if test="excellent != null">excellent,</if>
+            <if test="good != null">good,</if>
+            <if test="poor != null">poor,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="number != null">#{number},</if>
+            <if test="excellent != null">#{excellent},</if>
+            <if test="good != null">#{good},</if>
+            <if test="poor != null">#{poor},</if>
+         </trim>
+    </insert>
+
+    <update id="updateQmyMid" parameterType="QmyMid">
+        update qmy_mid
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="number != null">number = #{number},</if>
+            <if test="excellent != null">excellent = #{excellent},</if>
+            <if test="good != null">good = #{good},</if>
+            <if test="poor != null">poor = #{poor},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteQmyMidById" parameterType="Long">
+        delete from qmy_mid where id = #{id}
+    </delete>
+
+    <delete id="deleteQmyMidByIds" parameterType="String">
+        delete from qmy_mid where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.SheepGenealogyMapper">
+
+    <resultMap type="SheepGenealogy" id="SheepGenealogyResult">
+        <result property="id"    column="id"    />
+        <result property="eartagid"    column="eartagid"    />
+        <result property="sex"    column="sex"    />
+        <result property="farmloc"    column="farmloc"    />
+        <result property="bornloc"    column="bornloc"    />
+        <result property="region"    column="region"    />
+        <result property="buildingnum"    column="buildingnum"    />
+        <result property="columnnum"    column="columnnum"    />
+        <result property="borntime"    column="borntime"    />
+        <result property="bornweight"    column="bornweight"    />
+        <result property="breed"    column="breed"    />
+        <result property="coatcolor"    column="coatcolor"    />
+        <result property="motherid"    column="motherid"    />
+        <result property="fatherid"    column="fatherid"    />
+        <result property="grandfatherid"    column="grandfatherid"    />
+        <result property="grandmotherid"    column="grandmotherid"    />
+        <result property="grandpaid"    column="grandpaid"    />
+        <result property="grandmaid"    column="grandmaid"    />
+        <result property="video"    column="video"    />
+        <result property="bak1"    column="bak1"    />
+        <result property="bak2"    column="bak2"    />
+        <result property="bak3"    column="bak3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <resultMap type="java.util.HashMap" id="SheepSpeciesResult">
+        <result property="breed"    column="breed"    />
+        <result property="bak1"    column="bak1"    />
+    </resultMap>
+
+    <sql id="selectSheepGenealogyVo">
+        select id, eartagid, sex, farmloc, bornloc, region, buildingnum, columnnum, borntime, bornweight, breed, coatcolor, motherid, fatherid, grandfatherid, grandmotherid, grandpaid, grandmaid, video, bak1, bak2, bak3, create_by, create_date, update_by, update_date, remarks, del_flag from sheep_genealogy
+    </sql>
+
+    <!--
+        返回养殖场的个数
+        孙少聪
+     -->
+    <select id="selectSheepGenealogyFaemlocList" resultMap="SheepGenealogyResult">
+        select * from sheep_genealogy group by farmloc
+    </select>
+
+    <!--
+        返回每种羊只对应的数目
+        孙少聪
+        获取的每只羊的数目暂时存在bak1字段中
+     -->
+    <select id="selectSheepGenealogysheepSpecies"  resultMap="SheepSpeciesResult">
+        SELECT breed,COUNT(breed) bak1 from sheep_genealogy GROUP BY breed
+    </select>
+
+
+    <select id="selectSheepGenealogyList" parameterType="SheepGenealogy" resultMap="SheepGenealogyResult">
+        <include refid="selectSheepGenealogyVo"/>
+        <where>
+            <if test="eartagid != null  and eartagid != ''"> and eartagid = #{eartagid}</if>
+            <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="buildingnum != null  and buildingnum != ''"> and buildingnum = #{buildingnum}</if>
+            <if test="columnnum != null  and columnnum != ''"> and columnnum = #{columnnum}</if>
+            <if test="params.beginBorntime != null and params.beginBorntime != '' and params.endBorntime != null and params.endBorntime != ''"> and borntime between #{params.beginBorntime} and #{params.endBorntime}</if>
+            <if test="breed != null  and breed != ''"> and breed = #{breed}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="farmloc != null  and farmloc != ''"> and farmloc = #{farmloc}</if>
+        </where>
+    </select>
+
+    <select id="selectSheepGenealogyById" parameterType="Long" resultMap="SheepGenealogyResult">
+        <include refid="selectSheepGenealogyVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertSheepGenealogy" parameterType="SheepGenealogy" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep_genealogy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eartagid != null">eartagid,</if>
+            <if test="sex != null">sex,</if>
+            <if test="farmloc != null">farmloc,</if>
+            <if test="bornloc != null">bornloc,</if>
+            <if test="region != null">region,</if>
+            <if test="buildingnum != null">buildingnum,</if>
+            <if test="columnnum != null">columnnum,</if>
+            <if test="borntime != null">borntime,</if>
+            <if test="bornweight != null">bornweight,</if>
+            <if test="breed != null">breed,</if>
+            <if test="coatcolor != null">coatcolor,</if>
+            <if test="motherid != null">motherid,</if>
+            <if test="fatherid != null">fatherid,</if>
+            <if test="grandfatherid != null">grandfatherid,</if>
+            <if test="grandmotherid != null">grandmotherid,</if>
+            <if test="grandpaid != null">grandpaid,</if>
+            <if test="grandmaid != null">grandmaid,</if>
+            <if test="video != null">video,</if>
+            <if test="bak1 != null">bak1,</if>
+            <if test="bak2 != null">bak2,</if>
+            <if test="bak3 != null">bak3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="eartagid != null">#{eartagid},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="farmloc != null">#{farmloc},</if>
+            <if test="bornloc != null">#{bornloc},</if>
+            <if test="region != null">#{region},</if>
+            <if test="buildingnum != null">#{buildingnum},</if>
+            <if test="columnnum != null">#{columnnum},</if>
+            <if test="borntime != null">#{borntime},</if>
+            <if test="bornweight != null">#{bornweight},</if>
+            <if test="breed != null">#{breed},</if>
+            <if test="coatcolor != null">#{coatcolor},</if>
+            <if test="motherid != null">#{motherid},</if>
+            <if test="fatherid != null">#{fatherid},</if>
+            <if test="grandfatherid != null">#{grandfatherid},</if>
+            <if test="grandmotherid != null">#{grandmotherid},</if>
+            <if test="grandpaid != null">#{grandpaid},</if>
+            <if test="grandmaid != null">#{grandmaid},</if>
+            <if test="video != null">#{video},</if>
+            <if test="bak1 != null">#{bak1},</if>
+            <if test="bak2 != null">#{bak2},</if>
+            <if test="bak3 != null">#{bak3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheepGenealogy" parameterType="SheepGenealogy">
+        update sheep_genealogy
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="eartagid != null">eartagid = #{eartagid},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="farmloc != null">farmloc = #{farmloc},</if>
+            <if test="bornloc != null">bornloc = #{bornloc},</if>
+            <if test="region != null">region = #{region},</if>
+            <if test="buildingnum != null">buildingnum = #{buildingnum},</if>
+            <if test="columnnum != null">columnnum = #{columnnum},</if>
+            <if test="borntime != null">borntime = #{borntime},</if>
+            <if test="bornweight != null">bornweight = #{bornweight},</if>
+            <if test="breed != null">breed = #{breed},</if>
+            <if test="coatcolor != null">coatcolor = #{coatcolor},</if>
+            <if test="motherid != null">motherid = #{motherid},</if>
+            <if test="fatherid != null">fatherid = #{fatherid},</if>
+            <if test="grandfatherid != null">grandfatherid = #{grandfatherid},</if>
+            <if test="grandmotherid != null">grandmotherid = #{grandmotherid},</if>
+            <if test="grandpaid != null">grandpaid = #{grandpaid},</if>
+            <if test="grandmaid != null">grandmaid = #{grandmaid},</if>
+            <if test="video != null">video = #{video},</if>
+            <if test="bak1 != null">bak1 = #{bak1},</if>
+            <if test="bak2 != null">bak2 = #{bak2},</if>
+            <if test="bak3 != null">bak3 = #{bak3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheepGenealogyById" parameterType="Long">
+        delete from sheep_genealogy where id = #{id}
+    </delete>
+
+    <delete id="deleteSheepGenealogyByIds" parameterType="String">
+        delete from sheep_genealogy where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

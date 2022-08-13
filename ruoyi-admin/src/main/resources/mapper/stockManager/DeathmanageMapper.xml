@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.stockManager.mapper.DeathmanageMapper">
+
+    <resultMap type="Deathmanage" id="DeathmanageResult">
+        <result property="id"    column="id"    />
+        <result property="eartagid"    column="eartagid"    />
+        <result property="deathdate"    column="deathdate"    />
+        <result property="nweight"    column="nweight"    />
+        <result property="buildingnum"    column="buildingnum"    />
+        <result property="columnnum"    column="columnnum"    />
+        <result property="colour"    column="colour"    />
+        <result property="age"    column="age"    />
+        <result property="goattype"    column="goattype"    />
+        <result property="category"    column="category"    />
+        <result property="deathsick"    column="deathsick"    />
+        <result property="disaster"    column="disaster"    />
+        <result property="accident"    column="accident"    />
+        <result property="harmless"    column="harmless"    />
+        <result property="video"    column="video"    />
+        <result property="riskreporting"    column="riskreporting"    />
+        <result property="bak1"    column="bak1"    />
+        <result property="bak2"    column="bak2"    />
+        <result property="bak3"    column="bak3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectDeathmanageVo">
+        select id, eartagid, deathdate, nweight, buildingnum, columnnum, colour, age, goattype, category, deathsick, disaster, accident, harmless, video, riskreporting, bak1, bak2, bak3, create_by, create_date, update_by, update_date, remarks, del_flag from sheep_deathmanage
+    </sql>
+
+    <select id="selectDeathmanageList" parameterType="Deathmanage" resultMap="DeathmanageResult">
+        <include refid="selectDeathmanageVo"/>
+        <where>
+            <if test="eartagid != null  and eartagid != ''"> and eartagid = #{eartagid}</if>
+            <if test="params.beginDeathdate != null and params.beginDeathdate != '' and params.endDeathdate != null and params.endDeathdate != ''"> and deathdate between #{params.beginDeathdate} and #{params.endDeathdate}</if>
+            <if test="nweight != null  and nweight != ''"> and nweight = #{nweight}</if>
+            <if test="buildingnum != null  and buildingnum != ''"> and buildingnum = #{buildingnum}</if>
+            <if test="columnnum != null  and columnnum != ''"> and columnnum = #{columnnum}</if>
+            <if test="colour != null  and colour != ''"> and colour = #{colour}</if>
+            <if test="age != null  and age != ''"> and age = #{age}</if>
+            <if test="goattype != null  and goattype != ''"> and goattype = #{goattype}</if>
+            <if test="category != null  and category != ''"> and category = #{category}</if>
+            <if test="deathsick != null  and deathsick != ''"> and deathsick = #{deathsick}</if>
+            <if test="disaster != null  and disaster != ''"> and disaster = #{disaster}</if>
+            <if test="accident != null  and accident != ''"> and accident = #{accident}</if>
+            <if test="harmless != null  and harmless != ''"> and harmless = #{harmless}</if>
+            <if test="video != null  and video != ''"> and video = #{video}</if>
+            <if test="riskreporting != null  and riskreporting != ''"> and riskreporting = #{riskreporting}</if>
+            <if test="bak1 != null  and bak1 != ''"> and bak1 = #{bak1}</if>
+            <if test="bak2 != null  and bak2 != ''"> and bak2 = #{bak2}</if>
+            <if test="bak3 != null  and bak3 != ''"> and bak3 = #{bak3}</if>
+        </where>
+    </select>
+
+    <select id="selectDeathmanageById" parameterType="Long" resultMap="DeathmanageResult">
+        <include refid="selectDeathmanageVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDeathmanage" parameterType="Deathmanage" useGeneratedKeys="true" keyProperty="id">
+        insert into deathmanage
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eartagid != null">eartagid,</if>
+            <if test="deathdate != null">deathdate,</if>
+            <if test="nweight != null">nweight,</if>
+            <if test="buildingnum != null">buildingnum,</if>
+            <if test="columnnum != null">columnnum,</if>
+            <if test="colour != null">colour,</if>
+            <if test="age != null">age,</if>
+            <if test="goattype != null">goattype,</if>
+            <if test="category != null">category,</if>
+            <if test="deathsick != null">deathsick,</if>
+            <if test="disaster != null">disaster,</if>
+            <if test="accident != null">accident,</if>
+            <if test="harmless != null">harmless,</if>
+            <if test="video != null">video,</if>
+            <if test="riskreporting != null">riskreporting,</if>
+            <if test="bak1 != null">bak1,</if>
+            <if test="bak2 != null">bak2,</if>
+            <if test="bak3 != null">bak3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="eartagid != null">#{eartagid},</if>
+            <if test="deathdate != null">#{deathdate},</if>
+            <if test="nweight != null">#{nweight},</if>
+            <if test="buildingnum != null">#{buildingnum},</if>
+            <if test="columnnum != null">#{columnnum},</if>
+            <if test="colour != null">#{colour},</if>
+            <if test="age != null">#{age},</if>
+            <if test="goattype != null">#{goattype},</if>
+            <if test="category != null">#{category},</if>
+            <if test="deathsick != null">#{deathsick},</if>
+            <if test="disaster != null">#{disaster},</if>
+            <if test="accident != null">#{accident},</if>
+            <if test="harmless != null">#{harmless},</if>
+            <if test="video != null">#{video},</if>
+            <if test="riskreporting != null">#{riskreporting},</if>
+            <if test="bak1 != null">#{bak1},</if>
+            <if test="bak2 != null">#{bak2},</if>
+            <if test="bak3 != null">#{bak3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDeathmanage" parameterType="Deathmanage">
+        update deathmanage
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="eartagid != null">eartagid = #{eartagid},</if>
+            <if test="deathdate != null">deathdate = #{deathdate},</if>
+            <if test="nweight != null">nweight = #{nweight},</if>
+            <if test="buildingnum != null">buildingnum = #{buildingnum},</if>
+            <if test="columnnum != null">columnnum = #{columnnum},</if>
+            <if test="colour != null">colour = #{colour},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="goattype != null">goattype = #{goattype},</if>
+            <if test="category != null">category = #{category},</if>
+            <if test="deathsick != null">deathsick = #{deathsick},</if>
+            <if test="disaster != null">disaster = #{disaster},</if>
+            <if test="accident != null">accident = #{accident},</if>
+            <if test="harmless != null">harmless = #{harmless},</if>
+            <if test="video != null">video = #{video},</if>
+            <if test="riskreporting != null">riskreporting = #{riskreporting},</if>
+            <if test="bak1 != null">bak1 = #{bak1},</if>
+            <if test="bak2 != null">bak2 = #{bak2},</if>
+            <if test="bak3 != null">bak3 = #{bak3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDeathmanageById" parameterType="Long">
+        delete from deathmanage where id = #{id}
+    </delete>
+
+    <delete id="deleteDeathmanageByIds" parameterType="String">
+        delete from deathmanage where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

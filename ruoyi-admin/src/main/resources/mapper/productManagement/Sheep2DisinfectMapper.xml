@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.Sheep2DisinfectMapper">
+
+    <resultMap type="Sheep2Disinfect" id="Sheep2DisinfectResult">
+        <result property="id"    column="id"    />
+        <result property="disinfectTime"    column="disinfect_time"    />
+        <result property="disinfectPosition"    column="disinfect_position"    />
+        <result property="disinfectDrug"    column="disinfect_drug"    />
+        <result property="drugDose"    column="drug_dose"    />
+        <result property="drugMethod"    column="drug_method"    />
+        <result property="signOperation"    column="sign_operation"    />
+        <result property="remark"    column="remark"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="creatTime"    column="creat_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSheep2DisinfectVo">
+        select id, disinfect_time, disinfect_position, disinfect_drug, drug_dose, drug_method, sign_operation, remark, user_id, dept_id, creat_time, update_time from sheep2_disinfect disinfect
+    </sql>
+
+    <select id="selectSheep2DisinfectList" parameterType="Sheep2Disinfect" resultMap="Sheep2DisinfectResult">
+        <include refid="selectSheep2DisinfectVo"/>
+        <where>
+            1=1  ${params.dataScope}
+            <if test="params.beginDisinfectTime != null and params.beginDisinfectTime != '' and params.endDisinfectTime != null and params.endDisinfectTime != ''"> and disinfect_time between #{params.beginDisinfectTime} and #{params.endDisinfectTime}</if>
+            <if test="disinfectPosition != null  and disinfectPosition != ''"> and disinfect_position like concat('%', #{disinfectPosition}, '%')</if>
+            <if test="disinfectDrug != null  and disinfectDrug != ''"> and disinfect_drug = #{disinfectDrug}</if>
+            <if test="drugDose != null  and drugDose != ''"> and drug_dose = #{drugDose}</if>
+            <if test="drugMethod != null  and drugMethod != ''"> and drug_method = #{drugMethod}</if>
+            <if test="signOperation != null  and signOperation != ''"> and sign_operation = #{signOperation}</if>
+            <if test="remark != null  and remark != ''"> and remark like concat('%', #{remark}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and creat_time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
+            <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and update_time between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
+        </where>
+    </select>
+
+    <select id="selectSheep2DisinfectById" parameterType="Long" resultMap="Sheep2DisinfectResult">
+        <include refid="selectSheep2DisinfectVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertSheep2Disinfect" parameterType="Sheep2Disinfect" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep2_disinfect
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="disinfectTime != null">disinfect_time,</if>
+            <if test="disinfectPosition != null">disinfect_position,</if>
+            <if test="disinfectDrug != null">disinfect_drug,</if>
+            <if test="drugDose != null">drug_dose,</if>
+            <if test="drugMethod != null">drug_method,</if>
+            <if test="signOperation != null">sign_operation,</if>
+            <if test="remark != null">remark,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="creatTime != null">creat_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="disinfectTime != null">#{disinfectTime},</if>
+            <if test="disinfectPosition != null">#{disinfectPosition},</if>
+            <if test="disinfectDrug != null">#{disinfectDrug},</if>
+            <if test="drugDose != null">#{drugDose},</if>
+            <if test="drugMethod != null">#{drugMethod},</if>
+            <if test="signOperation != null">#{signOperation},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="creatTime != null">#{creatTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheep2Disinfect" parameterType="Sheep2Disinfect">
+        update sheep2_disinfect
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="disinfectTime != null">disinfect_time = #{disinfectTime},</if>
+            <if test="disinfectPosition != null">disinfect_position = #{disinfectPosition},</if>
+            <if test="disinfectDrug != null">disinfect_drug = #{disinfectDrug},</if>
+            <if test="drugDose != null">drug_dose = #{drugDose},</if>
+            <if test="drugMethod != null">drug_method = #{drugMethod},</if>
+            <if test="signOperation != null">sign_operation = #{signOperation},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="creatTime != null">creat_time = #{creatTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheep2DisinfectById" parameterType="Long">
+        delete from sheep2_disinfect where id = #{id}
+    </delete>
+
+    <delete id="deleteSheep2DisinfectByIds" parameterType="String">
+        delete from sheep2_disinfect where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

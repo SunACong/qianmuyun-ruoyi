@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.productManagement.mapper.SheepHealthcareMapper">
+    
+    <resultMap type="SheepHealthcare" id="SheepHealthcareResult">
+        <result property="id"    column="id"    />
+        <result property="healthdate"    column="healthdate"    />
+        <result property="region"    column="region"    />
+        <result property="buildingnum"    column="buildingnum"    />
+        <result property="columnnum"    column="columnnum"    />
+        <result property="eartagid"    column="eartagid"    />
+        <result property="amount"    column="amount"    />
+        <result property="weight"    column="weight"    />
+        <result property="stage"    column="stage"    />
+        <result property="name"    column="name"    />
+        <result property="method"    column="method"    />
+        <result property="dose"    column="dose"    />
+        <result property="volume"    column="volume"    />
+        <result property="period"    column="period"    />
+        <result property="startdate"    column="startdate"    />
+        <result property="enddate"    column="enddate"    />
+        <result property="video"    column="video"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="bak1"    column="bak1"    />
+        <result property="bak2"    column="bak2"    />
+        <result property="bak3"    column="bak3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectSheepHealthcareVo">
+        select id, healthdate, region, buildingnum, columnnum, eartagid, amount, weight, stage, name, method, dose, volume, period, startdate, enddate, video, remarks, bak1, bak2, bak3, create_by, create_date, update_by, update_date, del_flag from sheep_healthcare
+    </sql>
+
+    <select id="selectSheepHealthcareList" parameterType="SheepHealthcare" resultMap="SheepHealthcareResult">
+        <include refid="selectSheepHealthcareVo"/>
+        <where>  
+            <if test="params.beginHealthdate != null and params.beginHealthdate != '' and params.endHealthdate != null and params.endHealthdate != ''"> and healthdate between #{params.beginHealthdate} and #{params.endHealthdate}</if>
+            <if test="region != null  and region != ''"> and region like concat('%', #{region}, '%')</if>
+            <if test="buildingnum != null  and buildingnum != ''"> and buildingnum = #{buildingnum}</if>
+            <if test="columnnum != null  and columnnum != ''"> and columnnum = #{columnnum}</if>
+            <if test="eartagid != null  and eartagid != ''"> and eartagid = #{eartagid}</if>
+            <if test="amount != null  and amount != ''"> and amount = #{amount}</if>
+            <if test="weight != null  and weight != ''"> and weight = #{weight}</if>
+            <if test="stage != null  and stage != ''"> and stage like concat('%', #{stage}, '%')</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="method != null  and method != ''"> and method like concat('%', #{method}, '%')</if>
+            <if test="dose != null  and dose != ''"> and dose = #{dose}</if>
+            <if test="volume != null  and volume != ''"> and volume = #{volume}</if>
+            <if test="period != null  and period != ''"> and period = #{period}</if>
+            <if test="params.beginStartdate != null and params.beginStartdate != '' and params.endStartdate != null and params.endStartdate != ''"> and startdate between #{params.beginStartdate} and #{params.endStartdate}</if>
+            <if test="params.beginEnddate != null and params.beginEnddate != '' and params.endEnddate != null and params.endEnddate != ''"> and enddate between #{params.beginEnddate} and #{params.endEnddate}</if>
+            <if test="video != null  and video != ''"> and video = #{video}</if>
+            <if test="remarks != null  and remarks != ''"> and remarks = #{remarks}</if>
+            <if test="bak1 != null  and bak1 != ''"> and bak1 = #{bak1}</if>
+            <if test="bak2 != null  and bak2 != ''"> and bak2 = #{bak2}</if>
+            <if test="bak3 != null  and bak3 != ''"> and bak3 like concat('%', #{bak3}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectSheepHealthcareById" parameterType="Long" resultMap="SheepHealthcareResult">
+        <include refid="selectSheepHealthcareVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSheepHealthcare" parameterType="SheepHealthcare" useGeneratedKeys="true" keyProperty="id">
+        insert into sheep_healthcare
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="healthdate != null">healthdate,</if>
+            <if test="region != null">region,</if>
+            <if test="buildingnum != null">buildingnum,</if>
+            <if test="columnnum != null">columnnum,</if>
+            <if test="eartagid != null">eartagid,</if>
+            <if test="amount != null">amount,</if>
+            <if test="weight != null">weight,</if>
+            <if test="stage != null">stage,</if>
+            <if test="name != null">name,</if>
+            <if test="method != null">method,</if>
+            <if test="dose != null">dose,</if>
+            <if test="volume != null">volume,</if>
+            <if test="period != null">period,</if>
+            <if test="startdate != null">startdate,</if>
+            <if test="enddate != null">enddate,</if>
+            <if test="video != null">video,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="bak1 != null">bak1,</if>
+            <if test="bak2 != null">bak2,</if>
+            <if test="bak3 != null">bak3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="healthdate != null">#{healthdate},</if>
+            <if test="region != null">#{region},</if>
+            <if test="buildingnum != null">#{buildingnum},</if>
+            <if test="columnnum != null">#{columnnum},</if>
+            <if test="eartagid != null">#{eartagid},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="stage != null">#{stage},</if>
+            <if test="name != null">#{name},</if>
+            <if test="method != null">#{method},</if>
+            <if test="dose != null">#{dose},</if>
+            <if test="volume != null">#{volume},</if>
+            <if test="period != null">#{period},</if>
+            <if test="startdate != null">#{startdate},</if>
+            <if test="enddate != null">#{enddate},</if>
+            <if test="video != null">#{video},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="bak1 != null">#{bak1},</if>
+            <if test="bak2 != null">#{bak2},</if>
+            <if test="bak3 != null">#{bak3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSheepHealthcare" parameterType="SheepHealthcare">
+        update sheep_healthcare
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="healthdate != null">healthdate = #{healthdate},</if>
+            <if test="region != null">region = #{region},</if>
+            <if test="buildingnum != null">buildingnum = #{buildingnum},</if>
+            <if test="columnnum != null">columnnum = #{columnnum},</if>
+            <if test="eartagid != null">eartagid = #{eartagid},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="stage != null">stage = #{stage},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="method != null">method = #{method},</if>
+            <if test="dose != null">dose = #{dose},</if>
+            <if test="volume != null">volume = #{volume},</if>
+            <if test="period != null">period = #{period},</if>
+            <if test="startdate != null">startdate = #{startdate},</if>
+            <if test="enddate != null">enddate = #{enddate},</if>
+            <if test="video != null">video = #{video},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="bak1 != null">bak1 = #{bak1},</if>
+            <if test="bak2 != null">bak2 = #{bak2},</if>
+            <if test="bak3 != null">bak3 = #{bak3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSheepHealthcareById" parameterType="Long">
+        delete from sheep_healthcare where id = #{id}
+    </delete>
+
+    <delete id="deleteSheepHealthcareByIds" parameterType="String">
+        delete from sheep_healthcare where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

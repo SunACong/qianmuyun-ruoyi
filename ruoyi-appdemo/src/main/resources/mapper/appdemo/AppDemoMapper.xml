@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.appdemo.mapper.AppDemoMapper" >
+	<resultMap type="AnodeChangeInfoApp" id="anodeChangeInfoMap">
+		<id column="sn" property="sn"/>
+		<result column="op_time" property="opTime"/>
+		<result column="pot_id" property="potId"/>
+		<result column="rod_pos" property="rodPos"/>
+		<result column="rod_id_in" property="rodIdIn"/>
+		<result column="rod_id_out" property="rodIdOut"/>
+		<result column="cb_id_in1" property="cbIdIn1"/>
+		<result column="cb_id_in2" property="cbIdIn2"/>
+		<result column="cb_id_out1" property="cbIdOut1"/>
+		<result column="cb_id_out2" property="cbIdOut2"/>
+		<result column="op_user_id" property="opUserId"/>
+		<result column="op_user_name" property="opUserName"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<resultMap id="InsertDemoAppResult" type="InsertDemoApp">
+		<id column="sn"	property="sn"/>
+		<result column="op_time" property="opTime"/>
+		<result column="pot_id" property="potId"/>
+		<result column="rod_id_in" property="rodIdIn"/>
+		<result column="rod_id_out" property="rodIdOut"/>
+		<result column="op_user_name" property="opUserName"/>
+	</resultMap>
+
+	<!-- 通过换入导杆编号查询40天内的换出导杆编号，查询不到可为空 -->
+	<select id="selRodIdOutByRodIdIn" parameterType="AnodeChangeInfoApp" resultType="Integer">
+		select rod_id_in from anode_change_info
+		<where>
+			<if test="potId != null and potId != ''">pot_id=#{potId} and</if>
+	        <if test="rodPos != null and rodPos != ''">rod_pos=#{rodPos} and</if>
+	        op_time between DATE_SUB(#{opTime},INTERVAL 40 DAY) and#{opTime}
+	        order by op_time desc limit 1
+		</where>
+	</select>
+	<select id="selectPotId" resultType="Integer">
+		select pot_id from pot_info
+		<where>
+			<trim suffixOverrides="and">
+				<if test="factoryName != null and factoryName != ''">factory_name=#{factoryName} and</if>
+				<if test="areaName != null and areaName != ''">area_name=#{areaName} and</if>
+			</trim>
+		</where>
+	</select>
+	<!-- 传入参数为当前电解槽号，通过该电解槽号得到槽类型，在通过槽类型获取导杆位置 -->
+	<select id="selPotTypeByPotId" parameterType="Integer" resultType="String">
+		select pot_type from pot_info where pot_id=#{0}
+	</select>
+	<select id="selectRodPos" resultType="String" parameterType="String">
+		select rod_pos from rod_pos_info where pot_type=#{potType}
+	</select>
+	<select id="selectFactoryName" resultType="String">
+		select distinct factory_name from pot_info
+	</select>
+	<select id="selectAreaName" resultType="String">
+		select distinct area_name from pot_info
+	</select>
+
+	<select id="selectInsertDemoApp" resultMap="InsertDemoAppResult">
+		select sn, op_time, pot_id, rod_id_in, rod_id_out, op_user_name  from anode_change_info
+	</select>
+
+	<insert id="insertAnodeChangeInfo" parameterType="AnodeChangeInfoApp">
+        insert into anode_change_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sn != null">sn,</if>
+            <if test="opTime != null">op_time,</if>
+            <if test="potId != null and potId != ''">pot_id,</if>
+            <if test="rodPos != null and rodPos != ''">rod_pos,</if>
+            <if test="rodIdIn != null and rodIdIn != ''">rod_id_in,</if>
+            <if test="rodIdOut != null and rodIdOut != ''">rod_id_out,</if>
+            <if test="cbIdIn1 != null">cb_id_in1,</if>
+            <if test="cbIdIn2 != null">cb_id_in2,</if>
+            <if test="cbIdOut1 != null">cb_id_out1,</if>
+            <if test="cbIdOut2 != null">cb_id_out2,</if>
+            <if test="opUserId != null and opUserId != ''">op_user_id,</if>
+            <if test="opUserName != null">op_user_name,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sn != null">#{sn},</if>
+            <if test="opTime != null">#{opTime},</if>
+            <if test="potId != null and potId != ''">#{potId},</if>
+            <if test="rodPos != null and rodPos != ''">#{rodPos},</if>
+            <if test="rodIdIn != null and rodIdIn != ''">#{rodIdIn},</if>
+            <if test="rodIdOut != null and rodIdOut != ''">#{rodIdOut},</if>
+            <if test="cbIdIn1 != null">#{cbIdIn1},</if>
+            <if test="cbIdIn2 != null">#{cbIdIn2},</if>
+            <if test="cbIdOut1 != null">#{cbIdOut1},</if>
+            <if test="cbIdOut2 != null">#{cbIdOut2},</if>
+            <if test="opUserId != null and opUserId != ''">#{opUserId},</if>
+            <if test="opUserName != null">#{opUserName},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+	<update id="updateAnodeChangeInfo" parameterType="AnodeChangeInfoApp">
+		update anode_change_info
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="sn != null">sn=#{sn},</if>
+			<if test="opTime != null">op_time = #{opTime},</if>
+			<if test="potId != null">pot_id = #{potId},</if>
+			rod_id_in = #{rodIdIn},
+			rod_id_out = #{rodIdOut},
+			<if test="opUserId != null">op_user_id = #{opUserId},</if>
+			<if test="opUserName != null">op_user_name = #{opUserName},</if>
+			<if test="updateTime != null">update_time = #{updateTime},</if>
+		</trim>
+		where sn = #{sn}
+	</update>
+	<delete id="deleteAnodeChangeInfo" parameterType="String">
+		delete from anode_change_info where sn=#{sn}
+	</delete>
+</mapper>

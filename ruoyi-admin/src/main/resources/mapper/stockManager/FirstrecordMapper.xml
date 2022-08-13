@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.stockManager.mapper.FirstrecordMapper">
+
+    <resultMap type="Firstrecord" id="FirstrecordResult">
+        <result property="id"    column="id"    />
+        <result property="recorddate"    column="recorddate"    />
+        <result property="ranch"    column="ranch"    />
+        <result property="eartagid"    column="eartagid"    />
+        <result property="region"    column="region"    />
+        <result property="buildingnum"    column="buildingnum"    />
+        <result property="columnnum"    column="columnnum"    />
+        <result property="gender"    column="gender"    />
+        <result property="species"    column="species"    />
+        <result property="type"    column="type"    />
+        <result property="stage"    column="stage"    />
+        <result property="age"    column="age"    />
+        <result property="colour"    column="colour"    />
+        <result property="weight"    column="weight"    />
+        <result property="video"    column="video"    />
+        <result property="startdate"    column="startdate"    />
+        <result property="enddate"    column="enddate"    />
+        <result property="bak1"    column="bak1"    />
+        <result property="bak2"    column="bak2"    />
+        <result property="bak3"    column="bak3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectFirstrecordVo">
+        select id, recorddate, ranch, eartagid, region, buildingnum, columnnum, gender, species, type, stage, age, colour, weight, video, startdate, enddate, bak1, bak2, bak3, create_by, create_date, update_by, update_date, remarks, del_flag from sheep_firstrecord
+    </sql>
+
+    <!--查询养殖场个数-->
+    <select id="selectFirstrecordFarmNum" resultType="hashmap">
+        SELECT count(*) num,ranch FROM firstrecord GROUP BY ranch
+    </select>
+    <!--每种羊只数目-->
+    <select id="selectFirstrecordSheepTypeNum" resultType="hashmap">
+        SELECT count(*) value,species name FROM firstrecord GROUP BY species
+    </select>
+
+    <select id="selectFirstrecordList" parameterType="Firstrecord" resultMap="FirstrecordResult">
+        <include refid="selectFirstrecordVo"/>
+        <where>
+            <if test="params.beginRecorddate != null and params.beginRecorddate != '' and params.endRecorddate != null and params.endRecorddate != ''"> and recorddate between #{params.beginRecorddate} and #{params.endRecorddate}</if>
+            <if test="ranch != null  and ranch != ''"> and ranch = #{ranch}</if>
+            <if test="eartagid != null  and eartagid != ''"> and eartagid = #{eartagid}</if>
+            <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="buildingnum != null  and buildingnum != ''"> and buildingnum = #{buildingnum}</if>
+            <if test="columnnum != null  and columnnum != ''"> and columnnum = #{columnnum}</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="species != null  and species != ''"> and species = #{species}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="stage != null  and stage != ''"> and stage = #{stage}</if>
+            <if test="age != null  and age != ''"> and age = #{age}</if>
+            <if test="colour != null  and colour != ''"> and colour = #{colour}</if>
+            <if test="weight != null  and weight != ''"> and weight = #{weight}</if>
+            <if test="video != null  and video != ''"> and video = #{video}</if>
+            <if test="params.beginStartdate != null and params.beginStartdate != '' and params.endStartdate != null and params.endStartdate != ''"> and startdate between #{params.beginStartdate} and #{params.endStartdate}</if>
+            <if test="params.beginEnddate != null and params.beginEnddate != '' and params.endEnddate != null and params.endEnddate != ''"> and enddate between #{params.beginEnddate} and #{params.endEnddate}</if>
+            <if test="bak1 != null  and bak1 != ''"> and bak1 = #{bak1}</if>
+            <if test="bak2 != null  and bak2 != ''"> and bak2 = #{bak2}</if>
+            <if test="bak3 != null  and bak3 != ''"> and bak3 = #{bak3}</if>
+        </where>
+    </select>
+
+    <select id="selectFirstrecordById" parameterType="Long" resultMap="FirstrecordResult">
+        <include refid="selectFirstrecordVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFirstrecord" parameterType="Firstrecord" useGeneratedKeys="true" keyProperty="id">
+        insert into firstrecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="recorddate != null">recorddate,</if>
+            <if test="ranch != null">ranch,</if>
+            <if test="eartagid != null">eartagid,</if>
+            <if test="region != null">region,</if>
+            <if test="buildingnum != null">buildingnum,</if>
+            <if test="columnnum != null">columnnum,</if>
+            <if test="gender != null">gender,</if>
+            <if test="species != null">species,</if>
+            <if test="type != null">type,</if>
+            <if test="stage != null">stage,</if>
+            <if test="age != null">age,</if>
+            <if test="colour != null">colour,</if>
+            <if test="weight != null">weight,</if>
+            <if test="video != null">video,</if>
+            <if test="startdate != null">startdate,</if>
+            <if test="enddate != null">enddate,</if>
+            <if test="bak1 != null">bak1,</if>
+            <if test="bak2 != null">bak2,</if>
+            <if test="bak3 != null">bak3,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="recorddate != null">#{recorddate},</if>
+            <if test="ranch != null">#{ranch},</if>
+            <if test="eartagid != null">#{eartagid},</if>
+            <if test="region != null">#{region},</if>
+            <if test="buildingnum != null">#{buildingnum},</if>
+            <if test="columnnum != null">#{columnnum},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="species != null">#{species},</if>
+            <if test="type != null">#{type},</if>
+            <if test="stage != null">#{stage},</if>
+            <if test="age != null">#{age},</if>
+            <if test="colour != null">#{colour},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="video != null">#{video},</if>
+            <if test="startdate != null">#{startdate},</if>
+            <if test="enddate != null">#{enddate},</if>
+            <if test="bak1 != null">#{bak1},</if>
+            <if test="bak2 != null">#{bak2},</if>
+            <if test="bak3 != null">#{bak3},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFirstrecord" parameterType="Firstrecord">
+        update firstrecord
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="recorddate != null">recorddate = #{recorddate},</if>
+            <if test="ranch != null">ranch = #{ranch},</if>
+            <if test="eartagid != null">eartagid = #{eartagid},</if>
+            <if test="region != null">region = #{region},</if>
+            <if test="buildingnum != null">buildingnum = #{buildingnum},</if>
+            <if test="columnnum != null">columnnum = #{columnnum},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="species != null">species = #{species},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="stage != null">stage = #{stage},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="colour != null">colour = #{colour},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="video != null">video = #{video},</if>
+            <if test="startdate != null">startdate = #{startdate},</if>
+            <if test="enddate != null">enddate = #{enddate},</if>
+            <if test="bak1 != null">bak1 = #{bak1},</if>
+            <if test="bak2 != null">bak2 = #{bak2},</if>
+            <if test="bak3 != null">bak3 = #{bak3},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFirstrecordById" parameterType="Long">
+        delete from firstrecord where id = #{id}
+    </delete>
+
+    <delete id="deleteFirstrecordByIds" parameterType="String">
+        delete from firstrecord where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
