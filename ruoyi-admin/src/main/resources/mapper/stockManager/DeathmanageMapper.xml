@@ -66,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <insert id="insertDeathmanage" parameterType="Deathmanage" useGeneratedKeys="true" keyProperty="id">
-        insert into deathmanage
+        insert into sheep_deathmanage
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="eartagid != null">eartagid,</if>
             <if test="deathdate != null">deathdate,</if>
@@ -122,7 +122,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateDeathmanage" parameterType="Deathmanage">
-        update deathmanage
+        update sheep_deathmanage
         <trim prefix="SET" suffixOverrides=",">
             <if test="eartagid != null">eartagid = #{eartagid},</if>
             <if test="deathdate != null">deathdate = #{deathdate},</if>
@@ -153,11 +153,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteDeathmanageById" parameterType="Long">
-        delete from deathmanage where id = #{id}
+        delete from sheep_deathmanage where id = #{id}
     </delete>
 
     <delete id="deleteDeathmanageByIds" parameterType="String">
-        delete from deathmanage where id in
+        delete from sheep_deathmanage where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

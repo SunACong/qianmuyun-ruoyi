@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <insert id="insertGoatsell" parameterType="Goatsell" useGeneratedKeys="true" keyProperty="id">
-        insert into goatsell
+        insert into sheep_goatsell
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="selldate != null">selldate,</if>
             <if test="eartagid != null">eartagid,</if>
@@ -122,7 +122,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateGoatsell" parameterType="Goatsell">
-        update goatsell
+        update sheep_goatsell
         <trim prefix="SET" suffixOverrides=",">
             <if test="selldate != null">selldate = #{selldate},</if>
             <if test="eartagid != null">eartagid = #{eartagid},</if>
@@ -152,11 +152,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteGoatsellById" parameterType="Long">
-        delete from goatsell where id = #{id}
+        delete from sheep_goatsell where id = #{id}
     </delete>
 
     <delete id="deleteGoatsellByIds" parameterType="String">
-        delete from goatsell where id in
+        delete from sheep_goatsell where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

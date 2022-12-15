@@ -39,11 +39,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <!--查询养殖场个数-->
     <select id="selectFirstrecordFarmNum" resultType="hashmap">
-        SELECT count(*) num,ranch FROM firstrecord GROUP BY ranch
+        SELECT count(*) num,ranch FROM sheep_firstrecord GROUP BY ranch
     </select>
     <!--每种羊只数目-->
     <select id="selectFirstrecordSheepTypeNum" resultType="hashmap">
-        SELECT count(*) value,species name FROM firstrecord GROUP BY species
+        SELECT count(*) value,species name FROM sheep_firstrecord GROUP BY species
     </select>
 
     <select id="selectFirstrecordList" parameterType="Firstrecord" resultMap="FirstrecordResult">
@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <insert id="insertFirstrecord" parameterType="Firstrecord" useGeneratedKeys="true" keyProperty="id">
-        insert into firstrecord
+        insert into sheep_firstrecord
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="recorddate != null">recorddate,</if>
             <if test="ranch != null">ranch,</if>
@@ -135,7 +135,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateFirstrecord" parameterType="Firstrecord">
-        update firstrecord
+        update sheep_firstrecord
         <trim prefix="SET" suffixOverrides=",">
             <if test="recorddate != null">recorddate = #{recorddate},</if>
             <if test="ranch != null">ranch = #{ranch},</if>
@@ -167,11 +167,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteFirstrecordById" parameterType="Long">
-        delete from firstrecord where id = #{id}
+        delete from sheep_firstrecord where id = #{id}
     </delete>
 
     <delete id="deleteFirstrecordByIds" parameterType="String">
-        delete from firstrecord where id in
+        delete from sheep_firstrecord where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
