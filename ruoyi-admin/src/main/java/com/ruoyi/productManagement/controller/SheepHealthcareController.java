@@ -2,6 +2,8 @@ package com.ruoyi.productManagement.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.annotation.AddUserIdDeptId;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 保健档案Controller
- * 
+ *
  * @author 孙少聪
  * @date 2022-06-09
  */
@@ -72,6 +74,7 @@ public class SheepHealthcareController extends BaseController
     /**
      * 新增保健档案
      */
+    @AddUserIdDeptId()
     @PreAuthorize("@ss.hasPermi('productManagement:healthcare:add')")
     @Log(title = "保健档案", businessType = BusinessType.INSERT)
     @PostMapping

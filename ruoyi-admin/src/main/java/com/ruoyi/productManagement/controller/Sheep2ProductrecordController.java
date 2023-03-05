@@ -2,6 +2,8 @@ package com.ruoyi.productManagement.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.annotation.AddUserIdDeptId;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 生产记录Controller
- * 
+ *
  * @author 孙少聪
  * @date 2022-05-20
  */
@@ -72,6 +74,7 @@ public class Sheep2ProductrecordController extends BaseController
     /**
      * 新增生产记录
      */
+    @AddUserIdDeptId()
     @PreAuthorize("@ss.hasPermi('productManagement:productrecordMy:add')")
     @Log(title = "生产记录", businessType = BusinessType.INSERT)
     @PostMapping

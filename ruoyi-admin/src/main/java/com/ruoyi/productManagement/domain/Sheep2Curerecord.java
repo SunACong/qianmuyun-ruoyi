@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 诊疗记录对象 sheep2_curerecord
- * 
+ *
  * @author 孙少聪
  * @date 2022-05-20
  */
@@ -62,145 +62,145 @@ public class Sheep2Curerecord extends BaseEntity
     @Excel(name = "诊疗结果")
     private String result;
 
-    /** 用户编号 */
-    @Excel(name = "用户编号")
-    private Long userId;
+    ///** 用户编号 */
+    //@Excel(name = "用户编号")
+    //private Long userId;
+    //
+    ///** 部门编号 */
+    //@Excel(name = "部门编号")
+    //private Long deptId;
 
-    /** 部门编号 */
-    @Excel(name = "部门编号")
-    private Long deptId;
+    ///** 创建时间 */
+    //@JsonFormat(pattern = "yyyy-MM-dd")
+    //@Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
+    //private Date creatTime;
 
-    /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date creatTime;
-
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setCureTime(Date cureTime) 
+    public void setCureTime(Date cureTime)
     {
         this.cureTime = cureTime;
     }
 
-    public Date getCureTime() 
+    public Date getCureTime()
     {
         return cureTime;
     }
-    public void setCurePosition(String curePosition) 
+    public void setCurePosition(String curePosition)
     {
         this.curePosition = curePosition;
     }
 
-    public String getCurePosition() 
+    public String getCurePosition()
     {
         return curePosition;
     }
-    public void setDayAge(String dayAge) 
+    public void setDayAge(String dayAge)
     {
         this.dayAge = dayAge;
     }
 
-    public String getDayAge() 
+    public String getDayAge()
     {
         return dayAge;
     }
-    public void setIllTime(Date illTime) 
+    public void setIllTime(Date illTime)
     {
         this.illTime = illTime;
     }
 
-    public Date getIllTime() 
+    public Date getIllTime()
     {
         return illTime;
     }
-    public void setIllCause(String illCause) 
+    public void setIllCause(String illCause)
     {
         this.illCause = illCause;
     }
 
-    public String getIllCause() 
+    public String getIllCause()
     {
         return illCause;
     }
-    public void setSignCure(String signCure) 
+    public void setSignCure(String signCure)
     {
         this.signCure = signCure;
     }
 
-    public String getSignCure() 
+    public String getSignCure()
     {
         return signCure;
     }
-    public void setDrugName(String drugName) 
+    public void setDrugName(String drugName)
     {
         this.drugName = drugName;
     }
 
-    public String getDrugName() 
+    public String getDrugName()
     {
         return drugName;
     }
-    public void setDrugMethod(String drugMethod) 
+    public void setDrugMethod(String drugMethod)
     {
         this.drugMethod = drugMethod;
     }
 
-    public String getDrugMethod() 
+    public String getDrugMethod()
     {
         return drugMethod;
     }
-    public void setSheepNumber(String sheepNumber) 
+    public void setSheepNumber(String sheepNumber)
     {
         this.sheepNumber = sheepNumber;
     }
 
-    public String getSheepNumber() 
+    public String getSheepNumber()
     {
         return sheepNumber;
     }
-    public void setResult(String result) 
+    public void setResult(String result)
     {
         this.result = result;
     }
 
-    public String getResult() 
+    public String getResult()
     {
         return result;
     }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
-    public void setDeptId(Long deptId) 
-    {
-        this.deptId = deptId;
-    }
-
-    public Long getDeptId() 
-    {
-        return deptId;
-    }
-    public void setCreatTime(Date creatTime) 
-    {
-        this.creatTime = creatTime;
-    }
-
-    public Date getCreatTime() 
-    {
-        return creatTime;
-    }
+    //public void setUserId(Long userId)
+    //{
+    //    this.userId = userId;
+    //}
+    //
+    //public Long getUserId()
+    //{
+    //    return userId;
+    //}
+    //public void setDeptId(Long deptId)
+    //{
+    //    this.deptId = deptId;
+    //}
+    //
+    //public Long getDeptId()
+    //{
+    //    return deptId;
+    //}
+    //public void setCreatTime(Date creatTime)
+    //{
+    //    this.creatTime = creatTime;
+    //}
+    //
+    //public Date getCreatTime()
+    //{
+    //    return creatTime;
+    //}
 
     @Override
     public String toString() {
@@ -219,7 +219,7 @@ public class Sheep2Curerecord extends BaseEntity
             .append("remark", getRemark())
             .append("userId", getUserId())
             .append("deptId", getDeptId())
-            .append("creatTime", getCreatTime())
+            .append("createTime", getCreateTime())
             .append("updateTime", getUpdateTime())
             .toString();
     }

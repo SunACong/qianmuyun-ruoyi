@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.productManagement.mapper.Sheep2ProductrecordMapper">
-    
+
     <resultMap type="Sheep2Productrecord" id="Sheep2ProductrecordResult">
         <result property="id"    column="id"    />
         <result property="enclosure"    column="enclosure"    />
@@ -16,17 +16,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
         <result property="userId"    column="user_id"    />
         <result property="deptId"    column="dept_id"    />
-        <result property="creatTime"    column="creat_time"    />
+        <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectSheep2ProductrecordVo">
-        select id, enclosure, product_time, born, transfer_in, transfer_out, death, number, remark, user_id, dept_id, creat_time, update_time from sheep2_productrecord
+        select id, enclosure, product_time, born, transfer_in, transfer_out, death, number, remark, user_id, dept_id, create_time, update_time from sheep2_productrecord sheep2Productrecord
     </sql>
 
     <select id="selectSheep2ProductrecordList" parameterType="Sheep2Productrecord" resultMap="Sheep2ProductrecordResult">
         <include refid="selectSheep2ProductrecordVo"/>
-        <where>  
+        <where>
+            1=1  ${params.dataScope}
             <if test="enclosure != null  and enclosure != ''"> and enclosure = #{enclosure}</if>
             <if test="params.beginProductTime != null and params.beginProductTime != '' and params.endProductTime != null and params.endProductTime != ''"> and product_time between #{params.beginProductTime} and #{params.endProductTime}</if>
             <if test="born != null "> and born = #{born}</if>
@@ -37,16 +38,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null  and remark != ''"> and remark like concat('%', #{remark}, '%')</if>
             <if test="userId != null "> and user_id = #{userId}</if>
             <if test="deptId != null "> and dept_id = #{deptId}</if>
-            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and creat_time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
+            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and create_Time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
             <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and update_time between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
         </where>
     </select>
-    
+
     <select id="selectSheep2ProductrecordById" parameterType="Long" resultMap="Sheep2ProductrecordResult">
         <include refid="selectSheep2ProductrecordVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertSheep2Productrecord" parameterType="Sheep2Productrecord" useGeneratedKeys="true" keyProperty="id">
         insert into sheep2_productrecord
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -60,8 +61,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">remark,</if>
             <if test="userId != null">user_id,</if>
             <if test="deptId != null">dept_id,</if>
-            <if test="creatTime != null">creat_time,</if>
             <if test="updateTime != null">update_time,</if>
+            create_time
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="enclosure != null">#{enclosure},</if>
@@ -74,8 +75,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">#{remark},</if>
             <if test="userId != null">#{userId},</if>
             <if test="deptId != null">#{deptId},</if>
-            <if test="creatTime != null">#{creatTime},</if>
+            <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            sysdate()
          </trim>
     </insert>
 
@@ -92,8 +94,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">remark = #{remark},</if>
             <if test="userId != null">user_id = #{userId},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
-            <if test="creatTime != null">creat_time = #{creatTime},</if>
-            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_Time = #{createTime},</if>
+            update_time = sysdate()
         </trim>
         where id = #{id}
     </update>
@@ -103,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteSheep2ProductrecordByIds" parameterType="String">
-        delete from sheep2_productrecord where id in 
+        delete from sheep2_productrecord where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -1,6 +1,8 @@
 package com.ruoyi.productManagement.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,19 +12,19 @@ import com.ruoyi.productManagement.service.ISheep2SamplingService;
 
 /**
  * 采样记录Service业务层处理
- * 
+ *
  * @author 孙少聪
  * @date 2022-05-20
  */
 @Service
-public class Sheep2SamplingServiceImpl implements ISheep2SamplingService 
+public class Sheep2SamplingServiceImpl implements ISheep2SamplingService
 {
     @Autowired
     private Sheep2SamplingMapper sheep2SamplingMapper;
 
     /**
      * 查询采样记录
-     * 
+     *
      * @param id 采样记录主键
      * @return 采样记录
      */
@@ -34,11 +36,12 @@ public class Sheep2SamplingServiceImpl implements ISheep2SamplingService
 
     /**
      * 查询采样记录列表
-     * 
+     *
      * @param sheep2Sampling 采样记录
      * @return 采样记录
      */
     @Override
+    @DataScope(deptAlias = "sheep2Sampling" , userAlias = "sheep2Sampling")
     public List<Sheep2Sampling> selectSheep2SamplingList(Sheep2Sampling sheep2Sampling)
     {
         return sheep2SamplingMapper.selectSheep2SamplingList(sheep2Sampling);
@@ -46,7 +49,7 @@ public class Sheep2SamplingServiceImpl implements ISheep2SamplingService
 
     /**
      * 新增采样记录
-     * 
+     *
      * @param sheep2Sampling 采样记录
      * @return 结果
      */
@@ -58,7 +61,7 @@ public class Sheep2SamplingServiceImpl implements ISheep2SamplingService
 
     /**
      * 修改采样记录
-     * 
+     *
      * @param sheep2Sampling 采样记录
      * @return 结果
      */
@@ -71,7 +74,7 @@ public class Sheep2SamplingServiceImpl implements ISheep2SamplingService
 
     /**
      * 批量删除采样记录
-     * 
+     *
      * @param ids 需要删除的采样记录主键
      * @return 结果
      */
@@ -83,7 +86,7 @@ public class Sheep2SamplingServiceImpl implements ISheep2SamplingService
 
     /**
      * 删除采样记录信息
-     * 
+     *
      * @param id 采样记录主键
      * @return 结果
      */

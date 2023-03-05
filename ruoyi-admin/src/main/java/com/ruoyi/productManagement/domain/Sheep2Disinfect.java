@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 消毒记录对象 sheep2_disinfect
- * 
+ *
  * @author 孙少聪
  * @date 2022-05-20
  */
@@ -53,101 +53,101 @@ public class Sheep2Disinfect extends BaseEntity
     @Excel(name = "部门编号")
     private Long deptId;
 
-    /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date creatTime;
+    ///** 创建时间 */
+    //@JsonFormat(pattern = "yyyy-MM-dd")
+    //@Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
+    //private Date creatTime;
 
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setDisinfectTime(Date disinfectTime) 
+    public void setDisinfectTime(Date disinfectTime)
     {
         this.disinfectTime = disinfectTime;
     }
 
-    public Date getDisinfectTime() 
+    public Date getDisinfectTime()
     {
         return disinfectTime;
     }
-    public void setDisinfectPosition(String disinfectPosition) 
+    public void setDisinfectPosition(String disinfectPosition)
     {
         this.disinfectPosition = disinfectPosition;
     }
 
-    public String getDisinfectPosition() 
+    public String getDisinfectPosition()
     {
         return disinfectPosition;
     }
-    public void setDisinfectDrug(String disinfectDrug) 
+    public void setDisinfectDrug(String disinfectDrug)
     {
         this.disinfectDrug = disinfectDrug;
     }
 
-    public String getDisinfectDrug() 
+    public String getDisinfectDrug()
     {
         return disinfectDrug;
     }
-    public void setDrugDose(String drugDose) 
+    public void setDrugDose(String drugDose)
     {
         this.drugDose = drugDose;
     }
 
-    public String getDrugDose() 
+    public String getDrugDose()
     {
         return drugDose;
     }
-    public void setDrugMethod(String drugMethod) 
+    public void setDrugMethod(String drugMethod)
     {
         this.drugMethod = drugMethod;
     }
 
-    public String getDrugMethod() 
+    public String getDrugMethod()
     {
         return drugMethod;
     }
-    public void setSignOperation(String signOperation) 
+    public void setSignOperation(String signOperation)
     {
         this.signOperation = signOperation;
     }
 
-    public String getSignOperation() 
+    public String getSignOperation()
     {
         return signOperation;
     }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
-    public void setDeptId(Long deptId) 
-    {
-        this.deptId = deptId;
-    }
-
-    public Long getDeptId() 
-    {
-        return deptId;
-    }
-    public void setCreatTime(Date creatTime) 
-    {
-        this.creatTime = creatTime;
-    }
-
-    public Date getCreatTime() 
-    {
-        return creatTime;
-    }
+    //public void setUserId(Long userId)
+    //{
+    //    this.userId = userId;
+    //}
+    //
+    //public Long getUserId()
+    //{
+    //    return userId;
+    //}
+    //public void setDeptId(Long deptId)
+    //{
+    //    this.deptId = deptId;
+    //}
+    //
+    //public Long getDeptId()
+    //{
+    //    return deptId;
+    //}
+    //public void setCreatTime(Date creatTime)
+    //{
+    //    this.creatTime = creatTime;
+    //}
+    //
+    //public Date getCreatTime()
+    //{
+    //    return creatTime;
+    //}
 
     @Override
     public String toString() {
@@ -162,7 +162,7 @@ public class Sheep2Disinfect extends BaseEntity
             .append("remark", getRemark())
             .append("userId", getUserId())
             .append("deptId", getDeptId())
-            .append("creatTime", getCreatTime())
+            .append("createTime", getCreateTime())
             .append("updateTime", getUpdateTime())
             .toString();
     }

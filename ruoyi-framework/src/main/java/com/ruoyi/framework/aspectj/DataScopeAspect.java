@@ -84,12 +84,9 @@ public class DataScopeAspect
     public static void dataScopeFilter(JoinPoint joinPoint, SysUser user, String deptAlias, String userAlias)
     {
         StringBuilder sqlString = new StringBuilder();
-        System.out.println("------------------");
-        System.out.println(user.getRoles());
         for (SysRole role : user.getRoles())
         {
             String dataScope = role.getDataScope();
-            System.out.println("dataScope是多少："  + dataScope);
             if (DATA_SCOPE_ALL.equals(dataScope))
             {
                 sqlString = new StringBuilder();

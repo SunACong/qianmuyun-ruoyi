@@ -1,6 +1,8 @@
 package com.ruoyi.productManagement.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.DataScope;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.productManagement.mapper.SheepSheepbirthMapper;
@@ -9,19 +11,19 @@ import com.ruoyi.productManagement.service.ISheepSheepbirthService;
 
 /**
  * 产子档案Service业务层处理
- * 
+ *
  * @author 孙少聪
  * @date 2022-06-09
  */
 @Service
-public class SheepSheepbirthServiceImpl implements ISheepSheepbirthService 
+public class SheepSheepbirthServiceImpl implements ISheepSheepbirthService
 {
     @Autowired
     private SheepSheepbirthMapper sheepSheepbirthMapper;
 
     /**
      * 查询产子档案
-     * 
+     *
      * @param id 产子档案主键
      * @return 产子档案
      */
@@ -33,11 +35,12 @@ public class SheepSheepbirthServiceImpl implements ISheepSheepbirthService
 
     /**
      * 查询产子档案列表
-     * 
+     *
      * @param sheepSheepbirth 产子档案
      * @return 产子档案
      */
     @Override
+    @DataScope(deptAlias = "sheepSheepbirth", userAlias = "sheepSheepbirth")
     public List<SheepSheepbirth> selectSheepSheepbirthList(SheepSheepbirth sheepSheepbirth)
     {
         return sheepSheepbirthMapper.selectSheepSheepbirthList(sheepSheepbirth);
@@ -45,7 +48,7 @@ public class SheepSheepbirthServiceImpl implements ISheepSheepbirthService
 
     /**
      * 新增产子档案
-     * 
+     *
      * @param sheepSheepbirth 产子档案
      * @return 结果
      */
@@ -57,7 +60,7 @@ public class SheepSheepbirthServiceImpl implements ISheepSheepbirthService
 
     /**
      * 修改产子档案
-     * 
+     *
      * @param sheepSheepbirth 产子档案
      * @return 结果
      */
@@ -69,7 +72,7 @@ public class SheepSheepbirthServiceImpl implements ISheepSheepbirthService
 
     /**
      * 批量删除产子档案
-     * 
+     *
      * @param ids 需要删除的产子档案主键
      * @return 结果
      */
@@ -81,7 +84,7 @@ public class SheepSheepbirthServiceImpl implements ISheepSheepbirthService
 
     /**
      * 删除产子档案信息
-     * 
+     *
      * @param id 产子档案主键
      * @return 结果
      */

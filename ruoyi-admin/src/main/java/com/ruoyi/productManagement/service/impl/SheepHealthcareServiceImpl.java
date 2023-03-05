@@ -1,6 +1,8 @@
 package com.ruoyi.productManagement.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.DataScope;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.productManagement.mapper.SheepHealthcareMapper;
@@ -9,19 +11,19 @@ import com.ruoyi.productManagement.service.ISheepHealthcareService;
 
 /**
  * 保健档案Service业务层处理
- * 
+ *
  * @author 孙少聪
  * @date 2022-06-09
  */
 @Service
-public class SheepHealthcareServiceImpl implements ISheepHealthcareService 
+public class SheepHealthcareServiceImpl implements ISheepHealthcareService
 {
     @Autowired
     private SheepHealthcareMapper sheepHealthcareMapper;
 
     /**
      * 查询保健档案
-     * 
+     *
      * @param id 保健档案主键
      * @return 保健档案
      */
@@ -33,11 +35,12 @@ public class SheepHealthcareServiceImpl implements ISheepHealthcareService
 
     /**
      * 查询保健档案列表
-     * 
+     *
      * @param sheepHealthcare 保健档案
      * @return 保健档案
      */
     @Override
+    @DataScope(deptAlias = "sheepHealthcare" , userAlias = "sheepHealthcare")
     public List<SheepHealthcare> selectSheepHealthcareList(SheepHealthcare sheepHealthcare)
     {
         return sheepHealthcareMapper.selectSheepHealthcareList(sheepHealthcare);
@@ -45,7 +48,7 @@ public class SheepHealthcareServiceImpl implements ISheepHealthcareService
 
     /**
      * 新增保健档案
-     * 
+     *
      * @param sheepHealthcare 保健档案
      * @return 结果
      */
@@ -57,7 +60,7 @@ public class SheepHealthcareServiceImpl implements ISheepHealthcareService
 
     /**
      * 修改保健档案
-     * 
+     *
      * @param sheepHealthcare 保健档案
      * @return 结果
      */
@@ -69,7 +72,7 @@ public class SheepHealthcareServiceImpl implements ISheepHealthcareService
 
     /**
      * 批量删除保健档案
-     * 
+     *
      * @param ids 需要删除的保健档案主键
      * @return 结果
      */
@@ -81,7 +84,7 @@ public class SheepHealthcareServiceImpl implements ISheepHealthcareService
 
     /**
      * 删除保健档案信息
-     * 
+     *
      * @param id 保健档案主键
      * @return 结果
      */

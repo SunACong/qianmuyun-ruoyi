@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.productManagement.mapper.SheepSheepbirthMapper">
-    
+
     <resultMap type="SheepSheepbirth" id="SheepSheepbirthResult">
         <result property="id"    column="id"    />
         <result property="matingid"    column="matingid"    />
@@ -33,15 +33,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateDate"    column="update_date"    />
         <result property="remarks"    column="remarks"    />
         <result property="delFlag"    column="del_flag"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="createTime"    column="create_Time"    />
+        <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectSheepSheepbirthVo">
-        select id, matingid, eartagid, motherid, fatherid, sex, colour, birthweight, status, region, buildingnum, columnnum, weaningdate, weaningweight, type, newregion, newbuilding, newcolumn, video, bak1, bak2, bak3, create_by, create_date, update_by, update_date, remarks, del_flag from sheep_sheepbirth
+        select id, matingid, eartagid, motherid, fatherid, sex, colour, birthweight, status, region, buildingnum, columnnum, weaningdate, weaningweight, type, newregion, newbuilding, newcolumn, video, bak1, bak2, bak3, create_by, create_date, update_by, update_date, remarks, del_flag from sheep_sheepbirth sheepSheepbirth
     </sql>
 
     <select id="selectSheepSheepbirthList" parameterType="SheepSheepbirth" resultMap="SheepSheepbirthResult">
         <include refid="selectSheepSheepbirthVo"/>
-        <where>  
+        <where>
             <if test="matingid != null  and matingid != ''"> and matingid = #{matingid}</if>
             <if test="eartagid != null  and eartagid != ''"> and eartagid = #{eartagid}</if>
             <if test="motherid != null  and motherid != ''"> and motherid = #{motherid}</if>
@@ -71,12 +75,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="delFlag != null  and delFlag != ''"> and del_flag = #{delFlag}</if>
         </where>
     </select>
-    
+
     <select id="selectSheepSheepbirthById" parameterType="Long" resultMap="SheepSheepbirthResult">
         <include refid="selectSheepSheepbirthVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertSheepSheepbirth" parameterType="SheepSheepbirth" useGeneratedKeys="true" keyProperty="id">
         insert into sheep_sheepbirth
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -107,6 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateDate != null">update_date,</if>
             <if test="remarks != null">remarks,</if>
             <if test="delFlag != null">del_flag,</if>
+            create_time
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="matingid != null">#{matingid},</if>
@@ -136,6 +141,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateDate != null">#{updateDate},</if>
             <if test="remarks != null">#{remarks},</if>
             <if test="delFlag != null">#{delFlag},</if>
+            sysdate()
          </trim>
     </insert>
 
@@ -169,6 +175,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateDate != null">update_date = #{updateDate},</if>
             <if test="remarks != null">remarks = #{remarks},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
+            update_time = sysdate()
         </trim>
         where id = #{id}
     </update>
@@ -178,7 +185,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteSheepSheepbirthByIds" parameterType="String">
-        delete from sheep_sheepbirth where id in 
+        delete from sheep_sheepbirth where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 生产记录对象 sheep2_productrecord
- * 
+ *
  * @author 孙少聪
  * @date 2022-05-20
  */
@@ -49,118 +49,118 @@ public class Sheep2Productrecord extends BaseEntity
     @Excel(name = "存栏数量")
     private Long number;
 
-    /** 用户编号 */
-    @Excel(name = "用户编号")
-    private Long userId;
+    ///** 用户编号 */
+    //@Excel(name = "用户编号")
+    //private Long userId;
+    //
+    ///** 部门编号 */
+    //@Excel(name = "部门编号")
+    //private Long deptId;
+    //
+    ///** 创建时间 */
+    //@JsonFormat(pattern = "yyyy-MM-dd")
+    //@Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
+    //private Date creatTime;
 
-    /** 部门编号 */
-    @Excel(name = "部门编号")
-    private Long deptId;
-
-    /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date creatTime;
-
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setEnclosure(String enclosure) 
+    public void setEnclosure(String enclosure)
     {
         this.enclosure = enclosure;
     }
 
-    public String getEnclosure() 
+    public String getEnclosure()
     {
         return enclosure;
     }
-    public void setProductTime(Date productTime) 
+    public void setProductTime(Date productTime)
     {
         this.productTime = productTime;
     }
 
-    public Date getProductTime() 
+    public Date getProductTime()
     {
         return productTime;
     }
-    public void setBorn(Long born) 
+    public void setBorn(Long born)
     {
         this.born = born;
     }
 
-    public Long getBorn() 
+    public Long getBorn()
     {
         return born;
     }
-    public void setTransferIn(Long transferIn) 
+    public void setTransferIn(Long transferIn)
     {
         this.transferIn = transferIn;
     }
 
-    public Long getTransferIn() 
+    public Long getTransferIn()
     {
         return transferIn;
     }
-    public void setTransferOut(Long transferOut) 
+    public void setTransferOut(Long transferOut)
     {
         this.transferOut = transferOut;
     }
 
-    public Long getTransferOut() 
+    public Long getTransferOut()
     {
         return transferOut;
     }
-    public void setDeath(Long death) 
+    public void setDeath(Long death)
     {
         this.death = death;
     }
 
-    public Long getDeath() 
+    public Long getDeath()
     {
         return death;
     }
-    public void setNumber(Long number) 
+    public void setNumber(Long number)
     {
         this.number = number;
     }
 
-    public Long getNumber() 
+    public Long getNumber()
     {
         return number;
     }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
-    public void setDeptId(Long deptId) 
-    {
-        this.deptId = deptId;
-    }
-
-    public Long getDeptId() 
-    {
-        return deptId;
-    }
-    public void setCreatTime(Date creatTime) 
-    {
-        this.creatTime = creatTime;
-    }
-
-    public Date getCreatTime() 
-    {
-        return creatTime;
-    }
+    //public void setUserId(Long userId)
+    //{
+    //    this.userId = userId;
+    //}
+    //
+    //public Long getUserId()
+    //{
+    //    return userId;
+    //}
+    //public void setDeptId(Long deptId)
+    //{
+    //    this.deptId = deptId;
+    //}
+    //
+    //public Long getDeptId()
+    //{
+    //    return deptId;
+    //}
+    //public void setCreatTime(Date creatTime)
+    //{
+    //    this.creatTime = creatTime;
+    //}
+    //
+    //public Date getCreatTime()
+    //{
+    //    return creatTime;
+    //}
 
     @Override
     public String toString() {
@@ -176,7 +176,7 @@ public class Sheep2Productrecord extends BaseEntity
             .append("remark", getRemark())
             .append("userId", getUserId())
             .append("deptId", getDeptId())
-            .append("creatTime", getCreatTime())
+            .append("createTime", getCreateTime())
             .append("updateTime", getUpdateTime())
             .toString();
     }

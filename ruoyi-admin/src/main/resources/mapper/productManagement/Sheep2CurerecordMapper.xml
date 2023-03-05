@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.productManagement.mapper.Sheep2CurerecordMapper">
-    
+
     <resultMap type="Sheep2Curerecord" id="Sheep2CurerecordResult">
         <result property="id"    column="id"    />
         <result property="cureTime"    column="cure_time"    />
@@ -19,17 +19,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
         <result property="userId"    column="user_id"    />
         <result property="deptId"    column="dept_id"    />
-        <result property="creatTime"    column="creat_time"    />
+        <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectSheep2CurerecordVo">
-        select id, cure_time, cure_position, day_age, ill_time, ill_cause, sign_cure, drug_name, drug_method, sheep_number, result, remark, user_id, dept_id, creat_time, update_time from sheep2_curerecord
+        select id, cure_time, cure_position, day_age, ill_time, ill_cause, sign_cure, drug_name, drug_method, sheep_number, result, remark, user_id, dept_id, create_time, update_time from sheep2_curerecord sheep2Curerecord
     </sql>
 
     <select id="selectSheep2CurerecordList" parameterType="Sheep2Curerecord" resultMap="Sheep2CurerecordResult">
         <include refid="selectSheep2CurerecordVo"/>
-        <where>  
+        <where>
+            1=1  ${params.dataScope}
             <if test="params.beginCureTime != null and params.beginCureTime != '' and params.endCureTime != null and params.endCureTime != ''"> and cure_time between #{params.beginCureTime} and #{params.endCureTime}</if>
             <if test="curePosition != null  and curePosition != ''"> and cure_position like concat('%', #{curePosition}, '%')</if>
             <if test="dayAge != null  and dayAge != ''"> and day_age = #{dayAge}</if>
@@ -43,16 +44,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null  and remark != ''"> and remark like concat('%', #{remark}, '%')</if>
             <if test="userId != null "> and user_id = #{userId}</if>
             <if test="deptId != null "> and dept_id = #{deptId}</if>
-            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and creat_time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
+            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and create_Time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
             <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and update_time between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
         </where>
     </select>
-    
+
     <select id="selectSheep2CurerecordById" parameterType="Long" resultMap="Sheep2CurerecordResult">
         <include refid="selectSheep2CurerecordVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertSheep2Curerecord" parameterType="Sheep2Curerecord" useGeneratedKeys="true" keyProperty="id">
         insert into sheep2_curerecord
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -69,8 +70,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">remark,</if>
             <if test="userId != null">user_id,</if>
             <if test="deptId != null">dept_id,</if>
-            <if test="creatTime != null">creat_time,</if>
             <if test="updateTime != null">update_time,</if>
+            create_time
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="cureTime != null">#{cureTime},</if>
@@ -86,8 +87,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">#{remark},</if>
             <if test="userId != null">#{userId},</if>
             <if test="deptId != null">#{deptId},</if>
-            <if test="creatTime != null">#{creatTime},</if>
+            <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            sysdate()
          </trim>
     </insert>
 
@@ -107,8 +109,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">remark = #{remark},</if>
             <if test="userId != null">user_id = #{userId},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
-            <if test="creatTime != null">creat_time = #{creatTime},</if>
-            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_Time = #{createTime},</if>
+            update_time = sysdate()
         </trim>
         where id = #{id}
     </update>
@@ -118,7 +120,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteSheep2CurerecordByIds" parameterType="String">
-        delete from sheep2_curerecord where id in 
+        delete from sheep2_curerecord where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

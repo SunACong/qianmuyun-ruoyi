@@ -45,12 +45,6 @@ public class Sheep2DisinfectController extends BaseController
     public TableDataInfo list(Sheep2Disinfect sheep2Disinfect)
     {
         startPage();
-        System.out.println(sheep2Disinfect.getCreateBy());
-        System.out.println(sheep2Disinfect.getCreateTime());
-        System.out.println(sheep2Disinfect.getParams());
-        System.out.println(sheep2Disinfect.getRemark());
-        System.out.println(sheep2Disinfect.getSearchValue());
-        System.out.println("===========================================");
         List<Sheep2Disinfect> list = sheep2DisinfectService.selectSheep2DisinfectList(sheep2Disinfect);
         return getDataTable(list);
     }

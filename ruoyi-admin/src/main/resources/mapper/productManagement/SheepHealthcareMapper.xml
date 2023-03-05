@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.productManagement.mapper.SheepHealthcareMapper">
-    
+
     <resultMap type="SheepHealthcare" id="SheepHealthcareResult">
         <result property="id"    column="id"    />
         <result property="healthdate"    column="healthdate"    />
@@ -31,15 +31,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateDate"    column="update_date"    />
         <result property="delFlag"    column="del_flag"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="createTime"    column="create_Time"    />
+        <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectSheepHealthcareVo">
-        select id, healthdate, region, buildingnum, columnnum, eartagid, amount, weight, stage, name, method, dose, volume, period, startdate, enddate, video, remarks, bak1, bak2, bak3, create_by, create_date, update_by, update_date, del_flag from sheep_healthcare
+        select id, healthdate, region, buildingnum, columnnum, eartagid, amount, weight, stage, name, method, dose, volume, period, startdate, enddate, video, remarks, bak1, bak2, bak3, create_by, create_date, update_by, update_date, del_flag from sheep_healthcare sheepHealthcare
     </sql>
 
     <select id="selectSheepHealthcareList" parameterType="SheepHealthcare" resultMap="SheepHealthcareResult">
         <include refid="selectSheepHealthcareVo"/>
-        <where>  
+        <where>
+            1=1  ${params.dataScope}
             <if test="params.beginHealthdate != null and params.beginHealthdate != '' and params.endHealthdate != null and params.endHealthdate != ''"> and healthdate between #{params.beginHealthdate} and #{params.endHealthdate}</if>
             <if test="region != null  and region != ''"> and region like concat('%', #{region}, '%')</if>
             <if test="buildingnum != null  and buildingnum != ''"> and buildingnum = #{buildingnum}</if>
@@ -62,12 +67,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="bak3 != null  and bak3 != ''"> and bak3 like concat('%', #{bak3}, '%')</if>
         </where>
     </select>
-    
+
     <select id="selectSheepHealthcareById" parameterType="Long" resultMap="SheepHealthcareResult">
         <include refid="selectSheepHealthcareVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertSheepHealthcare" parameterType="SheepHealthcare" useGeneratedKeys="true" keyProperty="id">
         insert into sheep_healthcare
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -96,6 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by,</if>
             <if test="updateDate != null">update_date,</if>
             <if test="delFlag != null">del_flag,</if>
+            create_time
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="healthdate != null">#{healthdate},</if>
@@ -123,6 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateDate != null">#{updateDate},</if>
             <if test="delFlag != null">#{delFlag},</if>
+            sysdate()
          </trim>
     </insert>
 
@@ -154,6 +161,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateDate != null">update_date = #{updateDate},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
+            update_time = sysdate()
         </trim>
         where id = #{id}
     </update>
@@ -163,7 +171,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteSheepHealthcareByIds" parameterType="String">
-        delete from sheep_healthcare where id in 
+        delete from sheep_healthcare where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

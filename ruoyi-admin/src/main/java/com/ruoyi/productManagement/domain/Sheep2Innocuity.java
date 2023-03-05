@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 无害化处理对象 sheep2_innocuity
- * 
+ *
  * @author 孙少聪
  * @date 2022-05-20
  */
@@ -49,118 +49,118 @@ public class Sheep2Innocuity extends BaseEntity
     @Excel(name = "官方兽医签字")
     private String signDocor;
 
-    /** 用户编号 */
-    @Excel(name = "用户编号")
-    private Long userId;
+    ///** 用户编号 */
+    //@Excel(name = "用户编号")
+    //private Long userId;
+    //
+    ///** 部门编号 */
+    //@Excel(name = "部门编号")
+    //private Long deptId;
+    //
+    ///** 创建时间 */
+    //@JsonFormat(pattern = "yyyy-MM-dd")
+    //@Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
+    //private Date creatTime;
 
-    /** 部门编号 */
-    @Excel(name = "部门编号")
-    private Long deptId;
-
-    /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date creatTime;
-
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setRecordDate(Date recordDate) 
+    public void setRecordDate(Date recordDate)
     {
         this.recordDate = recordDate;
     }
 
-    public Date getRecordDate() 
+    public Date getRecordDate()
     {
         return recordDate;
     }
-    public void setNumber(Long number) 
+    public void setNumber(Long number)
     {
         this.number = number;
     }
 
-    public Long getNumber() 
+    public Long getNumber()
     {
         return number;
     }
-    public void setCause(String cause) 
+    public void setCause(String cause)
     {
         this.cause = cause;
     }
 
-    public String getCause() 
+    public String getCause()
     {
         return cause;
     }
-    public void setSignCode(String signCode) 
+    public void setSignCode(String signCode)
     {
         this.signCode = signCode;
     }
 
-    public String getSignCode() 
+    public String getSignCode()
     {
         return signCode;
     }
-    public void setDealMethod(String dealMethod) 
+    public void setDealMethod(String dealMethod)
     {
         this.dealMethod = dealMethod;
     }
 
-    public String getDealMethod() 
+    public String getDealMethod()
     {
         return dealMethod;
     }
-    public void setDealPeople(String dealPeople) 
+    public void setDealPeople(String dealPeople)
     {
         this.dealPeople = dealPeople;
     }
 
-    public String getDealPeople() 
+    public String getDealPeople()
     {
         return dealPeople;
     }
-    public void setSignDocor(String signDocor) 
+    public void setSignDocor(String signDocor)
     {
         this.signDocor = signDocor;
     }
 
-    public String getSignDocor() 
+    public String getSignDocor()
     {
         return signDocor;
     }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
-    public void setDeptId(Long deptId) 
-    {
-        this.deptId = deptId;
-    }
-
-    public Long getDeptId() 
-    {
-        return deptId;
-    }
-    public void setCreatTime(Date creatTime) 
-    {
-        this.creatTime = creatTime;
-    }
-
-    public Date getCreatTime() 
-    {
-        return creatTime;
-    }
+    //public void setUserId(Long userId)
+    //{
+    //    this.userId = userId;
+    //}
+    //
+    //public Long getUserId()
+    //{
+    //    return userId;
+    //}
+    //public void setDeptId(Long deptId)
+    //{
+    //    this.deptId = deptId;
+    //}
+    //
+    //public Long getDeptId()
+    //{
+    //    return deptId;
+    //}
+    //public void setCreatTime(Date creatTime)
+    //{
+    //    this.creatTime = creatTime;
+    //}
+    //
+    //public Date getCreatTime()
+    //{
+    //    return creatTime;
+    //}
 
     @Override
     public String toString() {
@@ -176,7 +176,7 @@ public class Sheep2Innocuity extends BaseEntity
             .append("remark", getRemark())
             .append("userId", getUserId())
             .append("deptId", getDeptId())
-            .append("creatTime", getCreatTime())
+            .append("createTime", getCreateTime())
             .append("updateTime", getUpdateTime())
             .toString();
     }

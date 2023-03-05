@@ -1,6 +1,8 @@
 package com.ruoyi.productManagement.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,19 +12,19 @@ import com.ruoyi.productManagement.service.ISheep2ImmuneService;
 
 /**
  * 免疫记录Service业务层处理
- * 
+ *
  * @author 孙少聪
  * @date 2022-05-20
  */
 @Service
-public class Sheep2ImmuneServiceImpl implements ISheep2ImmuneService 
+public class Sheep2ImmuneServiceImpl implements ISheep2ImmuneService
 {
     @Autowired
     private Sheep2ImmuneMapper sheep2ImmuneMapper;
 
     /**
      * 查询免疫记录
-     * 
+     *
      * @param id 免疫记录主键
      * @return 免疫记录
      */
@@ -34,11 +36,12 @@ public class Sheep2ImmuneServiceImpl implements ISheep2ImmuneService
 
     /**
      * 查询免疫记录列表
-     * 
+     *
      * @param sheep2Immune 免疫记录
      * @return 免疫记录
      */
     @Override
+    @DataScope(deptAlias = "sheep2Immune" , userAlias = "sheep2Immune")
     public List<Sheep2Immune> selectSheep2ImmuneList(Sheep2Immune sheep2Immune)
     {
         return sheep2ImmuneMapper.selectSheep2ImmuneList(sheep2Immune);
@@ -46,7 +49,7 @@ public class Sheep2ImmuneServiceImpl implements ISheep2ImmuneService
 
     /**
      * 新增免疫记录
-     * 
+     *
      * @param sheep2Immune 免疫记录
      * @return 结果
      */
@@ -58,7 +61,7 @@ public class Sheep2ImmuneServiceImpl implements ISheep2ImmuneService
 
     /**
      * 修改免疫记录
-     * 
+     *
      * @param sheep2Immune 免疫记录
      * @return 结果
      */
@@ -71,7 +74,7 @@ public class Sheep2ImmuneServiceImpl implements ISheep2ImmuneService
 
     /**
      * 批量删除免疫记录
-     * 
+     *
      * @param ids 需要删除的免疫记录主键
      * @return 结果
      */
@@ -83,7 +86,7 @@ public class Sheep2ImmuneServiceImpl implements ISheep2ImmuneService
 
     /**
      * 删除免疫记录信息
-     * 
+     *
      * @param id 免疫记录主键
      * @return 结果
      */

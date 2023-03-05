@@ -20,6 +20,7 @@ public class BaseEntity implements Serializable
     private Long userId;
     /** 部门ID */
     private Long deptId;
+
     public Long getUserId() {
         return userId;
     }

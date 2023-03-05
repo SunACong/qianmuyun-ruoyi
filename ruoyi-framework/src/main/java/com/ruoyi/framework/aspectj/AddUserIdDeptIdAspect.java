@@ -27,16 +27,16 @@ public class AddUserIdDeptIdAspect {
     public void doBefore(JoinPoint point, AddUserIdDeptId addUserIdDeptId) {
         Object param = point.getArgs()[0];
         LoginUser loginUser = SecurityUtils.getLoginUser();
-        System.out.println(loginUser);
+        System.out.println("loginUser信息："+loginUser.getUser().getUserId());
         try {
             //获取object中的data属性
-            Field userId = param.getClass().getDeclaredField("userId");
-            userId.setAccessible(true);//设置data属性为可访问的
-            userId.set(param, loginUser.getUserId());
-            Field deptId = param.getClass().getDeclaredField("deptId");
-            deptId.setAccessible(true);//设置data属性为可访问的
-            deptId.set(param, loginUser.getDeptId());
-            System.out.println(param);
+            Field userId = param.getClass().getSuperclass().getDeclaredField("userId");
+            userId.setAccessible(true);
+            userId.set(param, loginUser.getUser().getUserId());
+            Field deptId = param.getClass().getSuperclass().getDeclaredField("deptId");
+            deptId.setAccessible(true);
+            deptId.set(param, loginUser.getUser().getDeptId());
+            System.out.println("param信息是这么个意思："+param);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }

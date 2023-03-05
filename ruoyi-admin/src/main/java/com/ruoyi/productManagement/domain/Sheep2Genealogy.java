@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 系谱记录对象 sheep2_genealogy
- * 
+ *
  * @author 孙少聪
  * @date 2022-05-20
  */
@@ -106,244 +106,244 @@ public class Sheep2Genealogy extends BaseEntity
     @Excel(name = "图片")
     private String picture;
 
-    /** 用户编号 */
-    @Excel(name = "用户编号")
-    private Long userId;
+    ///** 用户编号 */
+    //@Excel(name = "用户编号")
+    //private Long userId;
+    //
+    ///** 部门编号 */
+    //@Excel(name = "部门编号")
+    //private Long deptId;
+    //
+    ///** 创建时间 */
+    //@JsonFormat(pattern = "yyyy-MM-dd")
+    //@Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
+    //private Date creatTime;
 
-    /** 部门编号 */
-    @Excel(name = "部门编号")
-    private Long deptId;
-
-    /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date creatTime;
-
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setSheepType(String sheepType) 
+    public void setSheepType(String sheepType)
     {
         this.sheepType = sheepType;
     }
 
-    public String getSheepType() 
+    public String getSheepType()
     {
         return sheepType;
     }
-    public void setSheepNumber(String sheepNumber) 
+    public void setSheepNumber(String sheepNumber)
     {
         this.sheepNumber = sheepNumber;
     }
 
-    public String getSheepNumber() 
+    public String getSheepNumber()
     {
         return sheepNumber;
     }
-    public void setSex(String sex) 
+    public void setSex(String sex)
     {
         this.sex = sex;
     }
 
-    public String getSex() 
+    public String getSex()
     {
         return sex;
     }
-    public void setBornTime(Date bornTime) 
+    public void setBornTime(Date bornTime)
     {
         this.bornTime = bornTime;
     }
 
-    public Date getBornTime() 
+    public Date getBornTime()
     {
         return bornTime;
     }
-    public void setNumber(Long number) 
+    public void setNumber(Long number)
     {
         this.number = number;
     }
 
-    public Long getNumber() 
+    public Long getNumber()
     {
         return number;
     }
-    public void setBornNumber(Long bornNumber) 
+    public void setBornNumber(Long bornNumber)
     {
         this.bornNumber = bornNumber;
     }
 
-    public Long getBornNumber() 
+    public Long getBornNumber()
     {
         return bornNumber;
     }
-    public void setRankm(String rankm) 
+    public void setRankm(String rankm)
     {
         this.rankm = rankm;
     }
 
-    public String getRankm() 
+    public String getRankm()
     {
         return rankm;
     }
-    public void setOutTime(Date outTime) 
+    public void setOutTime(Date outTime)
     {
         this.outTime = outTime;
     }
 
-    public Date getOutTime() 
+    public Date getOutTime()
     {
         return outTime;
     }
-    public void setOutKg(Long outKg) 
+    public void setOutKg(Long outKg)
     {
         this.outKg = outKg;
     }
 
-    public Long getOutKg() 
+    public Long getOutKg()
     {
         return outKg;
     }
-    public void setFatherNumber(String fatherNumber) 
+    public void setFatherNumber(String fatherNumber)
     {
         this.fatherNumber = fatherNumber;
     }
 
-    public String getFatherNumber() 
+    public String getFatherNumber()
     {
         return fatherNumber;
     }
-    public void setFfatherNumber(String ffatherNumber) 
+    public void setFfatherNumber(String ffatherNumber)
     {
         this.ffatherNumber = ffatherNumber;
     }
 
-    public String getFfatherNumber() 
+    public String getFfatherNumber()
     {
         return ffatherNumber;
     }
-    public void setFmotherNumber(String fmotherNumber) 
+    public void setFmotherNumber(String fmotherNumber)
     {
         this.fmotherNumber = fmotherNumber;
     }
 
-    public String getFmotherNumber() 
+    public String getFmotherNumber()
     {
         return fmotherNumber;
     }
-    public void setMotherNumber(String motherNumber) 
+    public void setMotherNumber(String motherNumber)
     {
         this.motherNumber = motherNumber;
     }
 
-    public String getMotherNumber() 
+    public String getMotherNumber()
     {
         return motherNumber;
     }
-    public void setMfatherNumber(String mfatherNumber) 
+    public void setMfatherNumber(String mfatherNumber)
     {
         this.mfatherNumber = mfatherNumber;
     }
 
-    public String getMfatherNumber() 
+    public String getMfatherNumber()
     {
         return mfatherNumber;
     }
-    public void setMmotherNumber(String mmotherNumber) 
+    public void setMmotherNumber(String mmotherNumber)
     {
         this.mmotherNumber = mmotherNumber;
     }
 
-    public String getMmotherNumber() 
+    public String getMmotherNumber()
     {
         return mmotherNumber;
     }
-    public void setAge(String age) 
+    public void setAge(String age)
     {
         this.age = age;
     }
 
-    public String getAge() 
+    public String getAge()
     {
         return age;
     }
-    public void setkHeavy(Long kHeavy) 
+    public void setkHeavy(Long kHeavy)
     {
         this.kHeavy = kHeavy;
     }
 
-    public Long getkHeavy() 
+    public Long getkHeavy()
     {
         return kHeavy;
     }
-    public void setkHeight(Long kHeight) 
+    public void setkHeight(Long kHeight)
     {
         this.kHeight = kHeight;
     }
 
-    public Long getkHeight() 
+    public Long getkHeight()
     {
         return kHeight;
     }
-    public void setkLong(Long kLong) 
+    public void setkLong(Long kLong)
     {
         this.kLong = kLong;
     }
 
-    public Long getkLong() 
+    public Long getkLong()
     {
         return kLong;
     }
-    public void setkChest(Long kChest) 
+    public void setkChest(Long kChest)
     {
         this.kChest = kChest;
     }
 
-    public Long getkChest() 
+    public Long getkChest()
     {
         return kChest;
     }
-    public void setPicture(String picture) 
+    public void setPicture(String picture)
     {
         this.picture = picture;
     }
 
-    public String getPicture() 
+    public String getPicture()
     {
         return picture;
     }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
-    public void setDeptId(Long deptId) 
-    {
-        this.deptId = deptId;
-    }
-
-    public Long getDeptId() 
-    {
-        return deptId;
-    }
-    public void setCreatTime(Date creatTime) 
-    {
-        this.creatTime = creatTime;
-    }
-
-    public Date getCreatTime() 
-    {
-        return creatTime;
-    }
+    //public void setUserId(Long userId)
+    //{
+    //    this.userId = userId;
+    //}
+    //
+    //public Long getUserId()
+    //{
+    //    return userId;
+    //}
+    //public void setDeptId(Long deptId)
+    //{
+    //    this.deptId = deptId;
+    //}
+    //
+    //public Long getDeptId()
+    //{
+    //    return deptId;
+    //}
+    //public void setCreatTime(Date creatTime)
+    //{
+    //    this.creatTime = creatTime;
+    //}
+    //
+    //public Date getCreatTime()
+    //{
+    //    return creatTime;
+    //}
 
     @Override
     public String toString() {
@@ -372,7 +372,7 @@ public class Sheep2Genealogy extends BaseEntity
             .append("picture", getPicture())
             .append("userId", getUserId())
             .append("deptId", getDeptId())
-            .append("creatTime", getCreatTime())
+            .append("createTime", getCreateTime())
             .append("updateTime", getUpdateTime())
             .toString();
     }

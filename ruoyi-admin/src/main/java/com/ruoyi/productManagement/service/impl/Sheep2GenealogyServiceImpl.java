@@ -1,6 +1,8 @@
 package com.ruoyi.productManagement.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,19 +12,19 @@ import com.ruoyi.productManagement.service.ISheep2GenealogyService;
 
 /**
  * 系谱记录Service业务层处理
- * 
+ *
  * @author 孙少聪
  * @date 2022-05-20
  */
 @Service
-public class Sheep2GenealogyServiceImpl implements ISheep2GenealogyService 
+public class Sheep2GenealogyServiceImpl implements ISheep2GenealogyService
 {
     @Autowired
     private Sheep2GenealogyMapper sheep2GenealogyMapper;
 
     /**
      * 查询系谱记录
-     * 
+     *
      * @param id 系谱记录主键
      * @return 系谱记录
      */
@@ -34,11 +36,12 @@ public class Sheep2GenealogyServiceImpl implements ISheep2GenealogyService
 
     /**
      * 查询系谱记录列表
-     * 
+     *
      * @param sheep2Genealogy 系谱记录
      * @return 系谱记录
      */
     @Override
+    @DataScope(deptAlias = "sheep2Genealogy" , userAlias = "sheep2Genealogy")
     public List<Sheep2Genealogy> selectSheep2GenealogyList(Sheep2Genealogy sheep2Genealogy)
     {
         return sheep2GenealogyMapper.selectSheep2GenealogyList(sheep2Genealogy);
@@ -46,7 +49,7 @@ public class Sheep2GenealogyServiceImpl implements ISheep2GenealogyService
 
     /**
      * 新增系谱记录
-     * 
+     *
      * @param sheep2Genealogy 系谱记录
      * @return 结果
      */
@@ -58,7 +61,7 @@ public class Sheep2GenealogyServiceImpl implements ISheep2GenealogyService
 
     /**
      * 修改系谱记录
-     * 
+     *
      * @param sheep2Genealogy 系谱记录
      * @return 结果
      */
@@ -71,7 +74,7 @@ public class Sheep2GenealogyServiceImpl implements ISheep2GenealogyService
 
     /**
      * 批量删除系谱记录
-     * 
+     *
      * @param ids 需要删除的系谱记录主键
      * @return 结果
      */
@@ -83,7 +86,7 @@ public class Sheep2GenealogyServiceImpl implements ISheep2GenealogyService
 
     /**
      * 删除系谱记录信息
-     * 
+     *
      * @param id 系谱记录主键
      * @return 结果
      */

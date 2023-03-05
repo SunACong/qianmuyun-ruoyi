@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.productManagement.mapper.Sheep2GenealogyMapper">
-    
+
     <resultMap type="Sheep2Genealogy" id="Sheep2GenealogyResult">
         <result property="id"    column="id"    />
         <result property="sheepType"    column="sheep_type"    />
@@ -29,17 +29,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="picture"    column="picture"    />
         <result property="userId"    column="user_id"    />
         <result property="deptId"    column="dept_id"    />
-        <result property="creatTime"    column="creat_time"    />
+        <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectSheep2GenealogyVo">
-        select id, sheep_type, sheep_number, sex, born_time, number, born_number, rankm, out_time, out_kg, father_number, ffather_number, fmother_number, mother_number, mfather_number, mmother_number, age, k_heavy, k_height, k_long, k_chest, picture, user_id, dept_id, creat_time, update_time from sheep2_genealogy
+        select id, sheep_type, sheep_number, sex, born_time, number, born_number, rankm, out_time, out_kg, father_number, ffather_number, fmother_number, mother_number, mfather_number, mmother_number, age, k_heavy, k_height, k_long, k_chest, picture, user_id, dept_id, create_time, update_time from sheep2_genealogy sheep2Genealogy
     </sql>
 
     <select id="selectSheep2GenealogyList" parameterType="Sheep2Genealogy" resultMap="Sheep2GenealogyResult">
         <include refid="selectSheep2GenealogyVo"/>
-        <where>  
+        <where>
+            1=1  ${params.dataScope}
             <if test="sheepType != null  and sheepType != ''"> and sheep_type = #{sheepType}</if>
             <if test="sheepNumber != null  and sheepNumber != ''"> and sheep_number = #{sheepNumber}</if>
             <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
@@ -63,16 +64,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="picture != null  and picture != ''"> and picture = #{picture}</if>
             <if test="userId != null "> and user_id = #{userId}</if>
             <if test="deptId != null "> and dept_id = #{deptId}</if>
-            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and creat_time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
+            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and create_Time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
             <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and update_time between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
         </where>
     </select>
-    
+
     <select id="selectSheep2GenealogyById" parameterType="Long" resultMap="Sheep2GenealogyResult">
         <include refid="selectSheep2GenealogyVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertSheep2Genealogy" parameterType="Sheep2Genealogy" useGeneratedKeys="true" keyProperty="id">
         insert into sheep2_genealogy
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -99,8 +100,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="picture != null">picture,</if>
             <if test="userId != null">user_id,</if>
             <if test="deptId != null">dept_id,</if>
-            <if test="creatTime != null">creat_time,</if>
             <if test="updateTime != null">update_time,</if>
+            create_time
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="sheepType != null">#{sheepType},</if>
@@ -126,8 +127,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="picture != null">#{picture},</if>
             <if test="userId != null">#{userId},</if>
             <if test="deptId != null">#{deptId},</if>
-            <if test="creatTime != null">#{creatTime},</if>
+            <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            sysdate()
          </trim>
     </insert>
 
@@ -157,8 +159,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="picture != null">picture = #{picture},</if>
             <if test="userId != null">user_id = #{userId},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
-            <if test="creatTime != null">creat_time = #{creatTime},</if>
-            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_Time = #{createTime},</if>
+            update_time = sysdate()
         </trim>
         where id = #{id}
     </update>
@@ -168,7 +170,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteSheep2GenealogyByIds" parameterType="String">
-        delete from sheep2_genealogy where id in 
+        delete from sheep2_genealogy where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

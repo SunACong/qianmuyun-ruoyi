@@ -2,6 +2,8 @@ package com.ruoyi.productManagement.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.annotation.AddUserIdDeptId;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 无害化处理Controller
- * 
+ *
  * @author 孙少聪
  * @date 2022-05-20
  */
@@ -72,6 +74,7 @@ public class Sheep2InnocuityController extends BaseController
     /**
      * 新增无害化处理
      */
+    @AddUserIdDeptId()
     @PreAuthorize("@ss.hasPermi('productManagement:innocuityMy:add')")
     @Log(title = "无害化处理", businessType = BusinessType.INSERT)
     @PostMapping

@@ -16,7 +16,7 @@ import com.ruoyi.common.xss.Xss;
 
 /**
  * 用户对象 sys_user
- * 
+ *
  * @author ruoyi
  */
 public class SysUser extends BaseEntity
@@ -104,11 +104,13 @@ public class SysUser extends BaseEntity
         this.userId = userId;
     }
 
+    @Override
     public Long getUserId()
     {
         return userId;
     }
 
+    @Override
     public void setUserId(Long userId)
     {
         this.userId = userId;
@@ -124,11 +126,13 @@ public class SysUser extends BaseEntity
         return userId != null && 1L == userId;
     }
 
+    @Override
     public Long getDeptId()
     {
         return deptId;
     }
 
+    @Override
     public void setDeptId(Long deptId)
     {
         this.deptId = deptId;

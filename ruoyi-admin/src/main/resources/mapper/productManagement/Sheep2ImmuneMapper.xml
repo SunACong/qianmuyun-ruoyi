@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.productManagement.mapper.Sheep2ImmuneMapper">
-    
+
     <resultMap type="Sheep2Immune" id="Sheep2ImmuneResult">
         <result property="id"    column="id"    />
         <result property="sheepNumber"    column="sheep_number"    />
@@ -18,17 +18,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
         <result property="userId"    column="user_id"    />
         <result property="deptId"    column="dept_id"    />
-        <result property="creatTime"    column="creat_time"    />
+        <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectSheep2ImmuneVo">
-        select id, sheep_number, immune_time, immune_position, immune_name, immune_from, batch_number, immune_method, immune_dose, sign_operation, remark, user_id, dept_id, creat_time, update_time from sheep2_immune
+        select id, sheep_number, immune_time, immune_position, immune_name, immune_from, batch_number, immune_method, immune_dose, sign_operation, remark, user_id, dept_id, create_time, update_time from sheep2_immune sheep2Immune
     </sql>
 
     <select id="selectSheep2ImmuneList" parameterType="Sheep2Immune" resultMap="Sheep2ImmuneResult">
         <include refid="selectSheep2ImmuneVo"/>
-        <where>  
+        <where>
+            1=1  ${params.dataScope}
             <if test="sheepNumber != null  and sheepNumber != ''"> and sheep_number = #{sheepNumber}</if>
             <if test="params.beginImmuneTime != null and params.beginImmuneTime != '' and params.endImmuneTime != null and params.endImmuneTime != ''"> and immune_time between #{params.beginImmuneTime} and #{params.endImmuneTime}</if>
             <if test="immunePosition != null  and immunePosition != ''"> and immune_position = #{immunePosition}</if>
@@ -41,16 +42,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null  and remark != ''"> and remark = #{remark}</if>
             <if test="userId != null "> and user_id = #{userId}</if>
             <if test="deptId != null "> and dept_id = #{deptId}</if>
-            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and creat_time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
+            <if test="params.beginCreatTime != null and params.beginCreatTime != '' and params.endCreatTime != null and params.endCreatTime != ''"> and create_Time between #{params.beginCreatTime} and #{params.endCreatTime}</if>
             <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and update_time between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
         </where>
     </select>
-    
+
     <select id="selectSheep2ImmuneById" parameterType="Long" resultMap="Sheep2ImmuneResult">
         <include refid="selectSheep2ImmuneVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertSheep2Immune" parameterType="Sheep2Immune" useGeneratedKeys="true" keyProperty="id">
         insert into sheep2_immune
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -66,8 +67,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">remark,</if>
             <if test="userId != null">user_id,</if>
             <if test="deptId != null">dept_id,</if>
-            <if test="creatTime != null">creat_time,</if>
             <if test="updateTime != null">update_time,</if>
+            create_time
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="sheepNumber != null">#{sheepNumber},</if>
@@ -82,8 +83,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">#{remark},</if>
             <if test="userId != null">#{userId},</if>
             <if test="deptId != null">#{deptId},</if>
-            <if test="creatTime != null">#{creatTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
+            sysdate()
          </trim>
     </insert>
 
@@ -102,8 +103,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">remark = #{remark},</if>
             <if test="userId != null">user_id = #{userId},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
-            <if test="creatTime != null">creat_time = #{creatTime},</if>
-            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_Time = #{createTime},</if>
+            update_time = sysdate()
         </trim>
         where id = #{id}
     </update>
@@ -113,7 +114,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteSheep2ImmuneByIds" parameterType="String">
-        delete from sheep2_immune where id in 
+        delete from sheep2_immune where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

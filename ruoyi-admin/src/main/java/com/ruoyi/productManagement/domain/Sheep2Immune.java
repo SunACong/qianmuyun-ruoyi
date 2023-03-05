@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 免疫记录对象 sheep2_immune
- * 
+ *
  * @author 孙少聪
  * @date 2022-05-20
  */
@@ -57,136 +57,136 @@ public class Sheep2Immune extends BaseEntity
     @Excel(name = "免疫人员")
     private String signOperation;
 
-    /** 用户编号 */
-    @Excel(name = "用户编号")
-    private Long userId;
+    ///** 用户编号 */
+    //@Excel(name = "用户编号")
+    //private Long userId;
+    //
+    ///** 部门编号 */
+    //@Excel(name = "部门编号")
+    //private Long deptId;
+    //
+    ///** 创建时间 */
+    //@JsonFormat(pattern = "yyyy-MM-dd")
+    //@Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
+    //private Date creatTime;
 
-    /** 部门编号 */
-    @Excel(name = "部门编号")
-    private Long deptId;
-
-    /** 创建时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
-    private Date creatTime;
-
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setSheepNumber(String sheepNumber) 
+    public void setSheepNumber(String sheepNumber)
     {
         this.sheepNumber = sheepNumber;
     }
 
-    public String getSheepNumber() 
+    public String getSheepNumber()
     {
         return sheepNumber;
     }
-    public void setImmuneTime(Date immuneTime) 
+    public void setImmuneTime(Date immuneTime)
     {
         this.immuneTime = immuneTime;
     }
 
-    public Date getImmuneTime() 
+    public Date getImmuneTime()
     {
         return immuneTime;
     }
-    public void setImmunePosition(String immunePosition) 
+    public void setImmunePosition(String immunePosition)
     {
         this.immunePosition = immunePosition;
     }
 
-    public String getImmunePosition() 
+    public String getImmunePosition()
     {
         return immunePosition;
     }
-    public void setImmuneName(String immuneName) 
+    public void setImmuneName(String immuneName)
     {
         this.immuneName = immuneName;
     }
 
-    public String getImmuneName() 
+    public String getImmuneName()
     {
         return immuneName;
     }
-    public void setImmuneFrom(String immuneFrom) 
+    public void setImmuneFrom(String immuneFrom)
     {
         this.immuneFrom = immuneFrom;
     }
 
-    public String getImmuneFrom() 
+    public String getImmuneFrom()
     {
         return immuneFrom;
     }
-    public void setBatchNumber(String batchNumber) 
+    public void setBatchNumber(String batchNumber)
     {
         this.batchNumber = batchNumber;
     }
 
-    public String getBatchNumber() 
+    public String getBatchNumber()
     {
         return batchNumber;
     }
-    public void setImmuneMethod(String immuneMethod) 
+    public void setImmuneMethod(String immuneMethod)
     {
         this.immuneMethod = immuneMethod;
     }
 
-    public String getImmuneMethod() 
+    public String getImmuneMethod()
     {
         return immuneMethod;
     }
-    public void setImmuneDose(String immuneDose) 
+    public void setImmuneDose(String immuneDose)
     {
         this.immuneDose = immuneDose;
     }
 
-    public String getImmuneDose() 
+    public String getImmuneDose()
     {
         return immuneDose;
     }
-    public void setSignOperation(String signOperation) 
+    public void setSignOperation(String signOperation)
     {
         this.signOperation = signOperation;
     }
 
-    public String getSignOperation() 
+    public String getSignOperation()
     {
         return signOperation;
     }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
-    public void setDeptId(Long deptId) 
-    {
-        this.deptId = deptId;
-    }
-
-    public Long getDeptId() 
-    {
-        return deptId;
-    }
-    public void setCreatTime(Date creatTime) 
-    {
-        this.creatTime = creatTime;
-    }
-
-    public Date getCreatTime() 
-    {
-        return creatTime;
-    }
+    //public void setUserId(Long userId)
+    //{
+    //    this.userId = userId;
+    //}
+    //
+    //public Long getUserId()
+    //{
+    //    return userId;
+    //}
+    //public void setDeptId(Long deptId)
+    //{
+    //    this.deptId = deptId;
+    //}
+    //
+    //public Long getDeptId()
+    //{
+    //    return deptId;
+    //}
+    //public void setCreatTime(Date creatTime)
+    //{
+    //    this.creatTime = creatTime;
+    //}
+    //
+    //public Date getCreatTime()
+    //{
+    //    return creatTime;
+    //}
 
     @Override
     public String toString() {
@@ -204,7 +204,7 @@ public class Sheep2Immune extends BaseEntity
             .append("remark", getRemark())
             .append("userId", getUserId())
             .append("deptId", getDeptId())
-            .append("creatTime", getCreatTime())
+            .append("createTime", getCreateTime())
             .append("updateTime", getUpdateTime())
             .toString();
     }

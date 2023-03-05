@@ -41,7 +41,7 @@ public class Sheep2DisinfectServiceImpl implements ISheep2DisinfectService
      * @return 消毒记录
      */
     @Override
-    @DataScope(deptAlias = "disinfect" , userAlias = "disinfect")
+    @DataScope(deptAlias = "sheep2Disinfect" , userAlias = "sheep2Disinfect")
     public List<Sheep2Disinfect> selectSheep2DisinfectList(Sheep2Disinfect sheep2Disinfect)
     {
         return sheep2DisinfectMapper.selectSheep2DisinfectList(sheep2Disinfect);

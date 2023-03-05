@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 保健档案对象 sheep_healthcare
- * 
+ *
  * @author 孙少聪
  * @date 2022-06-09
  */
@@ -112,219 +112,219 @@ public class SheepHealthcare extends BaseEntity
     /** 逻辑删除标记（0：显示；1：隐藏） */
     private String delFlag;
 
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setHealthdate(Date healthdate) 
+    public void setHealthdate(Date healthdate)
     {
         this.healthdate = healthdate;
     }
 
-    public Date getHealthdate() 
+    public Date getHealthdate()
     {
         return healthdate;
     }
-    public void setRegion(String region) 
+    public void setRegion(String region)
     {
         this.region = region;
     }
 
-    public String getRegion() 
+    public String getRegion()
     {
         return region;
     }
-    public void setBuildingnum(String buildingnum) 
+    public void setBuildingnum(String buildingnum)
     {
         this.buildingnum = buildingnum;
     }
 
-    public String getBuildingnum() 
+    public String getBuildingnum()
     {
         return buildingnum;
     }
-    public void setColumnnum(String columnnum) 
+    public void setColumnnum(String columnnum)
     {
         this.columnnum = columnnum;
     }
 
-    public String getColumnnum() 
+    public String getColumnnum()
     {
         return columnnum;
     }
-    public void setEartagid(String eartagid) 
+    public void setEartagid(String eartagid)
     {
         this.eartagid = eartagid;
     }
 
-    public String getEartagid() 
+    public String getEartagid()
     {
         return eartagid;
     }
-    public void setAmount(String amount) 
+    public void setAmount(String amount)
     {
         this.amount = amount;
     }
 
-    public String getAmount() 
+    public String getAmount()
     {
         return amount;
     }
-    public void setWeight(String weight) 
+    public void setWeight(String weight)
     {
         this.weight = weight;
     }
 
-    public String getWeight() 
+    public String getWeight()
     {
         return weight;
     }
-    public void setStage(String stage) 
+    public void setStage(String stage)
     {
         this.stage = stage;
     }
 
-    public String getStage() 
+    public String getStage()
     {
         return stage;
     }
-    public void setName(String name) 
+    public void setName(String name)
     {
         this.name = name;
     }
 
-    public String getName() 
+    public String getName()
     {
         return name;
     }
-    public void setMethod(String method) 
+    public void setMethod(String method)
     {
         this.method = method;
     }
 
-    public String getMethod() 
+    public String getMethod()
     {
         return method;
     }
-    public void setDose(String dose) 
+    public void setDose(String dose)
     {
         this.dose = dose;
     }
 
-    public String getDose() 
+    public String getDose()
     {
         return dose;
     }
-    public void setVolume(String volume) 
+    public void setVolume(String volume)
     {
         this.volume = volume;
     }
 
-    public String getVolume() 
+    public String getVolume()
     {
         return volume;
     }
-    public void setPeriod(String period) 
+    public void setPeriod(String period)
     {
         this.period = period;
     }
 
-    public String getPeriod() 
+    public String getPeriod()
     {
         return period;
     }
-    public void setStartdate(Date startdate) 
+    public void setStartdate(Date startdate)
     {
         this.startdate = startdate;
     }
 
-    public Date getStartdate() 
+    public Date getStartdate()
     {
         return startdate;
     }
-    public void setEnddate(Date enddate) 
+    public void setEnddate(Date enddate)
     {
         this.enddate = enddate;
     }
 
-    public Date getEnddate() 
+    public Date getEnddate()
     {
         return enddate;
     }
-    public void setVideo(String video) 
+    public void setVideo(String video)
     {
         this.video = video;
     }
 
-    public String getVideo() 
+    public String getVideo()
     {
         return video;
     }
-    public void setRemarks(String remarks) 
+    public void setRemarks(String remarks)
     {
         this.remarks = remarks;
     }
 
-    public String getRemarks() 
+    public String getRemarks()
     {
         return remarks;
     }
-    public void setBak1(String bak1) 
+    public void setBak1(String bak1)
     {
         this.bak1 = bak1;
     }
 
-    public String getBak1() 
+    public String getBak1()
     {
         return bak1;
     }
-    public void setBak2(String bak2) 
+    public void setBak2(String bak2)
     {
         this.bak2 = bak2;
     }
 
-    public String getBak2() 
+    public String getBak2()
     {
         return bak2;
     }
-    public void setBak3(String bak3) 
+    public void setBak3(String bak3)
     {
         this.bak3 = bak3;
     }
 
-    public String getBak3() 
+    public String getBak3()
     {
         return bak3;
     }
-    public void setCreateDate(Date createDate) 
+    public void setCreateDate(Date createDate)
     {
         this.createDate = createDate;
     }
 
-    public Date getCreateDate() 
+    public Date getCreateDate()
     {
         return createDate;
     }
-    public void setUpdateDate(Date updateDate) 
+    public void setUpdateDate(Date updateDate)
     {
         this.updateDate = updateDate;
     }
 
-    public Date getUpdateDate() 
+    public Date getUpdateDate()
     {
         return updateDate;
     }
-    public void setDelFlag(String delFlag) 
+    public void setDelFlag(String delFlag)
     {
         this.delFlag = delFlag;
     }
 
-    public String getDelFlag() 
+    public String getDelFlag()
     {
         return delFlag;
     }
@@ -358,6 +358,10 @@ public class SheepHealthcare extends BaseEntity
             .append("updateBy", getUpdateBy())
             .append("updateDate", getUpdateDate())
             .append("delFlag", getDelFlag())
+            .append("userId", getUserId())
+            .append("deptId", getDeptId())
+            .append("createTime", getCreateTime())
+            .append("updateTime", getUpdateTime())
             .toString();
     }
 }

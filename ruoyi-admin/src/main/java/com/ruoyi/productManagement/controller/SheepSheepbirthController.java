@@ -2,6 +2,8 @@ package com.ruoyi.productManagement.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.annotation.AddUserIdDeptId;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 产子档案Controller
- * 
+ *
  * @author 孙少聪
  * @date 2022-06-09
  */
@@ -44,7 +46,7 @@ public class SheepSheepbirthController extends BaseController
         startPage();
         List<SheepSheepbirth> list = sheepSheepbirthService.selectSheepSheepbirthList(sheepSheepbirth);
         return getDataTable(list);
-    }
+}
 
     /**
      * 导出产子档案列表
@@ -72,6 +74,7 @@ public class SheepSheepbirthController extends BaseController
     /**
      * 新增产子档案
      */
+    @AddUserIdDeptId()
     @PreAuthorize("@ss.hasPermi('productManagement:sheepbirth:add')")
     @Log(title = "产子档案", businessType = BusinessType.INSERT)
     @PostMapping
